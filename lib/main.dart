@@ -19,6 +19,14 @@ class MyApp extends StatelessWidget {
             ),
             centerTitle: true,
           ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage('assets/images/splash.png'),
+              )
+            ],
+          ),
         ),
       ),
     );

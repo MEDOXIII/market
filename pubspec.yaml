@@ -48,10 +48,9 @@ flutter_icons:
 
 
 flutter_native_splash:
-  background_image: assets/images/unsplash.png
+  color: "#2c5b4b"
   image: assets/images/splash.png
-  android_gravity: center
-
+  android_gravity: fill
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
