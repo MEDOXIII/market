@@ -16,21 +16,24 @@ class HomeScreen extends StatelessWidget {
             ),
             centerTitle: true,
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/market.png'),
-              SizedBox(
-                height: 50,
-              ),
-              ButtonWidget("Login", () {
-                Navigator.of(context).pushNamed('/screen1');
-              }),
-              SizedBox(
-                height: 30,
-              ),
-              ButtonWidget("Register", () {}),
-            ],
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/market.png'),
+                SizedBox(
+                  height: 50,
+                ),
+                ButtonWidget("Login", () {
+                  Navigator.of(context).pushNamed('/screen1');
+                }),
+                SizedBox(
+                  height: 30,
+                ),
+                ButtonWidget("Register", () {}),
+              ],
+            ),
           ),
         ),
       ),
