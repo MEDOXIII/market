@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
+import 'package:market/Widgets/textFieldWidget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,33 +25,11 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    hintText: 'Enter Your Email',
-                  ),
-                ),
+              textFieldWidget(
+                'Enter Your Email',
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    hintText: 'Enter Your Password',
-                  ),
-                ),
+              textFieldWidget(
+                'Enter Your Password',
               ),
               SizedBox(
                 height: 20,

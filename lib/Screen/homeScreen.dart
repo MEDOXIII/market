@@ -31,7 +31,9 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                ButtonWidget("Register", () {}),
+                ButtonWidget("Register", () {
+                  Navigator.of(context).pushNamed('/screen2');
+                }),
               ],
             ),
           ),
