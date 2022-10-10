@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:market/Widgets/ButtonWidget.dart';
+import 'package:market/Widgets/textFieldWidget.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -20,9 +22,19 @@ class RegisterScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 200,
+                height: 300,
                 child: Image.asset('assets/images/market.png'),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              textFieldWidget('Enter Your Name'),
+              textFieldWidget('Enter Your Phone Number'),
+              textFieldWidget('Enter Your Email'),
+              SizedBox(
+                height: 20,
+              ),
+              ButtonWidget('Register', () {})
             ],
           ),
         ),
