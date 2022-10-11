@@ -34,7 +34,9 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              ButtonWidget('Register', () {})
+              ButtonWidget('Register', () {
+                Navigator.of(context).pushNamed('/screen3');
+              })
             ],
           ),
         ),

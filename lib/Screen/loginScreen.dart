@@ -34,7 +34,9 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              ButtonWidget('Login', () {})
+              ButtonWidget('Login', () {
+                Navigator.of(context).pushNamed('/screen3');
+              })
             ],
           ),
         ),
