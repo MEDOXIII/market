@@ -14,8 +14,39 @@ class CategoryScreen extends StatelessWidget {
               'Category',
             ),
             centerTitle: true,
+            leading: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.search),
+              color: Color(0xff2a386c),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.shopping_cart),
+                color: Color(0xff2a386c),
+              ),
+            ],
           ),
-          body: Container(),
+          body: GridView(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ),
+            children: [
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+              Image.asset('assets/images/market.png'),
+            ],
+          ),
         ),
       ),
     );
