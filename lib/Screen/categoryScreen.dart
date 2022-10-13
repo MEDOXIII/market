@@ -35,16 +35,38 @@ class CategoryScreen extends StatelessWidget {
               mainAxisSpacing: 20,
             ),
             children: [
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
-              Image.asset('assets/images/market.png'),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
+              GestureDetector(
+                child: Image.asset('assets/images/market.png'),
+                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+              ),
             ],
           ),
         ),

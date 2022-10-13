@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/categoryScreen.dart';
+import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/screen1': (BuildContext context) => new LoginScreen(),
         '/screen2': (BuildContext context) => new RegisterScreen(),
         '/screen3': (BuildContext context) => new CategoryScreen(),
+        '/screen4': (BuildContext context) => new DetailScreen(),
       },
     );
   }
