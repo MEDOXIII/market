@@ -16,13 +16,19 @@ class CategoryScreen extends StatelessWidget {
             centerTitle: true,
             leading: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.search),
+              icon: Icon(
+                Icons.search,
+                size: 30,
+              ),
               color: Color(0xff2a386c),
             ),
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.shopping_cart),
+                icon: Icon(
+                  Icons.shopping_cart,
+                  size: 30,
+                ),
                 color: Color(0xff2a386c),
               ),
             ],
