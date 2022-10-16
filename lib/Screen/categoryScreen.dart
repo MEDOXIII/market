@@ -24,7 +24,9 @@ class CategoryScreen extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/screen5');
+                },
                 icon: Icon(
                   Icons.shopping_cart,
                   size: 30,

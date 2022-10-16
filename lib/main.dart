@@ -3,6 +3,7 @@ import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
+import 'package:market/Screen/shopCartScreen.dart';
 
 import 'Screen/homeScreen.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/screen2': (BuildContext context) => new RegisterScreen(),
         '/screen3': (BuildContext context) => new CategoryScreen(),
         '/screen4': (BuildContext context) => new DetailScreen(),
+        '/screen5': (BuildContext context) => new ShopCartScreen(),
       },
     );
   }
