@@ -4,7 +4,7 @@ import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
 import 'package:market/Screen/shopCartScreen.dart';
-
+import 'package:market/Screen/subCategoryScreen.dart';
 import 'Screen/homeScreen.dart';
 
 void main() {
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/screen3': (BuildContext context) => new CategoryScreen(),
         '/screen4': (BuildContext context) => new DetailScreen(),
         '/screen5': (BuildContext context) => new ShopCartScreen(),
+        '/screen6': (BuildContext context) => new SubCategoryScreen(),
       },
     );
   }

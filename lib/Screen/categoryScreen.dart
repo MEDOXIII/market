@@ -45,35 +45,35 @@ class CategoryScreen extends StatelessWidget {
             children: [
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
               GestureDetector(
                 child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen4'),
+                onTap: () => Navigator.of(context).pushNamed('/screen6'),
               ),
             ],
           ),
