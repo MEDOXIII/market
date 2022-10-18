@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market/Widgets/navigationDrawer.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -14,14 +15,6 @@ class DetailScreen extends StatelessWidget {
               'Detail',
             ),
             centerTitle: true,
-            leading: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.arrow_back,
-                size: 30,
-              ),
-              color: Color(0xff2a386c),
-            ),
             actions: [
               IconButton(
                 onPressed: () {
@@ -35,6 +28,7 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
+          drawer: NavigationDrawer(),
           body: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),

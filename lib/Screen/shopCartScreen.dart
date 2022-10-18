@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market/Widgets/navigationDrawer.dart';
 
 class ShopCartScreen extends StatelessWidget {
   const ShopCartScreen({Key? key}) : super(key: key);
@@ -11,10 +12,11 @@ class ShopCartScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Color(0xff0093d3),
             title: const Text(
-              'Category',
+              'ShopCart',
             ),
             centerTitle: true,
           ),
+          drawer: NavigationDrawer(),
           body: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),

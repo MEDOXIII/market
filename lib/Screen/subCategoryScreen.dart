@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market/Widgets/navigationDrawer.dart';
 
 class SubCategoryScreen extends StatelessWidget {
   const SubCategoryScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class SubCategoryScreen extends StatelessWidget {
             ),
             centerTitle: true,
           ),
+          drawer: NavigationDrawer(),
           body: SingleChildScrollView(
             child: Column(
               children: [
