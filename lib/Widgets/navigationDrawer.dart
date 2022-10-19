@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/detailScreen.dart';
+import 'package:market/Screen/profileScreen.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Screen/subCategoryScreen.dart';
 
@@ -18,9 +19,37 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 
-  Widget buildHeader(BuildContext context) => Container(
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top,
+  Widget buildHeader(BuildContext context) => GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProfileScreen(),
+          ));
+        },
+        child: Container(
+          color: Color(0xff2a386c),
+          width: double.infinity,
+          padding: EdgeInsets.only(
+            top: 24 + MediaQuery.of(context).padding.top,
+            bottom: 24,
+          ),
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 52,
+                backgroundImage: AssetImage('assets/images/market.png'),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "My Name",
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       );
   Widget buildMenuItem(BuildContext context) => Container(
