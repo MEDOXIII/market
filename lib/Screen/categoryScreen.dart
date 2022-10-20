@@ -18,6 +18,13 @@ class CategoryScreen extends StatelessWidget {
             centerTitle: true,
             actions: [
               IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  size: 30,
+                ),
+              ),
+              IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/screen5');
                 },
@@ -25,7 +32,6 @@ class CategoryScreen extends StatelessWidget {
                   Icons.shopping_cart,
                   size: 30,
                 ),
-                color: Color(0xff2a386c),
               ),
             ],
           ),

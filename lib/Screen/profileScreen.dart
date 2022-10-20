@@ -18,6 +18,13 @@ class ProfileScreen extends StatelessWidget {
             centerTitle: true,
             actions: [
               IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  size: 30,
+                ),
+              ),
+              IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/screen5');
                 },
@@ -25,14 +32,13 @@ class ProfileScreen extends StatelessWidget {
                   Icons.shopping_cart,
                   size: 30,
                 ),
-                color: Color(0xff2a386c),
               ),
             ],
           ),
           drawer: NavigationDrawer(),
           body: Center(
             child: Container(
-              child: Image.asset('assets/images/market.png'),
+              child: Image.asset('assets/images/avatar.png'),
             ),
           ),
         ),

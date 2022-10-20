@@ -36,7 +36,7 @@ class NavigationDrawer extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 52,
-                backgroundImage: AssetImage('assets/images/market.png'),
+                backgroundImage: AssetImage('assets/images/avatar.png'),
               ),
               SizedBox(
                 height: 10,

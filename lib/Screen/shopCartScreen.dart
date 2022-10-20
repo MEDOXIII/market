@@ -15,6 +15,24 @@ class ShopCartScreen extends StatelessWidget {
               'ShopCart',
             ),
             centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  size: 30,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/screen5');
+                },
+                icon: Icon(
+                  Icons.shopping_cart,
+                  size: 30,
+                ),
+              ),
+            ],
           ),
           drawer: NavigationDrawer(),
           body: Center(
