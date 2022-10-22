@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 
@@ -34,9 +35,14 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              ButtonWidget('Login', () {
-                Navigator.of(context).pushNamed('/screen3');
-              })
+              ButtonWidget(
+                'Login',
+                () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CategoryScreen(),
+                  ));
+                },
+              )
             ],
           ),
         ),

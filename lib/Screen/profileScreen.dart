@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market/Screen/shopCartScreen.dart';
 
 import '../Widgets/navigationDrawer.dart';
 
@@ -25,8 +26,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/screen5');
+                onPressed:  () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ShopCartScreen(),
+                  ));
                 },
                 icon: Icon(
                   Icons.shopping_cart,

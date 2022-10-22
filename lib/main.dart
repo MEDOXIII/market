@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market/Screen/categoryScreen.dart';
-import 'package:market/Screen/detailScreen.dart';
-import 'package:market/Screen/loginScreen.dart';
-import 'package:market/Screen/registerScreen.dart';
-import 'package:market/Screen/shopCartScreen.dart';
-import 'package:market/Screen/subCategoryScreen.dart';
 import 'Screen/homeScreen.dart';
-import 'Screen/profileScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,15 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeScreen(),
-      routes: <String, WidgetBuilder>{
-        '/screen1': (BuildContext context) => new LoginScreen(),
-        '/screen2': (BuildContext context) => new RegisterScreen(),
-        '/screen3': (BuildContext context) => new CategoryScreen(),
-        '/screen4': (BuildContext context) => new DetailScreen(),
-        '/screen5': (BuildContext context) => new ShopCartScreen(),
-        '/screen6': (BuildContext context) => new SubCategoryScreen(),
-        '/screen7': (BuildContext context) => new ProfileScreen(),
-      },
     );
   }
 }

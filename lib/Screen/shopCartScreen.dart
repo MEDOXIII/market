@@ -25,7 +25,9 @@ class ShopCartScreen extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/screen5');
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ShopCartScreen(),
+                  ));
                 },
                 icon: Icon(
                   Icons.shopping_cart,

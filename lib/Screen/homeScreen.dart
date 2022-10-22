@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:market/Screen/loginScreen.dart';
+import 'package:market/Screen/registerScreen.dart';
 import '../Widgets/ButtonWidget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,15 +27,25 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 50,
                 ),
-                ButtonWidget("Login", () {
-                  Navigator.of(context).pushNamed('/screen1');
-                }),
+                ButtonWidget(
+                  "Login",
+                  () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ));
+                  },
+                ),
                 SizedBox(
                   height: 30,
                 ),
-                ButtonWidget("Register", () {
-                  Navigator.of(context).pushNamed('/screen2');
-                }),
+                ButtonWidget(
+                  "Register",
+                  () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RegisterScreen(),
+                    ));
+                  },
+                ),
               ],
             ),
           ),

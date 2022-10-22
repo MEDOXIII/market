@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:market/Screen/shopCartScreen.dart';
+import 'package:market/Widgets/categoryWidget.dart';
 
 import '../Widgets/navigationDrawer.dart';
 
@@ -26,7 +28,9 @@ class CategoryScreen extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/screen5');
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ShopCartScreen(),
+                  ));
                 },
                 icon: Icon(
                   Icons.shopping_cart,
@@ -44,38 +48,14 @@ class CategoryScreen extends StatelessWidget {
               mainAxisSpacing: 20,
             ),
             children: [
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
-              GestureDetector(
-                child: Image.asset('assets/images/market.png'),
-                onTap: () => Navigator.of(context).pushNamed('/screen6'),
-              ),
+              CategoryWidget(),
+              CategoryWidget(),
+              CategoryWidget(),
+              CategoryWidget(),
+              CategoryWidget(),
+              CategoryWidget(),
+              CategoryWidget(),
+              CategoryWidget(),
             ],
           ),
         ),
