@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
+import 'package:market/Widgets/countRowWidget.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,13 +60,23 @@ class DetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  ButtonWidget(
-                    'Buy',
-                    () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ShopCartScreen(),
-                      ));
-                    },
+                  Row(
+                    children: [
+                      Expanded(child: countRowWidget()),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: ButtonWidget(
+                          'BUY',
+                          () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ShopCartScreen(),
+                            ));
+                          },
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),

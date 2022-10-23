@@ -15,7 +15,7 @@ class ButtonWidget extends StatelessWidget {
           color: Color(0xff2a386c),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10),
           child: Center(
             child: Text(
               text,
