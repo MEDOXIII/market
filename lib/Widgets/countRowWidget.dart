@@ -14,7 +14,7 @@ class _countRowWidgetState extends State<countRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
           width: 40,
