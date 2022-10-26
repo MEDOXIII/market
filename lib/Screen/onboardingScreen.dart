@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/homeScreen.dart';
 import 'package:market/Widgets/onBoardingWidget.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -10,30 +11,14 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  final int numberPages = 3;
   final PageController _pageController = PageController(initialPage: 0);
-  int currentPage = 0;
 
-  List<Widget> buildPageIndicator() {
-    List<Widget> list = [];
-    for (int i = 0; i < numberPages; i++) {
-      list.add(i == currentPage ? indicator(true) : indicator(false));
-    }
-    return list;
-  }
+  bool onLastPage = false;
 
-  Widget indicator(bool isActive) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
-      margin: EdgeInsets.symmetric(horizontal: 8),
-      height: 8,
-      width: isActive ? 24 : 16,
-      decoration: BoxDecoration(
-          color: isActive ? Colors.blueAccent : Colors.lightBlue,
-          borderRadius: BorderRadius.all(
-            Radius.circular(25),
-          )),
-    );
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,6 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 40),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
                   alignment: Alignment.centerRight,
@@ -67,9 +53,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   child: PageView(
                     controller: _pageController,
                     physics: ClampingScrollPhysics(),
-                    onPageChanged: (int page) {
+                    onPageChanged: (index) {
                       setState(() {
-                        currentPage = page;
+                        onLastPage = (index == 2);
                       });
                     },
                     children: [
@@ -106,9 +92,34 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: buildPageIndicator(),
+                Center(
+                    child: SmoothPageIndicator(
+                        controller: _pageController, count: 3)),
+                Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: MaterialButton(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    color: Color(0xff2a386c),
+                    onPressed: () {
+                      onLastPage
+                          ? Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ))
+                          : _pageController.nextPage(
+                              duration: Duration(milliseconds: 150),
+                              curve: Curves.ease);
+                    },
+                    child: Text(
+                      onLastPage ? "Get Ready" : "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
