@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 
 class textFieldWidget extends StatelessWidget {
   late final String text;
-
-  textFieldWidget(this.text);
+  final TextInputType type;
+  final bool isPass;
+  final Icon icon;
+  textFieldWidget(this.text, this.type, this.isPass, this.icon);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
+        keyboardType: type,
+        obscureText: isPass,
         textAlign: TextAlign.center,
         onChanged: (value) {},
         decoration: InputDecoration(
@@ -17,6 +21,7 @@ class textFieldWidget extends StatelessWidget {
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
           hintText: text,
+          prefixIcon: icon,
         ),
       ),
     );

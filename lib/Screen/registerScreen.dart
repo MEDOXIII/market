@@ -29,9 +29,30 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              textFieldWidget('Enter Your Name'),
-              textFieldWidget('Enter Your Phone Number'),
-              textFieldWidget('Enter Your Email'),
+              textFieldWidget(
+                'Enter Your Name',
+                TextInputType.name,
+                false,
+                Icon(Icons.person),
+              ),
+              textFieldWidget(
+                'Enter Your Phone Number',
+                TextInputType.number,
+                false,
+                Icon(Icons.phone),
+              ),
+              textFieldWidget(
+                'Enter Your Email',
+                TextInputType.emailAddress,
+                false,
+                Icon(Icons.email),
+              ),
+              textFieldWidget(
+                'Enter Your Address',
+                TextInputType.streetAddress,
+                false,
+                Icon(Icons.home),
+              ),
               SizedBox(
                 height: 20,
               ),

@@ -28,9 +28,15 @@ class LoginScreen extends StatelessWidget {
               ),
               textFieldWidget(
                 'Enter Your Email',
+                TextInputType.emailAddress,
+                false,
+                Icon(Icons.email),
               ),
               textFieldWidget(
                 'Enter Your Password',
+                TextInputType.visiblePassword,
+                true,
+                Icon(Icons.lock),
               ),
               SizedBox(
                 height: 20,
