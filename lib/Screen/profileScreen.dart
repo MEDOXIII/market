@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 
+import '../Widgets/infoWidget.dart';
 import '../Widgets/navigationDrawer.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -26,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed:  () {
+                onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ShopCartScreen(),
                   ));
@@ -39,10 +40,44 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
           drawer: NavigationDrawer(),
-          body: Center(
-            child: Container(
-              child: Image.asset('assets/images/avatar.png'),
-            ),
+          body: Column(
+            children: [
+              Container(
+                height: 300,
+                width: 300,
+                child: CircleAvatar(
+                  child: Image.asset('assets/images/avatar.png'),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              infoWidget(
+                labelText: "Name :",
+                infoText: "My Name Is ",
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              infoWidget(
+                labelText: "Phone Number :",
+                infoText: "My Phone Is ",
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              infoWidget(
+                labelText: "Email :",
+                infoText: "My Email Is ",
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              infoWidget(
+                labelText: "Address :",
+                infoText: "My Address Is ",
+              ),
+            ],
           ),
         ),
       ),
