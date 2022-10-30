@@ -38,7 +38,7 @@ dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
   flutter_native_splash: ^2.2.10+1
   smooth_page_indicator: ^1.0.0+2
-
+  firebase_auth: ^4.1.0
 
   flutter_test:
     sdk: flutter
