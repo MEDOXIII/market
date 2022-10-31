@@ -5,13 +5,20 @@ class textFieldWidget extends StatelessWidget {
   final TextInputType type;
   final bool isPass;
   final Icon icon;
-  textFieldWidget(this.text, this.type, this.isPass, this.icon);
+  final TextEditingController controller;
+  textFieldWidget(
+      {required this.text,
+      required this.type,
+      required this.isPass,
+      required this.icon,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
+        controller: controller,
         keyboardType: type,
         obscureText: isPass,
         textAlign: TextAlign.center,

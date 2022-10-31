@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../Widgets/infoWidget.dart';
 import '../Widgets/navigationDrawer.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
 
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               infoWidget(
                 labelText: "Name :",
-                infoText: "My Name Is ",
+                infoText: user.email != null ? user.email! : "My Name",
               ),
               SizedBox(
                 height: 25,

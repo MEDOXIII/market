@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/categoryWidget.dart';
-
 import '../Widgets/navigationDrawer.dart';
 
 class CategoryScreen extends StatelessWidget {

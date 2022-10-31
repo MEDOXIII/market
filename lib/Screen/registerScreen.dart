@@ -3,8 +3,25 @@ import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    nameController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +47,32 @@ class RegisterScreen extends StatelessWidget {
                 height: 20,
               ),
               textFieldWidget(
-                'Enter Your Name',
-                TextInputType.name,
-                false,
-                Icon(Icons.person),
+                controller: nameController,
+                text: 'Enter Your Name',
+                type: TextInputType.name,
+                isPass: false,
+                icon: Icon(Icons.person),
               ),
               textFieldWidget(
-                'Enter Your Phone Number',
-                TextInputType.number,
-                false,
-                Icon(Icons.phone),
+                controller: phoneController,
+                text: 'Enter Your Phone Number',
+                type: TextInputType.number,
+                isPass: false,
+                icon: Icon(Icons.phone),
               ),
               textFieldWidget(
-                'Enter Your Email',
-                TextInputType.emailAddress,
-                false,
-                Icon(Icons.email),
+                controller: emailController,
+                text: 'Enter Your Email',
+                type: TextInputType.emailAddress,
+                isPass: false,
+                icon: Icon(Icons.email),
               ),
               textFieldWidget(
-                'Enter Your Address',
-                TextInputType.streetAddress,
-                false,
-                Icon(Icons.home),
+                controller: addressController,
+                text: 'Enter Your Address',
+                type: TextInputType.streetAddress,
+                isPass: false,
+                icon: Icon(Icons.home),
               ),
               SizedBox(
                 height: 20,

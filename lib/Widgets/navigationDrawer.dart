@@ -4,9 +4,12 @@ import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Screen/profileScreen.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Screen/subCategoryScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+  NavigationDrawer({Key? key}) : super(key: key);
+
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +45,9 @@ class NavigationDrawer extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "My Name",
+                user.email != null ? user.email! : "My Name",
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 20,
                   color: Colors.white,
                 ),
               ),
