@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market/Screen/categoryScreen.dart';
+import 'package:market/Screen/registerScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 
@@ -72,7 +73,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     ButtonWidget(
                       'Login',
                       singIn,
-                    )
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account ? "),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => RegisterScreen(),
+                            ));
+                          },
+                          child: Text(
+                            "Register Here",
+                            style: TextStyle(
+                              color: Colors.cyan,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

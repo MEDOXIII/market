@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market/Screen/homeScreen.dart';
+import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Widgets/onBoardingWidget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -36,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   child: MaterialButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => LoginScreen(),
                       ));
                     },
                     // color: Colors.transparent,
@@ -106,7 +106,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onPressed: () {
                       onLastPage
                           ? Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => LoginScreen(),
                             ))
                           : _pageController.nextPage(
                               duration: Duration(milliseconds: 150),

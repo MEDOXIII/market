@@ -6,6 +6,8 @@ import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Screen/subCategoryScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// import '../Screen/loginScreen.dart';
+
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
 
@@ -78,9 +80,6 @@ class NavigationDrawer extends StatelessWidget {
                 ));
               },
             ),
-            Divider(
-              color: Colors.black45,
-            ),
             ListTile(
               leading: Icon(Icons.dataset_outlined),
               title: Text("Detail"),
@@ -98,6 +97,38 @@ class NavigationDrawer extends StatelessWidget {
                   builder: (context) => ShopCartScreen(),
                 ));
               },
+            ),
+            Divider(
+              color: Colors.black45,
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: GestureDetector(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => LoginScreen(),
+                  // ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Color(0xff2a386c),
+                  ),
+                  width: 50,
+                  height: 50,
+                  child: Center(
+                    child: Text(
+                      "Singe Out",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

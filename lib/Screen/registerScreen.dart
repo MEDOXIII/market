@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/categoryScreen.dart';
+import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 
@@ -84,6 +85,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     builder: (context) => CategoryScreen(),
                   ));
                 },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Already have an account ? "),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ));
+                    },
+                    child: Text(
+                      "Log In",
+                      style: TextStyle(
+                        color: Colors.cyan,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
