@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/loginScreen.dart';
-import 'package:market/Widgets/onBoardingWidget.dart';
+import 'package:market/Widgets/BoardingWidget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
+class BoardingScreen extends StatefulWidget {
+  const BoardingScreen({Key? key}) : super(key: key);
 
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+  State<BoardingScreen> createState() => _BoardingScreenState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class _BoardingScreenState extends State<BoardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
 
   bool onLastPage = false;
@@ -59,7 +59,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       });
                     },
                     children: [
-                      OnBoardingWidget(
+                      BoardingWidget(
                         image: Image.asset(
                           'assets/images/delivery.png',
                           height: 200,
@@ -69,7 +69,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         text:
                             "This is the text of the Boarding which is been display on the OnBoarding Screen",
                       ),
-                      OnBoardingWidget(
+                      BoardingWidget(
                         image: Image.asset(
                           'assets/images/food.png',
                           height: 200,
@@ -79,7 +79,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         text:
                             "This is the text of the Boarding which is been display on the OnBoarding Screen",
                       ),
-                      OnBoardingWidget(
+                      BoardingWidget(
                         image: Image.asset(
                           'assets/images/liveTracking.png',
                           height: 200,

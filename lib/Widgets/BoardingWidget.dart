@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class OnBoardingWidget extends StatelessWidget {
+class BoardingWidget extends StatelessWidget {
   final Image image;
   final String textAddress;
   final String text;
-  const OnBoardingWidget({
+  const BoardingWidget({
     Key? key,
     required this.image,
     required this.textAddress,

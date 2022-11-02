@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market/Screen/onboardingScreen.dart';
+import 'package:market/Screen/boardingScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: OnBoardingScreen(),
+      home: BoardingScreen(),
     );
   }
 }
