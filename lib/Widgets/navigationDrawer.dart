@@ -106,10 +106,6 @@ class NavigationDrawer extends StatelessWidget {
               title: GestureDetector(
                 onTap: () {
                   FirebaseAuth.instance.signOut();
-
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => LoginScreen(),
-                  // ));
                 },
                 child: Container(
                   decoration: BoxDecoration(
