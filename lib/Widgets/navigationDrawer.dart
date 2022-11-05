@@ -5,8 +5,7 @@ import 'package:market/Screen/profileScreen.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Screen/subCategoryScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-// import '../Screen/loginScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
@@ -48,9 +47,11 @@ class NavigationDrawer extends StatelessWidget {
               ),
               Text(
                 user.email != null ? user.email! : "My Name",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+                style: GoogleFonts.sacramento(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -64,7 +65,14 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             ListTile(
               leading: Icon(Icons.home),
-              title: Text("Category"),
+              title: Text(
+                "Category",
+                style: GoogleFonts.racingSansOne(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CategoryScreen(),
@@ -73,7 +81,14 @@ class NavigationDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.price_change_outlined),
-              title: Text("SubCategory"),
+              title: Text(
+                "SubCategory",
+                style: GoogleFonts.racingSansOne(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => SubCategoryScreen(),
@@ -82,7 +97,14 @@ class NavigationDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.dataset_outlined),
-              title: Text("Detail"),
+              title: Text(
+                "Detail",
+                style: GoogleFonts.racingSansOne(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailScreen(),
@@ -91,7 +113,14 @@ class NavigationDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.shopping_cart),
-              title: Text("ShopCart"),
+              title: Text(
+                "ShopCart",
+                style: GoogleFonts.racingSansOne(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ShopCartScreen(),
@@ -117,10 +146,12 @@ class NavigationDrawer extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Singe Out",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style: GoogleFonts.xanhMono(
+                        textStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),

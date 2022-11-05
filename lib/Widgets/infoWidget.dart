@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class infoWidget extends StatelessWidget {
   final String labelText;
@@ -18,10 +19,8 @@ class infoWidget extends StatelessWidget {
         children: [
           Text(
             labelText,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.xanhMono(
+              textStyle: TextStyle(fontSize: 25, color: Colors.black),
             ),
           ),
           SizedBox(
@@ -29,10 +28,8 @@ class infoWidget extends StatelessWidget {
           ),
           Text(
             infoText,
-            style: TextStyle(
-              color: Colors.cyan,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.sail(
+              textStyle: TextStyle(fontSize: 20, color: Colors.cyan),
             ),
           ),
         ],

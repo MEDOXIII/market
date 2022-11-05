@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/detailScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -28,21 +29,27 @@ class ProductWidget extends StatelessWidget {
               children: [
                 Text(
                   'Name',
-                  style: TextStyle(fontSize: 20, color: Colors.cyan),
+                  style: GoogleFonts.damion(
+                    textStyle: TextStyle(fontSize: 20, color: Colors.cyan),
+                  ),
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 Text(
                   'Price',
-                  style: TextStyle(fontSize: 16, color: Colors.cyan),
+                  style: GoogleFonts.damion(
+                    textStyle: TextStyle(fontSize: 15, color: Colors.cyan),
+                  ),
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 Text(
                   'Discount',
-                  style: TextStyle(fontSize: 8, color: Colors.cyan),
+                  style: GoogleFonts.damion(
+                    textStyle: TextStyle(fontSize: 10, color: Colors.cyan),
+                  ),
                 ),
               ],
             )

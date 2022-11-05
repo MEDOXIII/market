@@ -93,8 +93,11 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   ),
                 ),
                 Center(
-                    child: SmoothPageIndicator(
-                        controller: _pageController, count: 3)),
+                  child: SmoothPageIndicator(
+                    controller: _pageController,
+                    count: 3,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(50),
                   child: MaterialButton(
