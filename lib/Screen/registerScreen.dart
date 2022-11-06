@@ -4,6 +4,7 @@ import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'categoryScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -117,7 +118,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Already have an account ? "),
+                          Text(
+                            "Already have an account ? ",
+                            style: GoogleFonts.racingSansOne(
+                              textStyle: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -126,8 +134,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               "Log In",
-                              style: TextStyle(
-                                color: Colors.cyan,
+                              style: GoogleFonts.damion(
+                                textStyle:
+                                    TextStyle(fontSize: 20, color: Colors.cyan),
                               ),
                             ),
                           ),

@@ -3,6 +3,7 @@ import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/countRowWidget.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -51,10 +52,11 @@ class DetailScreen extends StatelessWidget {
                   ),
                   Text(
                     'This is the text of the product which is been display on the detail screen , this text should contain  what is this product and what is used for .. ',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.cyan,
+                    style: GoogleFonts.acme(
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.cyan,
+                      ),
                     ),
                   ),
                   SizedBox(

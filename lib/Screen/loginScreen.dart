@@ -4,6 +4,7 @@ import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -84,7 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Don't have an account ? "),
+                        Text(
+                          "Don't have an account ? ",
+                          style: GoogleFonts.racingSansOne(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -93,8 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Text(
                             "Register Here",
-                            style: TextStyle(
-                              color: Colors.cyan,
+                            style: GoogleFonts.damion(
+                              textStyle:
+                                  TextStyle(fontSize: 20, color: Colors.cyan),
                             ),
                           ),
                         ),

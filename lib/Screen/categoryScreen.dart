@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
-import 'package:market/Widgets/categoryWidget.dart';
 import '../Widgets/navigationDrawer.dart';
+import '../Widgets/categoryWidget.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -39,22 +39,9 @@ class CategoryScreen extends StatelessWidget {
             ],
           ),
           drawer: NavigationDrawer(),
-          body: Container(
-            padding: EdgeInsets.all(10),
-            color: Colors.grey.shade300,
-            child: GridView(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 0.75,
-              ),
+          body: SingleChildScrollView(
+            child: Column(
               children: [
-                CategoryWidget(),
-                CategoryWidget(),
-                CategoryWidget(),
-                CategoryWidget(),
                 CategoryWidget(),
                 CategoryWidget(),
                 CategoryWidget(),

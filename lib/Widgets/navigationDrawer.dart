@@ -3,7 +3,7 @@ import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Screen/profileScreen.dart';
 import 'package:market/Screen/shopCartScreen.dart';
-import 'package:market/Screen/subCategoryScreen.dart';
+import 'package:market/Screen/productScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -82,7 +82,7 @@ class NavigationDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.price_change_outlined),
               title: Text(
-                "SubCategory",
+                "Product",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
                     fontSize: 20,
@@ -91,7 +91,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SubCategoryScreen(),
+                  builder: (context) => ProductScreen(),
                 ));
               },
             ),

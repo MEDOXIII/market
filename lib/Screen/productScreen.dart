@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
+import 'package:market/Widgets/productWidget.dart';
 
-import '../Widgets/productWidget.dart';
-
-class SubCategoryScreen extends StatelessWidget {
-  const SubCategoryScreen({Key? key}) : super(key: key);
+class ProductScreen extends StatelessWidget {
+  const ProductScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class SubCategoryScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Color(0xff0093d3),
             title: const Text(
-              'SubCategory',
+              'Product',
             ),
             centerTitle: true,
             actions: [
@@ -40,9 +39,22 @@ class SubCategoryScreen extends StatelessWidget {
             ],
           ),
           drawer: NavigationDrawer(),
-          body: SingleChildScrollView(
-            child: Column(
+          body: Container(
+            padding: EdgeInsets.all(10),
+            color: Colors.grey.shade300,
+            child: GridView(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                childAspectRatio: 0.75,
+              ),
               children: [
+                ProductWidget(),
+                ProductWidget(),
+                ProductWidget(),
+                ProductWidget(),
                 ProductWidget(),
                 ProductWidget(),
                 ProductWidget(),

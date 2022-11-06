@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -19,10 +20,13 @@ class ButtonWidget extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(
-                  fontSize: 25,
+              style: GoogleFonts.sail(
+                textStyle: TextStyle(
+                  fontSize: 20,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ),
