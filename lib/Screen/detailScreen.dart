@@ -4,6 +4,7 @@ import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/countRowWidget.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class DetailScreen extends StatelessWidget {
                     'This is the text of the product which is been display on the detail screen , this text should contain  what is this product and what is used for .. ',
                     style: GoogleFonts.acme(
                       textStyle: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         color: Colors.cyan,
                       ),
                     ),

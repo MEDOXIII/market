@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/productScreen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({
@@ -30,7 +31,7 @@ class CategoryWidget extends StatelessWidget {
                 Text(
                   'Name',
                   style: GoogleFonts.damion(
-                    textStyle: TextStyle(fontSize: 20, color: Colors.cyan),
+                    textStyle: TextStyle(fontSize: 20.sp, color: Colors.cyan),
                   ),
                 ),
                 SizedBox(
@@ -39,7 +40,7 @@ class CategoryWidget extends StatelessWidget {
                 Text(
                   'Price',
                   style: GoogleFonts.damion(
-                    textStyle: TextStyle(fontSize: 15, color: Colors.cyan),
+                    textStyle: TextStyle(fontSize: 15.sp, color: Colors.cyan),
                   ),
                 ),
                 SizedBox(
@@ -48,7 +49,7 @@ class CategoryWidget extends StatelessWidget {
                 Text(
                   'Discount',
                   style: GoogleFonts.damion(
-                    textStyle: TextStyle(fontSize: 10, color: Colors.cyan),
+                    textStyle: TextStyle(fontSize: 10.sp, color: Colors.cyan),
                   ),
                 ),
               ],

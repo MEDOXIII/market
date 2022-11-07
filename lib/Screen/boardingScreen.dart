@@ -3,6 +3,7 @@ import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Widgets/BoardingWidget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BoardingScreen extends StatefulWidget {
   const BoardingScreen({Key? key}) : super(key: key);
@@ -44,7 +45,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     child: Text(
                       "Skip",
                       style: GoogleFonts.racingSansOne(
-                        textStyle: TextStyle(fontSize: 20, color: Colors.cyan),
+                        textStyle:
+                            TextStyle(fontSize: 20.sp, color: Colors.cyan),
                       ),
                     ),
                   ),
@@ -119,7 +121,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     child: Text(
                       onLastPage ? "Get Ready" : "Next",
                       style: GoogleFonts.damion(
-                        textStyle: TextStyle(fontSize: 25, color: Colors.white),
+                        textStyle:
+                            TextStyle(fontSize: 25.sp, color: Colors.white),
                       ),
                     ),
                   ),

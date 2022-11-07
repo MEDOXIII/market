@@ -6,6 +6,7 @@ import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Screen/productScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class NavigationDrawer extends StatelessWidget {
                 user.email != null ? user.email! : "My Name",
                 style: GoogleFonts.sacramento(
                   textStyle: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     color: Colors.white,
                   ),
                 ),
@@ -69,7 +70,7 @@ class NavigationDrawer extends StatelessWidget {
                 "Category",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),
@@ -85,7 +86,7 @@ class NavigationDrawer extends StatelessWidget {
                 "Product",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),
@@ -101,7 +102,7 @@ class NavigationDrawer extends StatelessWidget {
                 "Detail",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),
@@ -117,7 +118,7 @@ class NavigationDrawer extends StatelessWidget {
                 "ShopCart",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),
@@ -148,7 +149,7 @@ class NavigationDrawer extends StatelessWidget {
                       "Singe Out",
                       style: GoogleFonts.xanhMono(
                         textStyle: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),

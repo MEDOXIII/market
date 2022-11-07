@@ -5,6 +5,7 @@ import 'package:market/Screen/registerScreen.dart';
 import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -89,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Don't have an account ? ",
                           style: GoogleFonts.racingSansOne(
                             textStyle: TextStyle(
-                              fontSize: 20,
+                              fontSize: 16.sp,
                             ),
                           ),
                         ),
@@ -102,8 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             "Register Here",
                             style: GoogleFonts.damion(
-                              textStyle:
-                                  TextStyle(fontSize: 20, color: Colors.cyan),
+                              textStyle: TextStyle(
+                                  fontSize: 16.sp, color: Colors.cyan),
                             ),
                           ),
                         ),

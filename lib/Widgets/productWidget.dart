@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Widgets/countRowWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -28,7 +29,7 @@ class ProductWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 textStyle: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: Color(0xff0093d3),
                     fontWeight: FontWeight.bold),
               ),

@@ -5,6 +5,7 @@ import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'categoryScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -122,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             "Already have an account ? ",
                             style: GoogleFonts.racingSansOne(
                               textStyle: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16.sp,
                               ),
                             ),
                           ),
@@ -135,8 +136,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: Text(
                               "Log In",
                               style: GoogleFonts.damion(
-                                textStyle:
-                                    TextStyle(fontSize: 20, color: Colors.cyan),
+                                textStyle: TextStyle(
+                                    fontSize: 16.sp, color: Colors.cyan),
                               ),
                             ),
                           ),

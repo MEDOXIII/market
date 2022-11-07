@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ShopCartScreen extends StatelessWidget {
   const ShopCartScreen({Key? key}) : super(key: key);
@@ -51,7 +52,8 @@ class ShopCartScreen extends StatelessWidget {
                     Text(
                       'Your Shop Cart is Empty ',
                       style: GoogleFonts.damion(
-                        textStyle: TextStyle(fontSize: 20, color: Colors.cyan),
+                        textStyle:
+                            TextStyle(fontSize: 20.sp, color: Colors.cyan),
                       ),
                     ),
                   ]),

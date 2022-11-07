@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BoardingWidget extends StatelessWidget {
   final Image image;
@@ -27,7 +28,7 @@ class BoardingWidget extends StatelessWidget {
             textAddress,
             style: GoogleFonts.aclonica(
               textStyle: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
             ),
           ),
@@ -38,7 +39,7 @@ class BoardingWidget extends StatelessWidget {
             text,
             style: GoogleFonts.acme(
               textStyle: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
             ),
             textAlign: TextAlign.center,
