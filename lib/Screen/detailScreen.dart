@@ -49,7 +49,7 @@ class DetailScreen extends StatelessWidget {
                 children: [
                   Image.asset('assets/images/market.png'),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height / 12,
                   ),
                   Text(
                     'This is the text of the product which is been display on the detail screen , this text should contain  what is this product and what is used for .. ',
@@ -61,13 +61,13 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: MediaQuery.of(context).size.height / 12,
                   ),
                   Row(
                     children: [
                       Expanded(child: countRowWidget()),
                       SizedBox(
-                        width: 20,
+                        width: MediaQuery.of(context).size.height / 12,
                       ),
                       Expanded(
                         child: ButtonWidget(

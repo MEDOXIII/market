@@ -44,7 +44,7 @@ class NavigationDrawer extends StatelessWidget {
                 backgroundImage: AssetImage('assets/images/avatar.png'),
               ),
               SizedBox(
-                height: 10,
+                height: MediaQuery.of(context).size.height / 12,
               ),
               Text(
                 user.email != null ? user.email! : "My Name",
@@ -142,8 +142,8 @@ class NavigationDrawer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25),
                     color: Color(0xff2a386c),
                   ),
-                  width: 50,
-                  height: 50,
+                  width: 50.w,
+                  height: 50.h,
                   child: Center(
                     child: Text(
                       "Singe Out",

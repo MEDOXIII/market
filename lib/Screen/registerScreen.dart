@@ -62,11 +62,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: 300,
+                        height: 300.h,
                         child: Image.asset('assets/images/market.png'),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: MediaQuery.of(context).size.height / 12,
                       ),
                       textFieldWidget(
                         controller: emailController,
@@ -105,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //   icon: Icon(Icons.home),
                       // ),
                       SizedBox(
-                        height: 20,
+                        height: MediaQuery.of(context).size.height / 12,
                       ),
                       ButtonWidget(
                         'Register',
@@ -114,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       SizedBox(
-                        height: 10,
+                        height: MediaQuery.of(context).size.height / 12,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

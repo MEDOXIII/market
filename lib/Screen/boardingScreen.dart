@@ -52,7 +52,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   ),
                 ),
                 Container(
-                  height: 500,
+                  height: 500.h,
                   child: PageView(
                     controller: _pageController,
                     physics: ClampingScrollPhysics(),
@@ -65,8 +65,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       BoardingWidget(
                         image: Image.asset(
                           'assets/images/delivery.png',
-                          height: 200,
-                          width: 300,
+                          height: 200.h,
+                          width: 300.w,
                         ),
                         textAddress: "delivery",
                         text:
@@ -75,8 +75,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       BoardingWidget(
                         image: Image.asset(
                           'assets/images/food.png',
-                          height: 200,
-                          width: 300,
+                          height: 200.h,
+                          width: 300.w,
                         ),
                         textAddress: "food",
                         text:
@@ -85,8 +85,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       BoardingWidget(
                         image: Image.asset(
                           'assets/images/liveTracking.png',
-                          height: 200,
-                          width: 300,
+                          height: 200.h,
+                          width: 300.w,
                         ),
                         textAddress: "live Tracking",
                         text:

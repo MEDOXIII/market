@@ -3,6 +3,7 @@ import 'package:market/Screen/shopCartScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Widgets/infoWidget.dart';
 import '../Widgets/navigationDrawer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -44,35 +45,35 @@ class ProfileScreen extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                height: 300,
-                width: 300,
+                height: 300.h,
+                width: 300.w,
                 child: CircleAvatar(
                   child: Image.asset('assets/images/avatar.png'),
                 ),
               ),
               SizedBox(
-                height: 25,
+                height: MediaQuery.of(context).size.height / 12,
               ),
               infoWidget(
                 labelText: "Name :",
                 infoText: user.email != null ? user.email! : "My Name",
               ),
               SizedBox(
-                height: 25,
+                height: MediaQuery.of(context).size.height / 12,
               ),
               infoWidget(
                 labelText: "Phone Number :",
                 infoText: "My Phone Is ",
               ),
               SizedBox(
-                height: 25,
+                height: MediaQuery.of(context).size.height / 12,
               ),
               infoWidget(
                 labelText: "Email :",
                 infoText: "My Email Is ",
               ),
               SizedBox(
-                height: 25,
+                height: MediaQuery.of(context).size.height / 12,
               ),
               infoWidget(
                 labelText: "Address :",

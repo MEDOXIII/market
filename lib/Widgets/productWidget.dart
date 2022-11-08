@@ -19,10 +19,10 @@ class ProductWidget extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/market.png',
-              height: 140,
+              height: 140.h,
             ),
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.height / 12,
             ),
             Text(
               "Product Name",
@@ -35,10 +35,10 @@ class ProductWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.height / 12,
             ),
             Container(
-              height: 40,
+              height: 40.h,
               child: countRowWidget(),
             ),
           ],

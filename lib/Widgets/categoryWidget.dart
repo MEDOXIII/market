@@ -22,8 +22,8 @@ class CategoryWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-              height: 200,
-              width: 200,
+              height: 200.h,
+              width: 200.w,
               child: Image.asset('assets/images/market.png'),
             ),
             Column(
@@ -35,7 +35,7 @@ class CategoryWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: MediaQuery.of(context).size.height / 12,
                 ),
                 Text(
                   'Price',
@@ -44,7 +44,7 @@ class CategoryWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: MediaQuery.of(context).size.height / 12,
                 ),
                 Text(
                   'Discount',

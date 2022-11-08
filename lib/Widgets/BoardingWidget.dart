@@ -33,7 +33,7 @@ class BoardingWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 15,
+            height: MediaQuery.of(context).size.height / 12,
           ),
           Text(
             text,

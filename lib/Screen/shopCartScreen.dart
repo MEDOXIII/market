@@ -47,7 +47,7 @@ class ShopCartScreen extends StatelessWidget {
                   children: [
                     Image.asset('assets/images/empty_cart.png'),
                     SizedBox(
-                      height: 20,
+                      height: MediaQuery.of(context).size.height / 12,
                     ),
                     Text(
                       'Your Shop Cart is Empty ',

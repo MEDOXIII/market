@@ -25,7 +25,7 @@ class infoWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 30,
+            width: MediaQuery.of(context).size.height / 12,
           ),
           Text(
             infoText,

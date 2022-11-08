@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class countRowWidget extends StatefulWidget {
   const countRowWidget({
@@ -17,8 +18,8 @@ class _countRowWidgetState extends State<countRowWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          width: 40,
-          height: 40,
+          width: 40.w,
+          height: 40.h,
           decoration: BoxDecoration(
             color: Colors.cyan,
             borderRadius: BorderRadius.circular(20),
@@ -46,8 +47,8 @@ class _countRowWidgetState extends State<countRowWidget> {
           ),
         ),
         Container(
-          width: 40,
-          height: 40,
+          width: 40.w,
+          height: 40.h,
           decoration: BoxDecoration(
             color: Colors.cyan,
             borderRadius: BorderRadius.circular(20),

@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Image.asset('assets/images/market.png'),
                     SizedBox(
-                      height: 20,
+                      height: MediaQuery.of(context).size.height / 12,
                     ),
                     textFieldWidget(
                       controller: emailController,
@@ -74,14 +74,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       icon: Icon(Icons.lock),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: MediaQuery.of(context).size.height / 12,
                     ),
                     ButtonWidget(
                       'Login',
                       singIn,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: MediaQuery.of(context).size.height / 12,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
