@@ -102,7 +102,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(30),
                   child: MaterialButton(
                     padding: EdgeInsets.symmetric(vertical: 20),
                     shape: RoundedRectangleBorder(

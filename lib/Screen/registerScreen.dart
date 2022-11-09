@@ -68,17 +68,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 12,
                       ),
-                      textFieldWidget(
+                      textFormFieldWidget(
                         controller: emailController,
                         text: 'Enter Your Email',
-                        type: TextInputType.emailAddress,
                         isPass: false,
                         icon: Icon(Icons.email),
                       ),
-                      textFieldWidget(
+                      textFormFieldWidget(
                         controller: passwordController,
                         text: 'Enter Your Password',
-                        type: TextInputType.visiblePassword,
                         isPass: false,
                         icon: Icon(Icons.lock),
                       ),
@@ -105,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //   icon: Icon(Icons.home),
                       // ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 12,
+                        height: MediaQuery.of(context).size.height / 24,
                       ),
                       ButtonWidget(
                         'Register',
@@ -114,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 12,
+                        height: MediaQuery.of(context).size.height / 24,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

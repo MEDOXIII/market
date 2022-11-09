@@ -22,7 +22,7 @@ class BoardingWidget extends StatelessWidget {
         children: [
           Center(child: image),
           SizedBox(
-            height: 30,
+            height: MediaQuery.of(context).size.height / 24,
           ),
           Text(
             textAddress,
@@ -33,7 +33,7 @@ class BoardingWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height / 12,
+            height: MediaQuery.of(context).size.height / 24,
           ),
           Text(
             text,

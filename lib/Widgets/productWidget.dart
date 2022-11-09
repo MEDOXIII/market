@@ -13,16 +13,17 @@ class ProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+        height: 500.h,
         color: Colors.white38,
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
             Image.asset(
               'assets/images/market.png',
-              height: 140.h,
+              height: 100.h,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 12,
+              height: MediaQuery.of(context).size.height / 48,
             ),
             Text(
               "Product Name",
@@ -35,10 +36,10 @@ class ProductWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 12,
+              height: MediaQuery.of(context).size.height / 48,
             ),
             Container(
-              height: 40.h,
+              height: 30.h,
               child: countRowWidget(),
             ),
           ],

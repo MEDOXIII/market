@@ -35,7 +35,7 @@ class CategoryWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 12,
+                  height: MediaQuery.of(context).size.height / 24,
                 ),
                 Text(
                   'Price',
@@ -44,7 +44,7 @@ class CategoryWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 12,
+                  height: MediaQuery.of(context).size.height / 24,
                 ),
                 Text(
                   'Discount',

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class textFieldWidget extends StatelessWidget {
+class textFormFieldWidget extends StatelessWidget {
   late final String text;
-  final TextInputType type;
   final bool isPass;
   final Icon icon;
   final TextEditingController controller;
-  textFieldWidget(
+  textFormFieldWidget(
       {required this.text,
-      required this.type,
       required this.isPass,
       required this.icon,
       required this.controller});
@@ -17,9 +15,8 @@ class textFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
-        keyboardType: type,
         obscureText: isPass,
         textAlign: TextAlign.center,
         onChanged: (value) {},

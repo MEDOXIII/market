@@ -52,28 +52,28 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 12,
+                height: MediaQuery.of(context).size.height / 24,
               ),
               infoWidget(
                 labelText: "Name :",
                 infoText: user.email != null ? user.email! : "My Name",
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 12,
+                height: MediaQuery.of(context).size.height / 24,
               ),
               infoWidget(
                 labelText: "Phone Number :",
                 infoText: "My Phone Is ",
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 12,
+                height: MediaQuery.of(context).size.height / 24,
               ),
               infoWidget(
                 labelText: "Email :",
                 infoText: "My Email Is ",
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 12,
+                height: MediaQuery.of(context).size.height / 24,
               ),
               infoWidget(
                 labelText: "Address :",
