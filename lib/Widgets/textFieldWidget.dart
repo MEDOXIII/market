@@ -5,11 +5,15 @@ class textFormFieldWidget extends StatelessWidget {
   final bool isPass;
   final Icon icon;
   final TextEditingController controller;
-  textFormFieldWidget(
-      {required this.text,
-      required this.isPass,
-      required this.icon,
-      required this.controller});
+  final String? Function(String?)? validator;
+
+  textFormFieldWidget({
+    required this.text,
+    required this.isPass,
+    required this.icon,
+    required this.controller,
+    required this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,8 @@ class textFormFieldWidget extends StatelessWidget {
         controller: controller,
         obscureText: isPass,
         textAlign: TextAlign.center,
-        onChanged: (value) {},
+        validator: validator,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           border: OutlineInputBorder(

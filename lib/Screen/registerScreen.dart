@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'categoryScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
+  final formGlobalKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -30,6 +32,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future signUp() async {
+    final isValid = formGlobalKey.currentState!.validate();
+    if (!isValid) return;
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
@@ -58,90 +62,79 @@ class _RegisterScreenState extends State<RegisterScreen> {
               body: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 300.h,
-                        child: Image.asset('assets/images/market.png'),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 12,
-                      ),
-                      textFormFieldWidget(
-                        controller: emailController,
-                        text: 'Enter Your Email',
-                        isPass: false,
-                        icon: Icon(Icons.email),
-                      ),
-                      textFormFieldWidget(
-                        controller: passwordController,
-                        text: 'Enter Your Password',
-                        isPass: false,
-                        icon: Icon(Icons.lock),
-                      ),
-                      // textFieldWidget(
-                      //   controller: nameController,
-                      //   text: 'Enter Your Name',
-                      //   type: TextInputType.name,
-                      //   isPass: false,
-                      //   icon: Icon(Icons.person),
-                      // ),
-                      // textFieldWidget(
-                      //   controller: phoneController,
-                      //   text: 'Enter Your Phone Number',
-                      //   type: TextInputType.number,
-                      //   isPass: false,
-                      //   icon: Icon(Icons.phone),
-                      // ),
-                      //
-                      // textFieldWidget(
-                      //   controller: addressController,
-                      //   text: 'Enter Your Address',
-                      //   type: TextInputType.streetAddress,
-                      //   isPass: false,
-                      //   icon: Icon(Icons.home),
-                      // ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 24,
-                      ),
-                      ButtonWidget(
-                        'Register',
-                        () {
-                          signUp();
-                        },
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 24,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already have an account ? ",
-                            style: GoogleFonts.racingSansOne(
-                              textStyle: TextStyle(
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                              ));
-                            },
-                            child: Text(
-                              "Log In",
-                              style: GoogleFonts.damion(
+                  child: Form(
+                    key: formGlobalKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 300.h,
+                          child: Image.asset('assets/images/market.png'),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 12,
+                        ),
+                        textFormFieldWidget(
+                          controller: emailController,
+                          text: 'Enter Your Email',
+                          isPass: false,
+                          icon: Icon(Icons.email),
+                          validator: (email) =>
+                              email != null && !EmailValidator.validate(email)
+                                  ? 'Enter a valid Email'
+                                  : null,
+                        ),
+                        textFormFieldWidget(
+                          controller: passwordController,
+                          text: 'Enter Your Password',
+                          isPass: false,
+                          icon: Icon(Icons.lock),
+                          validator: (password) =>
+                              password != null && password.length < 6
+                                  ? 'Enter min of 6 characters'
+                                  : null,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 24,
+                        ),
+                        ButtonWidget(
+                          'Register',
+                          () {
+                            signUp();
+                          },
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 24,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already have an account ? ",
+                              style: GoogleFonts.racingSansOne(
                                 textStyle: TextStyle(
-                                    fontSize: 16.sp, color: Colors.cyan),
+                                  fontSize: 16.sp,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ));
+                              },
+                              child: Text(
+                                "Log In",
+                                style: GoogleFonts.damion(
+                                  textStyle: TextStyle(
+                                      fontSize: 16.sp, color: Colors.cyan),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
