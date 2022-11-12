@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Widgets/BoardingWidget.dart';
+import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,20 +37,21 @@ class _BoardingScreenState extends State<BoardingScreen> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: MaterialButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ));
-                    },
-                    // color: Colors.transparent,
-                    child: Text(
-                      "Skip",
-                      style: GoogleFonts.racingSansOne(
-                        textStyle:
-                            TextStyle(fontSize: 20.sp, color: Colors.cyan),
-                      ),
-                    ),
-                  ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ));
+                      },
+                      // color: Colors.transparent,
+                      child: NeumorphismButtonWidget(
+                        child: Text(
+                          "Skip",
+                          style: GoogleFonts.racingSansOne(
+                            textStyle:
+                                TextStyle(fontSize: 20.sp, color: Colors.cyan),
+                          ),
+                        ),
+                      )),
                 ),
                 Container(
                   height: 500.h,
