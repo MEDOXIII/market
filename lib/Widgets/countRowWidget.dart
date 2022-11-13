@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
 class countRowWidget extends StatefulWidget {
   const countRowWidget({
@@ -17,27 +17,20 @@ class _countRowWidgetState extends State<countRowWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-          width: 40.w,
-          height: 40.h,
-          decoration: BoxDecoration(
-            color: Colors.cyan,
-            borderRadius: BorderRadius.circular(20),
+        NeumorphismButtonWidget(
+          child: Icon(
+            Icons.remove,
+            size: 20,
+            color: Colors.black,
           ),
-          child: IconButton(
-            onPressed: () {
-              if (sum > 1) {
-                setState(() {
-                  sum--;
-                });
-              }
-            },
-            icon: Icon(
-              Icons.remove,
-              size: 20,
-              color: Colors.white,
-            ),
-          ),
+          onClick: () {
+            if (sum > 1) {
+              setState(() {
+                sum--;
+              });
+            }
+          },
+          myColor: Colors.white70,
         ),
         Text(
           "$sum",
@@ -46,25 +39,18 @@ class _countRowWidgetState extends State<countRowWidget> {
             fontSize: 20,
           ),
         ),
-        Container(
-          width: 40.w,
-          height: 40.h,
-          decoration: BoxDecoration(
-            color: Colors.cyan,
-            borderRadius: BorderRadius.circular(20),
+        NeumorphismButtonWidget(
+          child: Icon(
+            Icons.add,
+            size: 20,
+            color: Colors.black,
           ),
-          child: IconButton(
-            onPressed: () {
-              setState(() {
-                sum++;
-              });
-            },
-            icon: Icon(
-              Icons.add,
-              size: 20,
-              color: Colors.white,
-            ),
-          ),
+          onClick: () {
+            setState(() {
+              sum++;
+            });
+          },
+          myColor: Colors.white70,
         ),
       ],
     );

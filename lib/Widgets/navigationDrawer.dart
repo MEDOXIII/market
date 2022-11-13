@@ -7,6 +7,7 @@ import 'package:market/Screen/productScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
@@ -133,29 +134,22 @@ class NavigationDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.logout),
-              title: GestureDetector(
-                onTap: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Color(0xff2a386c),
-                  ),
-                  width: 50.w,
-                  height: 50.h,
-                  child: Center(
-                    child: Text(
-                      "Singe Out",
-                      style: GoogleFonts.xanhMono(
-                        textStyle: TextStyle(
-                            fontSize: 20.sp,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+              title: NeumorphismButtonWidget(
+                myColor: Colors.white70,
+                child: Center(
+                  child: Text(
+                    "Singe Out",
+                    style: GoogleFonts.xanhMono(
+                      textStyle: TextStyle(
+                          fontSize: 20.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
+                onClick: () {
+                  FirebaseAuth.instance.signOut();
+                },
               ),
             ),
           ],

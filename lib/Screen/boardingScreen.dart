@@ -36,22 +36,25 @@ class _BoardingScreenState extends State<BoardingScreen> {
               children: [
                 Container(
                   alignment: Alignment.centerRight,
-                  child: MaterialButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
-                        ));
-                      },
-                      // color: Colors.transparent,
-                      child: NeumorphismButtonWidget(
-                        child: Text(
-                          "Skip",
-                          style: GoogleFonts.racingSansOne(
-                            textStyle:
-                                TextStyle(fontSize: 20.sp, color: Colors.cyan),
-                          ),
-                        ),
-                      )),
+                  margin: EdgeInsets.only(
+                    right: 12,
+                    top: 12,
+                  ),
+                  child: NeumorphismButtonWidget(
+                    myColor: Colors.white70,
+                    onClick: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ));
+                    },
+                    child: Text(
+                      "Skip",
+                      style: GoogleFonts.racingSansOne(
+                        textStyle:
+                            TextStyle(fontSize: 16.sp, color: Colors.black),
+                      ),
+                    ),
+                  ),
                 ),
                 Container(
                   height: 500.h,
@@ -105,13 +108,18 @@ class _BoardingScreenState extends State<BoardingScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(30),
-                  child: MaterialButton(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                  child: NeumorphismButtonWidget(
+                    myColor: Colors.white70,
+                    child: Center(
+                      child: Text(
+                        onLastPage ? "Get Ready" : "Next",
+                        style: GoogleFonts.damion(
+                          textStyle:
+                              TextStyle(fontSize: 25.sp, color: Colors.black),
+                        ),
+                      ),
                     ),
-                    color: Color(0xff2a386c),
-                    onPressed: () {
+                    onClick: () {
                       onLastPage
                           ? Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => LoginScreen(),
@@ -120,14 +128,17 @@ class _BoardingScreenState extends State<BoardingScreen> {
                               duration: Duration(milliseconds: 150),
                               curve: Curves.ease);
                     },
-                    child: Text(
-                      onLastPage ? "Get Ready" : "Next",
-                      style: GoogleFonts.damion(
-                        textStyle:
-                            TextStyle(fontSize: 25.sp, color: Colors.white),
-                      ),
-                    ),
                   ),
+
+                  // MaterialButton(
+                  //   padding: EdgeInsets.symmetric(vertical: 20),
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(25),
+                  //   ),
+                  //   color: Color(0xff2a386c),
+                  //   onPressed:
+                  //   child:
+                  //   ),
                 ),
               ],
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
-import 'package:market/Widgets/ButtonWidget.dart';
+import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,10 +88,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 24,
                       ),
-                      ButtonWidget(
-                        'Login',
-                        singIn,
+                      NeumorphismButtonWidget(
+                        child: Text(
+                          'Login',
+                          style: GoogleFonts.sail(
+                            textStyle: TextStyle(
+                              fontSize: 20.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        onClick: singIn,
+                        myColor: Colors.white70,
                       ),
+                      // ButtonWidget(
+                      //   'Login',
+                      //   singIn,
+                      // ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 24,
                       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:market/Screen/shopCartScreen.dart';
-import 'package:market/Widgets/ButtonWidget.dart';
 import 'package:market/Widgets/countRowWidget.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -70,9 +70,20 @@ class DetailScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.height / 12,
                       ),
                       Expanded(
-                        child: ButtonWidget(
-                          'BUY',
-                          () {
+                        child: NeumorphismButtonWidget(
+                          myColor: Colors.white70,
+                          child: Center(
+                            child: Text(
+                              "BUY",
+                              style: GoogleFonts.xanhMono(
+                                textStyle: TextStyle(
+                                    fontSize: 20.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          onClick: () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ShopCartScreen(),
                             ));
