@@ -37,7 +37,7 @@ dependencies:
   flutter_screenutil: ^5.6.0
   email_validator: '^2.1.16'
   flutter_inset_box_shadow: ^1.0.8
-
+  slide_to_act: ^2.0.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"

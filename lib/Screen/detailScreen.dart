@@ -47,7 +47,10 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/market.png'),
+                  Hero(
+                    tag: 'image',
+                    child: Image.asset('assets/images/market.png'),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 12,
                   ),

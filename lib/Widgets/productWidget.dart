@@ -18,9 +18,12 @@ class ProductWidget extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            Image.asset(
-              'assets/images/market.png',
-              height: 100.h,
+            Hero(
+              tag: 'image',
+              child: Image.asset(
+                'assets/images/market.png',
+                height: 100.h,
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 48,
@@ -38,10 +41,7 @@ class ProductWidget extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 48,
             ),
-            Container(
-              height: 30.h,
-              child: countRowWidget(),
-            ),
+            countRowWidget(),
           ],
         ),
       ),

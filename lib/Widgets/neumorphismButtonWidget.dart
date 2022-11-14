@@ -22,8 +22,8 @@ class _NeumorphismButtonWidgetState extends State<NeumorphismButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Offset distance = isPressed ? Offset(5, 5) : Offset(10, 10);
-    double blur = isPressed ? 5 : 10;
+    Offset distance = isPressed ? Offset(3, 3) : Offset(2, 2);
+    double blur = isPressed ? 3 : 2;
 
     return GestureDetector(
       onTap: widget.onClick,
@@ -49,14 +49,16 @@ class _NeumorphismButtonWidgetState extends State<NeumorphismButtonWidget> {
               BoxShadow(
                 color: Colors.grey.shade600,
                 offset: distance,
-                spreadRadius: 1,
+                spreadRadius: 0.5,
+                blurStyle: BlurStyle.inner,
                 blurRadius: blur,
                 inset: isPressed,
               ),
               BoxShadow(
                 color: Colors.white,
                 offset: -distance,
-                spreadRadius: 1,
+                spreadRadius: 0.5,
+                blurStyle: BlurStyle.inner,
                 blurRadius: blur,
                 inset: isPressed,
               ),

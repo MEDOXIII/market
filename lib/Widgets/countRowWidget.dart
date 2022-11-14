@@ -18,10 +18,12 @@ class _countRowWidgetState extends State<countRowWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         NeumorphismButtonWidget(
-          child: Icon(
-            Icons.remove,
-            size: 20,
-            color: Colors.black,
+          child: Center(
+            child: Icon(
+              Icons.remove,
+              size: 20,
+              color: Colors.black,
+            ),
           ),
           onClick: () {
             if (sum > 1) {
@@ -40,10 +42,12 @@ class _countRowWidgetState extends State<countRowWidget> {
           ),
         ),
         NeumorphismButtonWidget(
-          child: Icon(
-            Icons.add,
-            size: 20,
-            color: Colors.black,
+          child: Center(
+            child: Icon(
+              Icons.add,
+              size: 20,
+              color: Colors.black,
+            ),
           ),
           onClick: () {
             setState(() {
