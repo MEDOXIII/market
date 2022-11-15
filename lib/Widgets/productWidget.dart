@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:market/Screen/detailScreen.dart';
 import 'package:market/Widgets/countRowWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductWidget extends StatelessWidget {
+  final Object heroTag;
+  final VoidCallback onClick;
+
   const ProductWidget({
+    required this.heroTag,
+    required this.onClick,
     Key? key,
   }) : super(key: key);
 
@@ -19,7 +23,7 @@ class ProductWidget extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: 'image',
+              tag: heroTag,
               child: Image.asset(
                 'assets/images/market.png',
                 height: 100.h,
@@ -45,11 +49,7 @@ class ProductWidget extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DetailScreen(),
-        ));
-      },
+      onTap: onClick,
     );
   }
 }

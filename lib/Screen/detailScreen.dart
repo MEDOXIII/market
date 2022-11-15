@@ -7,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final Object tag;
+
+  const DetailScreen(this.tag);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,7 +50,7 @@ class DetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Hero(
-                    tag: 'image',
+                    tag: tag,
                     child: Image.asset('assets/images/market.png'),
                   ),
                   SizedBox(

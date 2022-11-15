@@ -3,6 +3,8 @@ import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/navigationDrawer.dart';
 import 'package:market/Widgets/productWidget.dart';
 
+import 'detailScreen.dart';
+
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);
 
@@ -51,14 +53,86 @@ class ProductScreen extends StatelessWidget {
                 childAspectRatio: 0.75,
               ),
               children: [
-                ProductWidget(),
-                // ProductWidget(),
-                // ProductWidget(),
-                // ProductWidget(),
-                // ProductWidget(),
-                // ProductWidget(),
-                // ProductWidget(),
-                // ProductWidget(),
+                ProductWidget(
+                  heroTag: 'image',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image1',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image1',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image2',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image2',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image3',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image3',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image4',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image4',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image5',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image5',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image6',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image6',
+                      ),
+                    ));
+                  },
+                ),
+                ProductWidget(
+                  heroTag: 'image7',
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        'image7',
+                      ),
+                    ));
+                  },
+                ),
               ],
             ),
           ),
