@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/navigationDrawer.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -69,6 +72,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             showBackView: isCvvFocused,
             obscureCardNumber: true,
             obscureCardCvv: true,
+            isHolderNameVisible: true,
+            cardBgColor: Colors.grey,
             onCreditCardWidgetChange: (CreditCardBrand) {},
           ),
           Expanded(
@@ -104,6 +109,29 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     cardHolderName: cardHolderName,
                     cvvCode: cvvCode,
                     themeColor: Colors.white,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 12,
+                  ),
+                  NeumorphismButtonWidget(
+                    child: Text(
+                      'Validate',
+                      style: GoogleFonts.sail(
+                        textStyle: TextStyle(
+                          fontSize: 20.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    onClick: () {
+                      if (formKey.currentState!.validate()) {
+                        print('valid!');
+                      } else {
+                        print('invalid!');
+                      }
+                    },
+                    myColor: Colors.white70,
                   ),
                 ],
               ),
