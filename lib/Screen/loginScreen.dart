@@ -26,6 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future singIn() async {
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
     final isValid = formGlobalKey.currentState!.validate();
     if (!isValid) return;
     try {
@@ -35,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } on FirebaseAuthException catch (e) {
       print(e);
     }
+    Navigator.of(context).pop();
   }
 
   @override

@@ -127,8 +127,42 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     onClick: () {
                       if (formKey.currentState!.validate()) {
                         print('valid!');
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("valid!!"),
+                              content: Text("Your card is valid!"),
+                              actions: <Widget>[
+                                MaterialButton(
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       } else {
                         print('invalid!');
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        // 0    return AlertDialog(
+                        //       title: Text("invalid!!"),
+                        //       content: Text("Your card is invalid!"),
+                        //       actions: <Widget>[
+                        //         MaterialButton(
+                        //           child: Text("OK"),
+                        //           onPressed: () {
+                        //             Navigator.of(context).pop();
+                        //           },
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // );
                       }
                     },
                     myColor: Colors.white70,
