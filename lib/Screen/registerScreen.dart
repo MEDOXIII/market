@@ -7,6 +7,7 @@ import 'categoryScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -32,19 +33,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future signUp() async {
+    final isValid = formGlobalKey.currentState!.validate();
+    if (!isValid) return;
     showDialog(
       context: context,
       builder: (context) => Center(
         child: CircularProgressIndicator(),
       ),
     );
-    final isValid = formGlobalKey.currentState!.validate();
-    if (!isValid) return;
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(
+          msg: e.message.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.cyan,
+          textColor: Colors.white,
+          fontSize: 16.0);
       print(e);
     }
     Navigator.of(context).pop();

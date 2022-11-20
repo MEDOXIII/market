@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market/Screen/categoryScreen.dart';
+import 'package:market/Screen/forgotPasswordScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -26,19 +28,27 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future singIn() async {
+    final isValid = formGlobalKey.currentState!.validate();
+    if (!isValid) return;
     showDialog(
       context: context,
       builder: (context) => Center(
         child: CircularProgressIndicator(),
       ),
     );
-    final isValid = formGlobalKey.currentState!.validate();
-    if (!isValid) return;
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(
+          msg: e.message.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.cyan,
+          textColor: Colors.white,
+          fontSize: 16.0);
       print(e);
     }
     Navigator.of(context).pop();
@@ -70,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Image.asset('assets/images/market.png'),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 12,
+                        height: MediaQuery.of(context).size.height / 24,
                       ),
                       textFormFieldWidget(
                         controller: emailController,
@@ -109,12 +119,38 @@ class _LoginScreenState extends State<LoginScreen> {
                         onClick: singIn,
                         myColor: Colors.white70,
                       ),
-                      // ButtonWidget(
-                      //   'Login',
-                      //   singIn,
-                      // ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 24,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Forgot Password ? ",
+                            style: GoogleFonts.racingSansOne(
+                              textStyle: TextStyle(
+                                fontSize: 16.sp,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ForgotPasswordScreen(),
+                              ));
+                            },
+                            child: Text(
+                              "Reset Password",
+                              style: GoogleFonts.damion(
+                                textStyle: TextStyle(
+                                    fontSize: 16.sp, color: Colors.cyan),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 30,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

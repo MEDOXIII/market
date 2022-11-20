@@ -39,7 +39,7 @@ dependencies:
   flutter_inset_box_shadow: ^1.0.8
   slide_to_act: ^2.0.1
   flutter_credit_card: ^3.0.4
-
+  fluttertoast: ^8.1.1
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
   flutter_native_splash: ^2.2.10+1

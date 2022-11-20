@@ -73,7 +73,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             obscureCardNumber: true,
             obscureCardCvv: true,
             isHolderNameVisible: true,
-            cardBgColor: Colors.grey,
+            cardBgColor: Colors.blue.shade700,
             onCreditCardWidgetChange: (CreditCardBrand) {},
           ),
           Expanded(
@@ -131,14 +131,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text("valid!!"),
-                              content: Text("Your card is valid!"),
+                              title: Text(
+                                "valid!!",
+                                textAlign: TextAlign.center,
+                              ),
+                              content: Text(
+                                "Your card is valid!",
+                                textAlign: TextAlign.center,
+                              ),
                               actions: <Widget>[
-                                MaterialButton(
+                                NeumorphismButtonWidget(
                                   child: Text("OK"),
-                                  onPressed: () {
+                                  onClick: () {
                                     Navigator.of(context).pop();
                                   },
+                                  myColor: Colors.white70,
                                 ),
                               ],
                             );
