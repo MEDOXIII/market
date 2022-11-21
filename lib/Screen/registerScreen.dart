@@ -17,18 +17,14 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final addressController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    nameController.dispose();
-    phoneController.dispose();
-    addressController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -88,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Image.asset('assets/images/market.png'),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 12,
+                          height: MediaQuery.of(context).size.height / 24,
                         ),
                         textFormFieldWidget(
                           controller: emailController,
@@ -103,15 +99,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         textFormFieldWidget(
                           controller: passwordController,
                           text: 'Enter Your Password',
-                          isPass: false,
+                          isPass: true,
                           icon: Icon(Icons.lock),
                           validator: (password) =>
                               password != null && password.length < 6
                                   ? 'Enter min of 6 characters'
                                   : null,
                         ),
+                        textFormFieldWidget(
+                          controller: confirmPasswordController,
+                          text: 'Confirm Your Password',
+                          isPass: true,
+                          icon: Icon(Icons.lock),
+                          validator: (confirmPassword) =>
+                              confirmPassword != passwordController.text
+                                  ? 'Password Is Not Match'
+                                  : null,
+                        ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 24,
+                          height: MediaQuery.of(context).size.height / 30,
                         ),
                         NeumorphismButtonWidget(
                           child: Text(
@@ -127,14 +133,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onClick: signUp,
                           myColor: Colors.white70,
                         ),
-                        // ButtonWidget(
-                        //   'Register',
-                        //   () {
-                        //     signUp();
-                        //   },
-                        // ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 24,
+                          height: MediaQuery.of(context).size.height / 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

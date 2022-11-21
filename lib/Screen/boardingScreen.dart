@@ -69,31 +69,31 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     children: [
                       BoardingWidget(
                         image: Image.asset(
-                          'assets/images/delivery.png',
+                          'assets/images/online_shopping.png',
                           height: 200.h,
                           width: 300.w,
                         ),
-                        textAddress: "delivery",
+                        textAddress: "Online Shopping",
                         text:
                             "This is the text of the Boarding which is been display on the OnBoarding Screen",
                       ),
                       BoardingWidget(
                         image: Image.asset(
-                          'assets/images/food.png',
+                          'assets/images/order_confirmed.png',
                           height: 200.h,
                           width: 300.w,
                         ),
-                        textAddress: "food",
+                        textAddress: "Order Confirmed",
                         text:
                             "This is the text of the Boarding which is been display on the OnBoarding Screen",
                       ),
                       BoardingWidget(
                         image: Image.asset(
-                          'assets/images/liveTracking.png',
+                          'assets/images/package_arrived.png',
                           height: 200.h,
                           width: 300.w,
                         ),
-                        textAddress: "live Tracking",
+                        textAddress: "Package Arrived",
                         text:
                             "This is the text of the Boarding which is been display on the OnBoarding Screen",
                       ),
@@ -104,6 +104,9 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   child: SmoothPageIndicator(
                     controller: _pageController,
                     count: 3,
+                    effect: SlideEffect(
+                      activeDotColor: Colors.cyan,
+                    ),
                   ),
                 ),
                 Padding(

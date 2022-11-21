@@ -102,8 +102,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ? 'Enter min of 6 characters'
                                 : null,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 24,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ForgotPasswordScreen(),
+                              ));
+                            },
+                            child: Text(
+                              "Forgot Password ?",
+                              style: GoogleFonts.damion(
+                                textStyle: TextStyle(
+                                    fontSize: 16.sp, color: Colors.cyan),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       NeumorphismButtonWidget(
                         child: Text(
@@ -118,36 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onClick: singIn,
                         myColor: Colors.white70,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 24,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Forgot Password ? ",
-                            style: GoogleFonts.racingSansOne(
-                              textStyle: TextStyle(
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ForgotPasswordScreen(),
-                              ));
-                            },
-                            child: Text(
-                              "Reset Password",
-                              style: GoogleFonts.damion(
-                                textStyle: TextStyle(
-                                    fontSize: 16.sp, color: Colors.cyan),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 30,
