@@ -100,6 +100,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 textFormFieldWidget(
                   controller: emailController,
                   text: 'Enter Your Email',
+                  type: TextInputType.emailAddress,
                   isPass: false,
                   icon: Icon(Icons.email),
                   validator: (email) =>

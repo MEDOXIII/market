@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       textFormFieldWidget(
                         controller: emailController,
                         text: 'Enter Your Email',
+                        type: TextInputType.emailAddress,
                         isPass: false,
                         icon: Icon(Icons.email),
                         validator: (email) =>
@@ -95,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       textFormFieldWidget(
                         controller: passwordController,
                         text: 'Enter Your Password',
+                        type: TextInputType.text,
                         isPass: true,
                         icon: Icon(Icons.lock),
                         validator: (password) =>

@@ -6,6 +6,7 @@ class textFormFieldWidget extends StatelessWidget {
   final Icon icon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final TextInputType type;
 
   textFormFieldWidget({
     required this.text,
@@ -13,6 +14,7 @@ class textFormFieldWidget extends StatelessWidget {
     required this.icon,
     required this.controller,
     required this.validator,
+    required this.type,
   });
 
   @override
@@ -20,6 +22,7 @@ class textFormFieldWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
+        keyboardType: type,
         controller: controller,
         obscureText: isPass,
         textAlign: TextAlign.center,

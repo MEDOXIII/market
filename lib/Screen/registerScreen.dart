@@ -15,6 +15,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -22,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
@@ -55,6 +59,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Navigator.of(context).pop();
   }
 
+  Future addUser() async {}
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -84,11 +90,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Image.asset('assets/images/market.png'),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 24,
+                          height: MediaQuery.of(context).size.height / 30,
+                        ),
+                        textFormFieldWidget(
+                          controller: nameController,
+                          text: 'Enter Your Name',
+                          type: TextInputType.name,
+                          isPass: false,
+                          icon: Icon(Icons.person),
+                          validator: (name) => name != null && name.length < 4
+                              ? 'Enter Your Name'
+                              : null,
+                        ),
+                        textFormFieldWidget(
+                          controller: phoneController,
+                          text: 'Enter Your Phone Number',
+                          type: TextInputType.phone,
+                          isPass: false,
+                          icon: Icon(Icons.phone),
+                          validator: (phone) =>
+                              phone != null && phone.length < 11
+                                  ? 'Enter Your Phone Number'
+                                  : null,
                         ),
                         textFormFieldWidget(
                           controller: emailController,
                           text: 'Enter Your Email',
+                          type: TextInputType.emailAddress,
                           isPass: false,
                           icon: Icon(Icons.email),
                           validator: (email) =>
@@ -99,6 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         textFormFieldWidget(
                           controller: passwordController,
                           text: 'Enter Your Password',
+                          type: TextInputType.text,
                           isPass: true,
                           icon: Icon(Icons.lock),
                           validator: (password) =>
@@ -109,6 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         textFormFieldWidget(
                           controller: confirmPasswordController,
                           text: 'Confirm Your Password',
+                          type: TextInputType.text,
                           isPass: true,
                           icon: Icon(Icons.lock),
                           validator: (confirmPassword) =>
