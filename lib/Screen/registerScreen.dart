@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
@@ -56,10 +57,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
           fontSize: 16.0);
       print(e);
     }
+    addUser(nameController.text.trim(), phoneController.text.trim(),
+        emailController.text.trim());
+
     Navigator.of(context).pop();
   }
 
-  Future addUser() async {}
+  Future addUser(String name, String phone, String email) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'name': name,
+      'phone': phone,
+      'email': email,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           type: TextInputType.name,
                           isPass: false,
                           icon: Icon(Icons.person),
-                          validator: (name) => name != null && name.length < 4
+                          validator: (name) => name != null && name.length < 3
                               ? 'Enter Your Name'
                               : null,
                         ),
