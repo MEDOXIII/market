@@ -16,10 +16,11 @@ class CategoryScreen extends StatelessWidget {
     return ZoomDrawer(
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
-      borderRadius: 24.0,
+      borderRadius: 20.0,
       showShadow: true,
-      // angle: 0.0,
-      slideWidth: MediaQuery.of(context).size.width * 0.75,
+      angle: -10,
+      slideWidth: MediaQuery.of(context).size.width * 0.80,
+      menuBackgroundColor: Colors.grey,
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
       drawerShadowsBackgroundColor: Colors.white70,
@@ -66,7 +67,22 @@ class CategoryScreen extends StatelessWidget {
                   ),
                 ),
               ],
-              leading: leadingWidget(),
+              leading: Builder(
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: NeumorphismButtonWidget(
+                    child: Icon(
+                      Icons.menu,
+                      size: 30,
+                      color: Colors.lightBlue,
+                    ),
+                    onClick: () {
+                      ZoomDrawer.of(context)!.toggle();
+                    },
+                    myColor: Colors.white70,
+                  ),
+                ),
+              ),
             ),
 
             // drawer: NavigationDrawer(),
@@ -83,30 +99,6 @@ class CategoryScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class leadingWidget extends StatelessWidget {
-  const leadingWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: NeumorphismButtonWidget(
-        child: Icon(
-          Icons.menu,
-          size: 30,
-          color: Colors.lightBlue,
-        ),
-        onClick: () {
-          ZoomDrawer.of(context)!.toggle();
-        },
-        myColor: Colors.white70,
       ),
     );
   }
