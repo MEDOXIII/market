@@ -40,7 +40,7 @@ class _NeumorphismButtonWidgetState extends State<NeumorphismButtonWidget> {
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(8),
           child: widget.child,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),

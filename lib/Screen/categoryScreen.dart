@@ -3,6 +3,7 @@ import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
+import 'package:market/Widgets/searchWidget.dart';
 import '../Widgets/navigationDrawer.dart';
 import '../Widgets/categoryWidget.dart';
 
@@ -39,19 +40,13 @@ class CategoryScreen extends StatelessWidget {
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: NeumorphismButtonWidget(
-                    child: Icon(
-                      Icons.search,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    onClick: () {},
-                    myColor: Colors.white70,
-                  ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
+                  child: SearchWidget(),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
                   child: NeumorphismButtonWidget(
                     child: Icon(
                       Icons.shopping_cart,
@@ -69,7 +64,8 @@ class CategoryScreen extends StatelessWidget {
               ],
               leading: Builder(
                 builder: (context) => Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
                   child: NeumorphismButtonWidget(
                     child: Icon(
                       Icons.menu,

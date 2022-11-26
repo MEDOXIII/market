@@ -8,6 +8,8 @@ import '../Widgets/navigationDrawer.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
+import '../Widgets/searchWidget.dart';
+
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
 
@@ -60,19 +62,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: NeumorphismButtonWidget(
-                child: Icon(
-                  Icons.search,
-                  size: 30,
-                  color: Colors.lightBlue,
-                ),
-                onClick: () {},
-                myColor: Colors.white70,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
+              child: SearchWidget(),
             ),
             Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
               child: NeumorphismButtonWidget(
                 child: Icon(
                   Icons.shopping_cart,
@@ -90,7 +84,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
           leading: Builder(
             builder: (context) => Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
               child: NeumorphismButtonWidget(
                 child: Icon(
                   Icons.menu,

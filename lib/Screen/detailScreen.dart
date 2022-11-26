@@ -15,6 +15,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
+
     return ZoomDrawer(
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
