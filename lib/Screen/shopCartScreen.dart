@@ -10,23 +10,36 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
 
-class ShopCartScreen extends StatelessWidget {
+class ShopCartScreen extends StatefulWidget {
   const ShopCartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ShopCartScreen> createState() => _ShopCartScreenState();
+}
+
+final TextEditingController searchTextController = TextEditingController();
+
+class _ShopCartScreenState extends State<ShopCartScreen> {
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
+
     return ZoomDrawer(
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
       borderRadius: 20.0,
       showShadow: true,
-      angle: -10,
+      angle: 0,
       slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.grey,
+      menuBackgroundColor: Colors.white,
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white70,
+      drawerShadowsBackgroundColor: Colors.white,
       menuScreen: NavigationDrawer(),
       mainScreen: MaterialApp(
         home: SafeArea(
@@ -44,7 +57,9 @@ class ShopCartScreen extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: SearchWidget(),
+                  child: SearchWidget(
+                    controller: searchTextController,
+                  ),
                 ),
                 Padding(
                   padding:
@@ -82,41 +97,43 @@ class ShopCartScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/empty_cart.png'),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 12,
-                    ),
-                    Text(
-                      'Your Shop Cart is Empty ',
-                      style: GoogleFonts.damion(
-                        textStyle:
-                            TextStyle(fontSize: 20.sp, color: Colors.cyan),
+            body: SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/empty_cart.png'),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 12,
                       ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 12,
-                    ),
-                    SlideAction(
-                      text: 'Slid To Pay',
-                      sliderButtonIcon: Icon(
-                        Icons.monetization_on,
-                        color: Colors.cyan,
+                      Text(
+                        'Your Shop Cart is Empty ',
+                        style: GoogleFonts.damion(
+                          textStyle:
+                              TextStyle(fontSize: 20.sp, color: Colors.cyan),
+                        ),
                       ),
-                      innerColor: Colors.white70,
-                      outerColor: Colors.cyan,
-                      onSubmit: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PaymentScreen(),
-                        ));
-                      },
-                    ),
-                  ],
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 12,
+                      ),
+                      SlideAction(
+                        text: 'Slid To Pay',
+                        sliderButtonIcon: Icon(
+                          Icons.monetization_on,
+                          color: Colors.cyan,
+                        ),
+                        innerColor: Colors.white70,
+                        outerColor: Colors.cyan,
+                        onSubmit: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => PaymentScreen(),
+                          ));
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'neumorphismButtonWidget.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key? key}) : super(key: key);
+  SearchWidget({required this.controller, Key? key}) : super(key: key);
+  final TextEditingController controller;
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
 }
 
 bool isOpen = true;
-final TextEditingController searchTextController = TextEditingController();
 
 class _SearchWidgetState extends State<SearchWidget> {
+  @override
+  void initState() {
+    isOpen = true;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return NeumorphismButtonWidget(
@@ -36,12 +43,12 @@ class _SearchWidgetState extends State<SearchWidget> {
             )
           : AnimatedContainer(
               duration: Duration(milliseconds: 375),
-              width: 240,
+              width: 240.w,
               child: Row(
                 children: [
                   Container(
-                    height: 50,
-                    width: 50,
+                    height: 50.h,
+                    width: 50.w,
                     child: IconButton(
                         icon: Icon(
                           Icons.clear,
@@ -49,32 +56,33 @@ class _SearchWidgetState extends State<SearchWidget> {
                         ),
                         color: Colors.lightBlue,
                         onPressed: () {
-                          if (searchTextController.text.isEmpty) {
+                          if (widget.controller.text.isEmpty) {
                             setState(() {
                               isOpen = !isOpen;
                             });
                           } else {
                             setState(
                               () {
-                                searchTextController.clear();
+                                widget.controller.clear();
                               },
                             );
                           }
                         }),
                   ),
-                  Container(
-                    height: 50,
-                    width: 140,
+                  SizedBox(
+                    width: 140.w,
                     child: TextField(
-                      controller: searchTextController,
+                      // autofocus: true,
+                      controller: widget.controller,
                       decoration: InputDecoration(
                         hintText: "Search",
+                        isDense: true,
                       ),
                     ),
                   ),
                   Container(
-                    height: 50,
-                    width: 50,
+                    height: 50.h,
+                    width: 50.w,
                     child: IconButton(
                       icon: Icon(
                         Icons.search,
@@ -82,16 +90,16 @@ class _SearchWidgetState extends State<SearchWidget> {
                       ),
                       color: Colors.lightBlue,
                       onPressed: () {
-                        if (searchTextController.text.isEmpty) {
+                        if (widget.controller.text.isEmpty) {
                         } else {
                           Fluttertoast.showToast(
-                              msg: searchTextController.text,
+                              msg: widget.controller.text,
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.CENTER,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Colors.cyan,
                               textColor: Colors.white,
-                              fontSize: 16.0);
+                              fontSize: 16.sp);
                         }
                       },
                     ),

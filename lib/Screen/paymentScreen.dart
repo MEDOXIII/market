@@ -23,6 +23,7 @@ String cardHolderName = "";
 String cvvCode = "";
 bool isCvvFocused = false;
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+final TextEditingController searchTextController = TextEditingController();
 
 class _PaymentScreenState extends State<PaymentScreen> {
   void onCreditCardModelChange(CreditCardModel creditCardModel) {
@@ -35,6 +36,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     });
   }
 
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
@@ -43,12 +49,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
       style: DrawerStyle.defaultStyle,
       borderRadius: 20.0,
       showShadow: true,
-      angle: -10,
+      angle: 0,
       slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.grey,
+      menuBackgroundColor: Colors.white,
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white70,
+      drawerShadowsBackgroundColor: Colors.white,
       menuScreen: NavigationDrawer(),
       mainScreen: Scaffold(
         appBar: AppBar(
@@ -63,7 +69,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-              child: SearchWidget(),
+              child: SearchWidget(
+                controller: searchTextController,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),

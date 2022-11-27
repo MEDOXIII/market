@@ -8,23 +8,36 @@ import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
 import 'detailScreen.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+final TextEditingController searchTextController = TextEditingController();
+
+class _ProductScreenState extends State<ProductScreen> {
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
+
     return ZoomDrawer(
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
       borderRadius: 20.0,
       showShadow: true,
-      angle: -10,
+      angle: 0,
       slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.grey,
+      menuBackgroundColor: Colors.white,
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white70,
+      drawerShadowsBackgroundColor: Colors.white,
       menuScreen: NavigationDrawer(),
       mainScreen: MaterialApp(
         home: SafeArea(
@@ -42,7 +55,9 @@ class ProductScreen extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: SearchWidget(),
+                  child: SearchWidget(
+                    controller: searchTextController,
+                  ),
                 ),
                 Padding(
                   padding:

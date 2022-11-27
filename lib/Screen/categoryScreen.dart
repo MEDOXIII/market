@@ -7,8 +7,21 @@ import 'package:market/Widgets/searchWidget.dart';
 import '../Widgets/navigationDrawer.dart';
 import '../Widgets/categoryWidget.dart';
 
-class CategoryScreen extends StatelessWidget {
+class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+final TextEditingController searchTextController = TextEditingController();
+
+class _CategoryScreenState extends State<CategoryScreen> {
+  @override
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +31,12 @@ class CategoryScreen extends StatelessWidget {
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
       borderRadius: 20.0,
-      showShadow: true,
-      angle: -10,
+      angle: 0,
       slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.grey,
+      menuBackgroundColor: Colors.white,
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white70,
+      drawerShadowsBackgroundColor: Colors.white,
       menuScreen: NavigationDrawer(),
       mainScreen: MaterialApp(
         home: SafeArea(
@@ -42,7 +54,9 @@ class CategoryScreen extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: SearchWidget(),
+                  child: SearchWidget(
+                    controller: searchTextController,
+                  ),
                 ),
                 Padding(
                   padding:

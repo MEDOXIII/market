@@ -10,25 +10,37 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+final TextEditingController searchTextController = TextEditingController();
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
+
     return ZoomDrawer(
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
       borderRadius: 20.0,
       showShadow: true,
-      angle: -10,
+      angle: 0,
       slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.grey,
+      menuBackgroundColor: Colors.white,
       openCurve: Curves.fastOutSlowIn,
       closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white70,
+      drawerShadowsBackgroundColor: Colors.white,
       menuScreen: NavigationDrawer(),
       mainScreen: MaterialApp(
         home: SafeArea(
@@ -46,7 +58,9 @@ class ProfileScreen extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: SearchWidget(),
+                  child: SearchWidget(
+                    controller: searchTextController,
+                  ),
                 ),
                 Padding(
                   padding:
@@ -84,44 +98,46 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: Column(
-              children: [
-                Container(
-                  height: 300.h,
-                  width: 300.w,
-                  child: CircleAvatar(
-                    child: Image.asset('assets/images/avatar.png'),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: 300.h,
+                    width: 300.w,
+                    child: CircleAvatar(
+                      child: Image.asset('assets/images/avatar.png'),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 24,
-                ),
-                infoWidget(
-                  labelText: "Name :",
-                  infoText: user.email != null ? user.email! : "My Name",
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 24,
-                ),
-                infoWidget(
-                  labelText: "Phone Number :",
-                  infoText: "My Phone Is ",
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 24,
-                ),
-                infoWidget(
-                  labelText: "Email :",
-                  infoText: "My Email Is ",
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 24,
-                ),
-                infoWidget(
-                  labelText: "Address :",
-                  infoText: "My Address Is ",
-                ),
-              ],
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 24,
+                  ),
+                  infoWidget(
+                    labelText: "Name :",
+                    infoText: user.email != null ? user.email! : "My Name",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 24,
+                  ),
+                  infoWidget(
+                    labelText: "Phone Number :",
+                    infoText: "My Phone Is ",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 24,
+                  ),
+                  infoWidget(
+                    labelText: "Email :",
+                    infoText: "My Email Is ",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 24,
+                  ),
+                  infoWidget(
+                    labelText: "Address :",
+                    infoText: "My Address Is ",
+                  ),
+                ],
+              ),
             ),
           ),
         ),
