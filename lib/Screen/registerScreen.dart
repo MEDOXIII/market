@@ -43,9 +43,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+      UserCredential result = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
+      User? user = result.user;
+      await FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
+        'name': nameController.text.trim(),
+        'phone': phoneController.text.trim(),
+        'email': emailController.text.trim(),
+      });
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(
           msg: e.message.toString(),
@@ -57,19 +64,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
           fontSize: 16.0);
       print(e);
     }
-    addUser(nameController.text.trim(), phoneController.text.trim(),
-        emailController.text.trim());
 
     Navigator.of(context).pop();
   }
 
-  Future addUser(String name, String phone, String email) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'name': name,
-      'phone': phone,
-      'email': email,
-    });
-  }
+  // Future addUser(String name, String phone, String email) async {
+  //   await FirebaseFirestore.instance.collection('users').add({
+  //     'name': name,
+  //     'phone': phone,
+  //     'email': email,
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
