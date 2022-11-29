@@ -45,10 +45,10 @@ class NavigationDrawer extends StatelessWidget {
                 backgroundImage: AssetImage('assets/images/avatar.png'),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 12,
+                height: MediaQuery.of(context).size.height / 18,
               ),
               Text(
-                user.email != null ? user.email! : "My Name",
+                "My Profile",
                 style: GoogleFonts.sacramento(
                   textStyle: TextStyle(
                     fontSize: 20.sp,

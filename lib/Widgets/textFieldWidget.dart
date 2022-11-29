@@ -4,6 +4,7 @@ class textFormFieldWidget extends StatelessWidget {
   late final String text;
   final bool isPass;
   final Icon icon;
+  final IconButton lastIcon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final TextInputType type;
@@ -15,6 +16,7 @@ class textFormFieldWidget extends StatelessWidget {
     required this.controller,
     required this.validator,
     required this.type,
+    required this.lastIcon,
   });
 
   @override
@@ -34,6 +36,7 @@ class textFormFieldWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10))),
           hintText: text,
           prefixIcon: icon,
+          suffixIcon: lastIcon,
         ),
       ),
     );

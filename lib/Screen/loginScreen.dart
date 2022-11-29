@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
+  bool showPassword = true;
 
   @override
   void dispose() {
@@ -83,6 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: MediaQuery.of(context).size.height / 24,
                       ),
                       textFormFieldWidget(
+                        lastIcon: IconButton(
+                          icon: Icon(null),
+                          onPressed: () {},
+                        ),
                         controller: emailController,
                         text: 'Enter Your Email',
                         type: TextInputType.emailAddress,
@@ -94,10 +99,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : null,
                       ),
                       textFormFieldWidget(
+                        lastIcon: IconButton(
+                          icon: Icon(showPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: () =>
+                              setState(() => showPassword = !showPassword),
+                        ),
                         controller: passwordController,
                         text: 'Enter Your Password',
                         type: TextInputType.text,
-                        isPass: true,
+                        isPass: showPassword,
                         icon: Icon(Icons.lock),
                         validator: (password) =>
                             password != null && password.length < 6

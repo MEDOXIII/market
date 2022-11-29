@@ -22,6 +22,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
+  bool showConfirmPassword = true;
+  bool showPassword = true;
 
   @override
   void dispose() {
@@ -68,14 +70,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Navigator.of(context).pop();
   }
 
-  // Future addUser(String name, String phone, String email) async {
-  //   await FirebaseFirestore.instance.collection('users').add({
-  //     'name': name,
-  //     'phone': phone,
-  //     'email': email,
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -108,6 +102,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: MediaQuery.of(context).size.height / 30,
                         ),
                         textFormFieldWidget(
+                          lastIcon: IconButton(
+                            icon: Icon(null),
+                            onPressed: () {},
+                          ),
                           controller: nameController,
                           text: 'Enter Your Name',
                           type: TextInputType.name,
@@ -118,6 +116,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               : null,
                         ),
                         textFormFieldWidget(
+                          lastIcon: IconButton(
+                            icon: Icon(null),
+                            onPressed: () {},
+                          ),
                           controller: phoneController,
                           text: 'Enter Your Phone Number',
                           type: TextInputType.phone,
@@ -129,6 +131,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   : null,
                         ),
                         textFormFieldWidget(
+                          lastIcon: IconButton(
+                            icon: Icon(null),
+                            onPressed: () {},
+                          ),
                           controller: emailController,
                           text: 'Enter Your Email',
                           type: TextInputType.emailAddress,
@@ -140,10 +146,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   : null,
                         ),
                         textFormFieldWidget(
+                          lastIcon: IconButton(
+                            icon: Icon(showPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () =>
+                                setState(() => showPassword = !showPassword),
+                          ),
                           controller: passwordController,
                           text: 'Enter Your Password',
                           type: TextInputType.text,
-                          isPass: true,
+                          isPass: showPassword,
                           icon: Icon(Icons.lock),
                           validator: (password) =>
                               password != null && password.length < 6
@@ -151,10 +164,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   : null,
                         ),
                         textFormFieldWidget(
+                          lastIcon: IconButton(
+                            icon: Icon(showConfirmPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () => setState(() =>
+                                showConfirmPassword = !showConfirmPassword),
+                          ),
                           controller: confirmPasswordController,
                           text: 'Confirm Your Password',
                           type: TextInputType.text,
-                          isPass: true,
+                          isPass: showConfirmPassword,
                           icon: Icon(Icons.lock),
                           validator: (confirmPassword) =>
                               confirmPassword != passwordController.text

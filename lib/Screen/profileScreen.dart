@@ -6,7 +6,7 @@ import '../Widgets/navigationDrawer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
 
@@ -21,9 +21,55 @@ final TextEditingController searchTextController = TextEditingController();
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;
+  late String name;
+  late String phoneNumber;
+  late String email;
+  late String address;
+  late Future data;
+
+  @override
+  void initState() {
+    data = getUser();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     searchTextController.dispose();
     super.dispose();
+  }
+
+  Future getUser() async {
+    print((user.uid));
+
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.uid)
+        .get()
+        .then((value) {
+      print((value.data()));
+
+      if (value.data()!["name"] == null) {
+        name = "Add Your Name";
+      } else {
+        name = value.data()!["name"];
+      }
+      if (value.data()!["phone"] == null) {
+        phoneNumber = "Add Your Phone";
+      } else {
+        phoneNumber = value.data()!["phone"];
+      }
+      if (value.data()!["email"] == null) {
+        email = "Add Your Email";
+      } else {
+        email = value.data()!["email"];
+      }
+      if (value.data()!["address"] == null) {
+        address = " Add Your Address";
+      } else {
+        address = value.data()!["address"];
+      }
+    });
   }
 
   @override
@@ -98,47 +144,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: 300.h,
-                    width: 300.w,
-                    child: CircleAvatar(
-                      child: Image.asset('assets/images/avatar.png'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 24,
-                  ),
-                  infoWidget(
-                    labelText: "Name :",
-                    infoText: user.email != null ? user.email! : "My Name",
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 24,
-                  ),
-                  infoWidget(
-                    labelText: "Phone Number :",
-                    infoText: "My Phone Is ",
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 24,
-                  ),
-                  infoWidget(
-                    labelText: "Email :",
-                    infoText: "My Email Is ",
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 24,
-                  ),
-                  infoWidget(
-                    labelText: "Address :",
-                    infoText: "My Address Is ",
-                  ),
-                ],
-              ),
-            ),
+            body: FutureBuilder(
+                future: getUser(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else {
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 300.h,
+                            width: 300.w,
+                            child: CircleAvatar(
+                              child: Image.asset('assets/images/avatar.png'),
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 24,
+                          ),
+                          infoWidget(
+                            labelText: "Name :",
+                            infoText: name,
+                            onClick: () {},
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 24,
+                          ),
+                          infoWidget(
+                            labelText: "Phone Number :",
+                            infoText: phoneNumber,
+                            onClick: () {},
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 24,
+                          ),
+                          infoWidget(
+                            labelText: "Email :",
+                            infoText: email,
+                            onClick: () {},
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 24,
+                          ),
+                          infoWidget(
+                            labelText: "Address :",
+                            infoText: address,
+                            onClick: () {},
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                }),
           ),
         ),
       ),

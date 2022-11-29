@@ -95,9 +95,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 24,
+                  height: MediaQuery.of(context).size.height / 12,
                 ),
                 textFormFieldWidget(
+                  lastIcon: IconButton(
+                    icon: Icon(null),
+                    onPressed: () {},
+                  ),
                   controller: emailController,
                   text: 'Enter Your Email',
                   type: TextInputType.emailAddress,

@@ -5,9 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class infoWidget extends StatelessWidget {
   final String labelText;
   final String infoText;
+  final VoidCallback onClick;
   const infoWidget({
     required this.labelText,
     required this.infoText,
+    required this.onClick,
     Key? key,
   }) : super(key: key);
 
@@ -16,12 +18,12 @@ class infoWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             labelText,
             style: GoogleFonts.xanhMono(
-              textStyle: TextStyle(fontSize: 20.sp, color: Colors.black),
+              textStyle: TextStyle(fontSize: 16.sp, color: Colors.black),
             ),
           ),
           SizedBox(
@@ -30,8 +32,15 @@ class infoWidget extends StatelessWidget {
           Text(
             infoText,
             style: GoogleFonts.sail(
-              textStyle: TextStyle(fontSize: 20.sp, color: Colors.cyan),
+              textStyle: TextStyle(fontSize: 16.sp, color: Colors.cyan),
             ),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.edit,
+              color: Colors.lightBlue,
+            ),
+            onPressed: onClick,
           ),
         ],
       ),
