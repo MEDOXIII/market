@@ -1,8 +1,10 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:market/Widgets/zoomDrawerWidget.dart';
 import '../Widgets/infoWidget.dart';
-import '../Widgets/navigationDrawer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -18,9 +20,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 final TextEditingController searchTextController = TextEditingController();
+final TextEditingController nameController = TextEditingController();
+final TextEditingController phoneController = TextEditingController();
+final TextEditingController emailController = TextEditingController();
+final TextEditingController addressController = TextEditingController();
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;
+  final formGlobalKey = GlobalKey<FormState>();
   late String name;
   late String phoneNumber;
   late String email;
@@ -36,6 +43,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void dispose() {
     searchTextController.dispose();
+    nameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    addressController.dispose();
     super.dispose();
   }
 
@@ -76,19 +87,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
 
-    return ZoomDrawer(
-      controller: _drawerController,
-      style: DrawerStyle.defaultStyle,
-      borderRadius: 20.0,
-      showShadow: true,
-      angle: 0,
-      slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.white,
-      openCurve: Curves.fastOutSlowIn,
-      closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white,
-      menuScreen: NavigationDrawer(),
-      mainScreen: MaterialApp(
+    return ZoomDrawerWidget(
+      myController: _drawerController,
+      screen: MaterialApp(
         home: SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -160,8 +161,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Column(
                         children: [
                           Container(
-                            height: 300.h,
-                            width: 300.w,
+                            height: 150.h,
+                            width: 150.w,
                             child: CircleAvatar(
                               child: Image.asset('assets/images/avatar.png'),
                             ),
@@ -172,7 +173,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           infoWidget(
                             labelText: "Name :",
                             infoText: name,
-                            onClick: () {},
+                            onClick: () {
+                              nameController.text = name;
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => Form(
+                                  key: formGlobalKey,
+                                  child: AlertDialog(
+                                    title: Text('Edit Name'),
+                                    content: TextFormField(
+                                      keyboardType: TextInputType.name,
+                                      autofocus: true,
+                                      controller: nameController,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (name) =>
+                                          name != null && name.length < 3
+                                              ? 'Enter Your Name'
+                                              : null,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Done'),
+                                        onPressed: () {
+                                          final isValid = formGlobalKey
+                                              .currentState!
+                                              .validate();
+
+                                          if (isValid) {
+                                            print(nameController.text);
+                                            Navigator.pop(context);
+                                          }
+                                          if (!isValid) {
+                                            print("Your Name Is Not Valid");
+                                            Fluttertoast.showToast(
+                                                msg: "Your Name Is Not Valid",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.CENTER,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.cyan,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 24,
@@ -180,7 +236,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           infoWidget(
                             labelText: "Phone Number :",
                             infoText: phoneNumber,
-                            onClick: () {},
+                            onClick: () {
+                              phoneController.text = phoneNumber;
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => Form(
+                                  key: formGlobalKey,
+                                  child: AlertDialog(
+                                    title: Text('Edit Phone'),
+                                    content: TextFormField(
+                                      keyboardType: TextInputType.phone,
+                                      autofocus: true,
+                                      controller: phoneController,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (phone) =>
+                                          phone != null && phone.length < 11
+                                              ? 'Enter Your Phone Number'
+                                              : null,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Done'),
+                                        onPressed: () {
+                                          final isValid = formGlobalKey
+                                              .currentState!
+                                              .validate();
+
+                                          if (isValid) {
+                                            print(phoneController.text);
+                                            Navigator.pop(context);
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Your Phone Number Is Not Valid",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.CENTER,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.cyan,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 24,
@@ -188,7 +298,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           infoWidget(
                             labelText: "Email :",
                             infoText: email,
-                            onClick: () {},
+                            onClick: () {
+                              emailController.text = email;
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => Form(
+                                  key: formGlobalKey,
+                                  child: AlertDialog(
+                                    title: Text('Edit Email'),
+                                    content: TextFormField(
+                                      keyboardType: TextInputType.emailAddress,
+                                      autofocus: true,
+                                      controller: emailController,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (email) => email != null &&
+                                              !EmailValidator.validate(email)
+                                          ? 'Enter a valid Email'
+                                          : null,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Done'),
+                                        onPressed: () {
+                                          final isValid = formGlobalKey
+                                              .currentState!
+                                              .validate();
+
+                                          if (isValid) {
+                                            print(emailController.text);
+                                            Navigator.pop(context);
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg: "Your Email Is Not Valid",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.CENTER,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.cyan,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 24,
@@ -196,7 +359,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           infoWidget(
                             labelText: "Address :",
                             infoText: address,
-                            onClick: () {},
+                            onClick: () {
+                              addressController.text = address;
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => Form(
+                                  key: formGlobalKey,
+                                  child: AlertDialog(
+                                    title: Text('Edit Address'),
+                                    content: TextFormField(
+                                      keyboardType: TextInputType.streetAddress,
+                                      autofocus: true,
+                                      controller: addressController,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (address) =>
+                                          address != null && address.length < 10
+                                              ? 'Enter Your Address'
+                                              : null,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Done'),
+                                        onPressed: () {
+                                          final isValid = formGlobalKey
+                                              .currentState!
+                                              .validate();
+                                          if (isValid) {
+                                            print(addressController.text);
+                                            Navigator.pop(context);
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Your Address Is Not Valid",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.CENTER,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.cyan,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0);
+                                          }
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

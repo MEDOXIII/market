@@ -3,12 +3,11 @@ import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/countRowWidget.dart';
-import 'package:market/Widgets/navigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
-
 import '../Widgets/searchWidget.dart';
+import '../Widgets/zoomDrawerWidget.dart';
 
 class DetailScreen extends StatefulWidget {
   final Object tag;
@@ -31,19 +30,9 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
 
-    return ZoomDrawer(
-      controller: _drawerController,
-      style: DrawerStyle.defaultStyle,
-      borderRadius: 20.0,
-      showShadow: true,
-      angle: 0,
-      slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.white,
-      openCurve: Curves.fastOutSlowIn,
-      closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white,
-      menuScreen: NavigationDrawer(),
-      mainScreen: MaterialApp(
+    return ZoomDrawerWidget(
+      myController: _drawerController,
+      screen: MaterialApp(
         home: SafeArea(
           child: Scaffold(
             appBar: AppBar(

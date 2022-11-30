@@ -26,124 +26,118 @@ class _BoardingScreenState extends State<BoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(
-                    right: 12,
-                    top: 12,
-                  ),
-                  child: NeumorphismButtonWidget(
-                    myColor: Colors.white70,
-                    onClick: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ));
-                    },
-                    child: Text(
-                      "Skip",
-                      style: GoogleFonts.racingSansOne(
-                        textStyle:
-                            TextStyle(fontSize: 16.sp, color: Colors.black),
+    return MaterialApp(
+      home: SafeArea(
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(
+                        right: 12,
+                        top: 12,
                       ),
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 500.h,
-                  child: PageView(
-                    controller: _pageController,
-                    physics: ClampingScrollPhysics(),
-                    onPageChanged: (index) {
-                      setState(() {
-                        onLastPage = (index == 2);
-                      });
-                    },
-                    children: [
-                      BoardingWidget(
-                        image: Image.asset(
-                          'assets/images/online_shopping.png',
-                          height: 200.h,
-                          width: 300.w,
-                        ),
-                        textAddress: "Online Shopping",
-                        text:
-                            "This is the text of the Boarding which is been display on the OnBoarding Screen",
-                      ),
-                      BoardingWidget(
-                        image: Image.asset(
-                          'assets/images/order_confirmed.png',
-                          height: 200.h,
-                          width: 300.w,
-                        ),
-                        textAddress: "Order Confirmed",
-                        text:
-                            "This is the text of the Boarding which is been display on the OnBoarding Screen",
-                      ),
-                      BoardingWidget(
-                        image: Image.asset(
-                          'assets/images/package_arrived.png',
-                          height: 200.h,
-                          width: 300.w,
-                        ),
-                        textAddress: "Package Arrived",
-                        text:
-                            "This is the text of the Boarding which is been display on the OnBoarding Screen",
-                      ),
-                    ],
-                  ),
-                ),
-                Center(
-                  child: SmoothPageIndicator(
-                    controller: _pageController,
-                    count: 3,
-                    effect: SlideEffect(
-                      activeDotColor: Colors.cyan,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: NeumorphismButtonWidget(
-                    myColor: Colors.white70,
-                    child: Center(
-                      child: Text(
-                        onLastPage ? "Get Ready" : "Next",
-                        style: GoogleFonts.damion(
-                          textStyle:
-                              TextStyle(fontSize: 25.sp, color: Colors.black),
+                      child: NeumorphismButtonWidget(
+                        myColor: Colors.white70,
+                        onClick: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ));
+                        },
+                        child: Text(
+                          "Skip",
+                          style: GoogleFonts.racingSansOne(
+                            textStyle:
+                                TextStyle(fontSize: 16.sp, color: Colors.black),
+                          ),
                         ),
                       ),
                     ),
-                    onClick: () {
-                      onLastPage
-                          ? Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
-                            ))
-                          : _pageController.nextPage(
-                              duration: Duration(milliseconds: 150),
-                              curve: Curves.ease);
-                    },
-                  ),
-
-                  // MaterialButton(
-                  //   padding: EdgeInsets.symmetric(vertical: 20),
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(25),
-                  //   ),
-                  //   color: Color(0xff2a386c),
-                  //   onPressed:
-                  //   child:
-                  //   ),
+                    Container(
+                      height: 500.h,
+                      child: PageView(
+                        controller: _pageController,
+                        physics: ClampingScrollPhysics(),
+                        onPageChanged: (index) {
+                          setState(() {
+                            onLastPage = (index == 2);
+                          });
+                        },
+                        children: [
+                          BoardingWidget(
+                            image: Image.asset(
+                              'assets/images/online_shopping.png',
+                              height: 200.h,
+                              width: 300.w,
+                            ),
+                            textAddress: "Online Shopping",
+                            text:
+                                "This is the text of the Boarding which is been display on the OnBoarding Screen",
+                          ),
+                          BoardingWidget(
+                            image: Image.asset(
+                              'assets/images/order_confirmed.png',
+                              height: 200.h,
+                              width: 300.w,
+                            ),
+                            textAddress: "Order Confirmed",
+                            text:
+                                "This is the text of the Boarding which is been display on the OnBoarding Screen",
+                          ),
+                          BoardingWidget(
+                            image: Image.asset(
+                              'assets/images/package_arrived.png',
+                              height: 200.h,
+                              width: 300.w,
+                            ),
+                            textAddress: "Package Arrived",
+                            text:
+                                "This is the text of the Boarding which is been display on the OnBoarding Screen",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: _pageController,
+                        count: 3,
+                        effect: SlideEffect(
+                          activeDotColor: Colors.cyan,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: NeumorphismButtonWidget(
+                        myColor: Colors.white70,
+                        child: Center(
+                          child: Text(
+                            onLastPage ? "Get Ready" : "Next",
+                            style: GoogleFonts.damion(
+                              textStyle: TextStyle(
+                                  fontSize: 25.sp, color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        onClick: () {
+                          onLastPage
+                              ? Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ))
+                              : _pageController.nextPage(
+                                  duration: Duration(milliseconds: 150),
+                                  curve: Curves.ease);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

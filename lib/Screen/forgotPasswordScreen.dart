@@ -62,74 +62,78 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xff0093d3),
-        title: const Text(
-          'Reset Password',
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 20,
+    return MaterialApp(
+      home: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color(0xff0093d3),
+            title: const Text(
+              'Reset Password',
+            ),
+            centerTitle: true,
           ),
-          child: Form(
-            key: formGlobalKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 3,
-                ),
-                Text(
-                  'Receive Email to Reset Password',
-                  style: GoogleFonts.sail(
-                    textStyle: TextStyle(
-                      fontSize: 20.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 20,
+              ),
+              child: Form(
+                key: formGlobalKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 3,
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 12,
-                ),
-                textFormFieldWidget(
-                  lastIcon: IconButton(
-                    icon: Icon(null),
-                    onPressed: () {},
-                  ),
-                  controller: emailController,
-                  text: 'Enter Your Email',
-                  type: TextInputType.emailAddress,
-                  isPass: false,
-                  icon: Icon(Icons.email),
-                  validator: (email) =>
-                      email != null && !EmailValidator.validate(email)
-                          ? 'Enter a valid Email'
-                          : null,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 24,
-                ),
-                NeumorphismButtonWidget(
-                  child: Text(
-                    'Reset Password',
-                    style: GoogleFonts.sail(
-                      textStyle: TextStyle(
-                        fontSize: 20.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                    Text(
+                      'Receive Email to Reset Password',
+                      style: GoogleFonts.sail(
+                        textStyle: TextStyle(
+                          fontSize: 20.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  onClick: ResetPassword,
-                  myColor: Colors.white70,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 12,
+                    ),
+                    textFormFieldWidget(
+                      lastIcon: IconButton(
+                        icon: Icon(null),
+                        onPressed: () {},
+                      ),
+                      controller: emailController,
+                      text: 'Enter Your Email',
+                      type: TextInputType.emailAddress,
+                      isPass: false,
+                      icon: Icon(Icons.email),
+                      validator: (email) =>
+                          email != null && !EmailValidator.validate(email)
+                              ? 'Enter a valid Email'
+                              : null,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 24,
+                    ),
+                    NeumorphismButtonWidget(
+                      child: Text(
+                        'Reset Password',
+                        style: GoogleFonts.sail(
+                          textStyle: TextStyle(
+                            fontSize: 20.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      onClick: ResetPassword,
+                      myColor: Colors.white70,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

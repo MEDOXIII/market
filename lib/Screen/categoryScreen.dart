@@ -4,8 +4,8 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import 'package:market/Widgets/searchWidget.dart';
-import '../Widgets/navigationDrawer.dart';
 import '../Widgets/categoryWidget.dart';
+import '../Widgets/zoomDrawerWidget.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -27,18 +27,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
 
-    return ZoomDrawer(
-      controller: _drawerController,
-      style: DrawerStyle.defaultStyle,
-      borderRadius: 20.0,
-      angle: 0,
-      slideWidth: MediaQuery.of(context).size.width * 0.80,
-      menuBackgroundColor: Colors.white,
-      openCurve: Curves.fastOutSlowIn,
-      closeCurve: Curves.bounceIn,
-      drawerShadowsBackgroundColor: Colors.white,
-      menuScreen: NavigationDrawer(),
-      mainScreen: MaterialApp(
+    return ZoomDrawerWidget(
+      myController: _drawerController,
+      screen: MaterialApp(
         home: SafeArea(
           child: Scaffold(
             appBar: AppBar(

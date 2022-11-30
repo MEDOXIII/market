@@ -78,157 +78,163 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (snapshot.hasData) {
             return CategoryScreen();
           } else {
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Color(0xff0093d3),
-                title: const Text(
-                  'Register',
-                ),
-                centerTitle: true,
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Form(
-                    key: formGlobalKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 300.h,
-                          child: Image.asset('assets/images/market.png'),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 30,
-                        ),
-                        textFormFieldWidget(
-                          lastIcon: IconButton(
-                            icon: Icon(null),
-                            onPressed: () {},
-                          ),
-                          controller: nameController,
-                          text: 'Enter Your Name',
-                          type: TextInputType.name,
-                          isPass: false,
-                          icon: Icon(Icons.person),
-                          validator: (name) => name != null && name.length < 3
-                              ? 'Enter Your Name'
-                              : null,
-                        ),
-                        textFormFieldWidget(
-                          lastIcon: IconButton(
-                            icon: Icon(null),
-                            onPressed: () {},
-                          ),
-                          controller: phoneController,
-                          text: 'Enter Your Phone Number',
-                          type: TextInputType.phone,
-                          isPass: false,
-                          icon: Icon(Icons.phone),
-                          validator: (phone) =>
-                              phone != null && phone.length < 11
-                                  ? 'Enter Your Phone Number'
-                                  : null,
-                        ),
-                        textFormFieldWidget(
-                          lastIcon: IconButton(
-                            icon: Icon(null),
-                            onPressed: () {},
-                          ),
-                          controller: emailController,
-                          text: 'Enter Your Email',
-                          type: TextInputType.emailAddress,
-                          isPass: false,
-                          icon: Icon(Icons.email),
-                          validator: (email) =>
-                              email != null && !EmailValidator.validate(email)
+            return MaterialApp(
+              home: SafeArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Color(0xff0093d3),
+                    title: const Text(
+                      'Register',
+                    ),
+                    centerTitle: true,
+                  ),
+                  body: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Form(
+                        key: formGlobalKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 300.h,
+                              child: Image.asset('assets/images/market.png'),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 30,
+                            ),
+                            textFormFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(null),
+                                onPressed: () {},
+                              ),
+                              controller: nameController,
+                              text: 'Enter Your Name',
+                              type: TextInputType.name,
+                              isPass: false,
+                              icon: Icon(Icons.person),
+                              validator: (name) =>
+                                  name != null && name.length < 3
+                                      ? 'Enter Your Name'
+                                      : null,
+                            ),
+                            textFormFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(null),
+                                onPressed: () {},
+                              ),
+                              controller: phoneController,
+                              text: 'Enter Your Phone Number',
+                              type: TextInputType.phone,
+                              isPass: false,
+                              icon: Icon(Icons.phone),
+                              validator: (phone) =>
+                                  phone != null && phone.length < 11
+                                      ? 'Enter Your Phone Number'
+                                      : null,
+                            ),
+                            textFormFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(null),
+                                onPressed: () {},
+                              ),
+                              controller: emailController,
+                              text: 'Enter Your Email',
+                              type: TextInputType.emailAddress,
+                              isPass: false,
+                              icon: Icon(Icons.email),
+                              validator: (email) => email != null &&
+                                      !EmailValidator.validate(email)
                                   ? 'Enter a valid Email'
                                   : null,
-                        ),
-                        textFormFieldWidget(
-                          lastIcon: IconButton(
-                            icon: Icon(showPassword
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                            onPressed: () =>
-                                setState(() => showPassword = !showPassword),
-                          ),
-                          controller: passwordController,
-                          text: 'Enter Your Password',
-                          type: TextInputType.text,
-                          isPass: showPassword,
-                          icon: Icon(Icons.lock),
-                          validator: (password) =>
-                              password != null && password.length < 6
-                                  ? 'Enter min of 6 characters'
-                                  : null,
-                        ),
-                        textFormFieldWidget(
-                          lastIcon: IconButton(
-                            icon: Icon(showConfirmPassword
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                            onPressed: () => setState(() =>
-                                showConfirmPassword = !showConfirmPassword),
-                          ),
-                          controller: confirmPasswordController,
-                          text: 'Confirm Your Password',
-                          type: TextInputType.text,
-                          isPass: showConfirmPassword,
-                          icon: Icon(Icons.lock),
-                          validator: (confirmPassword) =>
-                              confirmPassword != passwordController.text
-                                  ? 'Password Is Not Match'
-                                  : null,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 30,
-                        ),
-                        NeumorphismButtonWidget(
-                          child: Text(
-                            'Register',
-                            style: GoogleFonts.sail(
-                              textStyle: TextStyle(
-                                fontSize: 20.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
                             ),
-                          ),
-                          onClick: signUp,
-                          myColor: Colors.white70,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Already have an account ? ",
-                              style: GoogleFonts.racingSansOne(
-                                textStyle: TextStyle(
-                                  fontSize: 16.sp,
-                                ),
+                            textFormFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(showPassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                                onPressed: () => setState(
+                                    () => showPassword = !showPassword),
                               ),
+                              controller: passwordController,
+                              text: 'Enter Your Password',
+                              type: TextInputType.text,
+                              isPass: showPassword,
+                              icon: Icon(Icons.lock),
+                              validator: (password) =>
+                                  password != null && password.length < 6
+                                      ? 'Enter min of 6 characters'
+                                      : null,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => LoginScreen(),
-                                ));
-                              },
+                            textFormFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(showConfirmPassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                                onPressed: () => setState(() =>
+                                    showConfirmPassword = !showConfirmPassword),
+                              ),
+                              controller: confirmPasswordController,
+                              text: 'Confirm Your Password',
+                              type: TextInputType.text,
+                              isPass: showConfirmPassword,
+                              icon: Icon(Icons.lock),
+                              validator: (confirmPassword) =>
+                                  confirmPassword != passwordController.text
+                                      ? 'Password Is Not Match'
+                                      : null,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 30,
+                            ),
+                            NeumorphismButtonWidget(
                               child: Text(
-                                "Log In",
-                                style: GoogleFonts.damion(
+                                'Register',
+                                style: GoogleFonts.sail(
                                   textStyle: TextStyle(
-                                      fontSize: 16.sp, color: Colors.cyan),
+                                    fontSize: 20.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
+                              onClick: signUp,
+                              myColor: Colors.white70,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 30,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Already have an account ? ",
+                                  style: GoogleFonts.racingSansOne(
+                                    textStyle: TextStyle(
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) => LoginScreen(),
+                                    ));
+                                  },
+                                  child: Text(
+                                    "Log In",
+                                    style: GoogleFonts.damion(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.sp, color: Colors.cyan),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
