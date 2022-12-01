@@ -129,7 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   style: GoogleFonts.xanhMono(
                                     textStyle: TextStyle(
                                         fontSize: 20.sp,
-                                        color: Colors.black,
+                                        color: Colors.cyan,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

@@ -32,15 +32,15 @@ class _BoardingScreenState extends State<BoardingScreen> {
           body: SingleChildScrollView(
             child: Container(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 40),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
                       alignment: Alignment.centerRight,
                       margin: EdgeInsets.only(
-                        right: 12,
-                        top: 12,
+                        right: 10,
+                        top: 10,
                       ),
                       child: NeumorphismButtonWidget(
                         myColor: Colors.white70,

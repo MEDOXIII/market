@@ -22,7 +22,7 @@ class _countRowWidgetState extends State<countRowWidget> {
             child: Icon(
               Icons.remove,
               size: 20,
-              color: Colors.black,
+              color: Colors.cyan,
             ),
           ),
           onClick: () {
@@ -46,7 +46,7 @@ class _countRowWidgetState extends State<countRowWidget> {
             child: Icon(
               Icons.add,
               size: 20,
-              color: Colors.black,
+              color: Colors.cyan,
             ),
           ),
           onClick: () {

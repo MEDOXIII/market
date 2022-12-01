@@ -66,12 +66,16 @@ class NavigationDrawer extends StatelessWidget {
           runSpacing: 16,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(
+                Icons.home,
+                color: Color(0xff2a386c),
+              ),
               title: Text(
                 "Category",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
                     fontSize: 20.sp,
+                    color: Colors.cyan,
                   ),
                 ),
               ),
@@ -82,12 +86,16 @@ class NavigationDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.price_change_outlined),
+              leading: Icon(
+                Icons.price_change_outlined,
+                color: Color(0xff2a386c),
+              ),
               title: Text(
                 "Product",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
                     fontSize: 20.sp,
+                    color: Colors.cyan,
                   ),
                 ),
               ),
@@ -98,12 +106,16 @@ class NavigationDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.dataset_outlined),
+              leading: Icon(
+                Icons.dataset_outlined,
+                color: Color(0xff2a386c),
+              ),
               title: Text(
                 "Detail",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
                     fontSize: 20.sp,
+                    color: Colors.cyan,
                   ),
                 ),
               ),
@@ -114,12 +126,16 @@ class NavigationDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart),
+              leading: Icon(
+                Icons.shopping_cart,
+                color: Color(0xff2a386c),
+              ),
               title: Text(
                 "ShopCart",
                 style: GoogleFonts.racingSansOne(
                   textStyle: TextStyle(
                     fontSize: 20.sp,
+                    color: Colors.cyan,
                   ),
                 ),
               ),
@@ -133,7 +149,10 @@ class NavigationDrawer extends StatelessWidget {
               color: Colors.black45,
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: Icon(
+                Icons.logout,
+                color: Color(0xff2a386c),
+              ),
               title: NeumorphismButtonWidget(
                 myColor: Colors.white70,
                 child: Center(
@@ -142,7 +161,7 @@ class NavigationDrawer extends StatelessWidget {
                     style: GoogleFonts.xanhMono(
                       textStyle: TextStyle(
                           fontSize: 20.sp,
-                          color: Colors.black,
+                          color: Colors.cyan,
                           fontWeight: FontWeight.bold),
                     ),
                   ),

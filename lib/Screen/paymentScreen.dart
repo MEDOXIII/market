@@ -158,7 +158,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             style: GoogleFonts.sail(
                               textStyle: TextStyle(
                                 fontSize: 20.sp,
-                                color: Colors.black,
+                                color: Colors.cyan,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
