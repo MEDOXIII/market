@@ -14,15 +14,7 @@ class CategoryScreen extends StatefulWidget {
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
-final TextEditingController searchTextController = TextEditingController();
-
 class _CategoryScreenState extends State<CategoryScreen> {
-  @override
-  void dispose() {
-    searchTextController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();

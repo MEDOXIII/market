@@ -19,6 +19,9 @@ class ShopCartScreen extends StatefulWidget {
 final TextEditingController searchTextController = TextEditingController();
 
 class _ShopCartScreenState extends State<ShopCartScreen> {
+  bool isSelected = false;
+  bool isClicked = false;
+
   void dispose() {
     searchTextController.dispose();
     super.dispose();
@@ -103,6 +106,56 @@ class _ShopCartScreenState extends State<ShopCartScreen> {
                           textStyle:
                               TextStyle(fontSize: 20.sp, color: Colors.cyan),
                         ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 12,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ChoiceChip(
+                            label: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Text(
+                                'Pay Credit Card',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                            ),
+                            backgroundColor: Color(0xff2a386c),
+                            selected: isClicked,
+                            selectedColor: Colors.cyan,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            onSelected: (newState) {
+                              setState(() {
+                                isClicked = newState;
+                              });
+                            },
+                          ),
+                          ChoiceChip(
+                            label: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Text(
+                                ' Pay on Delivery',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                            ),
+                            backgroundColor: Color(0xff2a386c),
+                            selected: isSelected,
+                            selectedColor: Colors.cyan,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            onSelected: (newState) {
+                              setState(() {
+                                isSelected = newState;
+                              });
+                            },
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 12,

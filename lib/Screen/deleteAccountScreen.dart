@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:market/Screen/boardingScreen.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/textFieldWidget.dart';
 
@@ -24,6 +27,53 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future delete() async {
+    final isValid = formGlobalKey.currentState!.validate();
+    if (!isValid) return;
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+
+      final user = FirebaseAuth.instance.currentUser!;
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .delete();
+
+      await FirebaseAuth.instance.currentUser?.delete();
+
+      Fluttertoast.showToast(
+          msg: "Your Account Is Deleted",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.cyan,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(
+          msg: e.message.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.cyan,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      print(e);
+    }
+    Navigator.of(context).pop();
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => BoardingScreen()));
   }
 
   @override
@@ -112,7 +162,9 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                           ),
                         ),
                       ),
-                      onClick: () {},
+                      onClick: () {
+                        delete();
+                      },
                       myColor: Colors.white70,
                     ),
                   ],

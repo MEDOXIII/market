@@ -12,8 +12,6 @@ import 'package:market/Widgets/neumorphismButtonWidget.dart';
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
 
-  final user = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
     return Drawer(

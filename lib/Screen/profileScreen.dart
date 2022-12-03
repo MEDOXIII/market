@@ -571,24 +571,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 TextStyle(color: Colors.cyan),
                                           ),
                                           onClick: () async {
-                                            // await FirebaseFirestore.instance
-                                            //     .collection('users')
-                                            //     .doc(user.uid)
-                                            //     .delete();
-
-                                            // await FirebaseAuth
-                                            //     .instance.currentUser
-                                            //     ?.delete();
-
-                                            // Fluttertoast.showToast(
-                                            //     msg: "Your Account Is Deleted",
-                                            //     toastLength: Toast.LENGTH_SHORT,
-                                            //     gravity: ToastGravity.CENTER,
-                                            //     timeInSecForIosWeb: 1,
-                                            //     backgroundColor: Colors.cyan,
-                                            //     textColor: Colors.white,
-                                            //     fontSize: 16.0);
-
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
