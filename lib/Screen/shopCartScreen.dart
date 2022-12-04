@@ -19,8 +19,8 @@ class ShopCartScreen extends StatefulWidget {
 final TextEditingController searchTextController = TextEditingController();
 
 class _ShopCartScreenState extends State<ShopCartScreen> {
-  bool isSelected = false;
-  bool isClicked = false;
+  bool cardSelected = false;
+  bool cashSelected = false;
 
   void dispose() {
     searchTextController.dispose();
@@ -110,48 +110,46 @@ class _ShopCartScreenState extends State<ShopCartScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 12,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Wrap(
+                        spacing: 16,
                         children: [
                           ChoiceChip(
-                            label: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                'Pay Credit Card',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              ),
+                            labelPadding: const EdgeInsets.all(6.0),
+                            label: Text(
+                              'Pay Credit Card',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
                             ),
                             backgroundColor: Color(0xff2a386c),
-                            selected: isClicked,
+                            selected: cardSelected,
                             selectedColor: Colors.cyan,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            onSelected: (newState) {
+                            onSelected: (value) {
                               setState(() {
-                                isClicked = newState;
+                                cardSelected = value;
+                                cashSelected = !value;
                               });
                             },
                           ),
                           ChoiceChip(
-                            label: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                ' Pay on Delivery',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              ),
+                            labelPadding: const EdgeInsets.all(6.0),
+                            label: Text(
+                              ' Pay on Delivery',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
                             ),
                             backgroundColor: Color(0xff2a386c),
-                            selected: isSelected,
+                            selected: cashSelected,
                             selectedColor: Colors.cyan,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            onSelected: (newState) {
+                            onSelected: (value) {
                               setState(() {
-                                isSelected = newState;
+                                cashSelected = value;
+                                cardSelected = !value;
                               });
                             },
                           ),

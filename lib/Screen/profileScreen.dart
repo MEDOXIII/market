@@ -174,9 +174,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             Container(
                               height: 150.h,
-                              width: 150.w,
-                              child: CircleAvatar(
-                                child: Image.asset('assets/images/avatar.png'),
+                              width: 180.w,
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  CircleAvatar(
+                                    child:
+                                        Image.asset('assets/images/avatar.png'),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: Colors.cyan,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                             SizedBox(
