@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/deleteAccountScreen.dart';
@@ -13,6 +15,8 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -35,6 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late String email;
   late String address;
   late Future data;
+  File? imagePicker;
 
   @override
   void initState() {
@@ -91,6 +96,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
         address = value.data()!["address"];
       }
     });
+  }
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      File? imageTemporary = File(image.path);
+      imageTemporary = await cropImage(imageFile: imageTemporary);
+      setState(() {
+        this.imagePicker = imageTemporary;
+      });
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  Future cropImage({required File imageFile}) async {
+    try {
+      CroppedFile? croppedImage =
+          await ImageCropper().cropImage(sourcePath: imageFile.path);
+      if (croppedImage == null) return;
+      return File(croppedImage.path);
+    } on PlatformException catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -174,19 +204,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             Container(
                               height: 150.h,
-                              width: 180.w,
+                              width: 150.w,
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: [
-                                  CircleAvatar(
-                                    child:
-                                        Image.asset('assets/images/avatar.png'),
+                                  ClipOval(
+                                    child: imagePicker != null
+                                        ? Image.file(
+                                            imagePicker!,
+                                            width: 150.w,
+                                            height: 150.h,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/avatar.png'),
                                   ),
                                   Positioned(
                                     bottom: 0,
                                     right: 0,
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: Text("Choose Your Photo"),
+                                            content: Text(
+                                                "Where Do You Want To Choose Your Photo"),
+                                            actions: [
+                                              NeumorphismButtonWidget(
+                                                child: Text(
+                                                  'Gallery',
+                                                  style: TextStyle(
+                                                      color: Colors.cyan),
+                                                ),
+                                                onClick: () {
+                                                  pickImage(
+                                                      ImageSource.gallery);
+                                                  Navigator.pop(context);
+                                                },
+                                                myColor: Colors.white70,
+                                              ),
+                                              NeumorphismButtonWidget(
+                                                child: Text(
+                                                  'Camera',
+                                                  style: TextStyle(
+                                                      color: Colors.cyan),
+                                                ),
+                                                myColor: Colors.white70,
+                                                onClick: () {
+                                                  pickImage(ImageSource.camera);
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                       icon: Icon(
                                         Icons.camera_alt_outlined,
                                         color: Colors.cyan,
