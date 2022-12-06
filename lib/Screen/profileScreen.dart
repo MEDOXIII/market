@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -106,6 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       imageTemporary = await cropImage(imageFile: imageTemporary);
       setState(() {
         this.imagePicker = imageTemporary;
+        uploadImage();
       });
     } on PlatformException catch (e) {
       print(e);
@@ -121,6 +123,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } on PlatformException catch (e) {
       print(e);
     }
+  }
+
+  Future uploadImage() async {
+    final imagePath = 'Profiles/${user.uid}';
+    final file = File(imagePicker!.path);
+    final firebaseStorageReference =
+        FirebaseStorage.instance.ref().child(imagePath);
+    final uploadTask = firebaseStorageReference.putFile(file);
+    final snapShot = await uploadTask.whenComplete(() {});
+    final imageURL = await snapShot.ref.getDownloadURL();
+    print(imageURL);
   }
 
   @override
