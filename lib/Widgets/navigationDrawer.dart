@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/detailScreen.dart';
@@ -9,8 +10,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
-class NavigationDrawer extends StatelessWidget {
+import '../Screen/boardingScreen.dart';
+
+class NavigationDrawer extends StatefulWidget {
   NavigationDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<NavigationDrawer> createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
+  final user = FirebaseAuth.instance.currentUser!;
+
+  String profileImage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +33,35 @@ class NavigationDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isEmpty() {
+    if (profileImage.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
+
+  Future getUser() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.uid)
+        .get()
+        .then((value) {
+      if (value.data()!["image"] == null) {
+      } else {
+        setState(() {
+          profileImage = value.data()!["image"];
+        });
+      }
+    });
   }
 
   Widget buildHeader(BuildContext context) => GestureDetector(
@@ -40,7 +81,15 @@ class NavigationDrawer extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 52,
-                backgroundImage: AssetImage('assets/images/avatar.png'),
+                child: isEmpty()
+                    ? Image.asset('assets/images/avatar.png')
+                    : ClipOval(
+                        child: Image.network(
+                        profileImage,
+                        width: 150.w,
+                        height: 150.h,
+                        fit: BoxFit.cover,
+                      )),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 18,
@@ -58,6 +107,7 @@ class NavigationDrawer extends StatelessWidget {
           ),
         ),
       );
+
   Widget buildMenuItem(BuildContext context) => Container(
         padding: EdgeInsets.all(24),
         child: Wrap(
@@ -166,6 +216,8 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 onClick: () {
                   FirebaseAuth.instance.signOut();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => BoardingScreen()));
                 },
               ),
             ),

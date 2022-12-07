@@ -54,6 +54,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'name': nameController.text.trim(),
         'phone': phoneController.text.trim(),
         'email': emailController.text.trim(),
+        'address': '',
+        'image': '',
       });
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(

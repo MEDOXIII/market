@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market/Screen/boardingScreen.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/textFieldWidget.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({Key? key}) : super(key: key);
@@ -49,6 +50,11 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           .collection('users')
           .doc(user.uid)
           .delete();
+
+      final image =
+          FirebaseStorage.instance.ref().child('Profiles/${user.uid}');
+
+      await image.delete();
 
       await FirebaseAuth.instance.currentUser?.delete();
 

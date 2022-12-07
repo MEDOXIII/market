@@ -40,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late String email;
   late String address;
   late Future data;
+  late String profileImage;
   File? imagePicker;
 
   @override
@@ -58,8 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  bool isEmpty() {
-    if (address.isEmpty) {
+  bool isEmpty(String value) {
+    if (value.isEmpty) {
       return true;
     } else {
       return false;
@@ -67,15 +68,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future getUser() async {
-    print((user.uid));
-
     await FirebaseFirestore.instance
         .collection("users")
         .doc(user.uid)
         .get()
         .then((value) {
-      print((value.data()));
-
       if (value.data()!["name"] == null) {
         name = "Add Your Name";
       } else {
@@ -95,6 +92,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         address = "";
       } else {
         address = value.data()!["address"];
+      }
+      if (value.data()!["image"] == null) {
+        profileImage = "";
+      } else {
+        profileImage = value.data()!["image"];
       }
     });
   }
@@ -133,7 +135,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final uploadTask = firebaseStorageReference.putFile(file);
     final snapShot = await uploadTask.whenComplete(() {});
     final imageURL = await snapShot.ref.getDownloadURL();
-    print(imageURL);
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+      'image': imageURL,
+    });
   }
 
   @override
@@ -229,8 +239,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             height: 150.h,
                                             fit: BoxFit.cover,
                                           )
-                                        : Image.asset(
-                                            'assets/images/avatar.png'),
+                                        : isEmpty(profileImage)
+                                            ? Image.asset(
+                                                'assets/images/avatar.png')
+                                            : Image.network(profileImage),
                                   ),
                                   Positioned(
                                     bottom: 0,
@@ -528,7 +540,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height / 24,
                             ),
-                            isEmpty()
+                            isEmpty(address)
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
