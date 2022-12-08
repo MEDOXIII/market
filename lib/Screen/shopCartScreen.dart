@@ -8,6 +8,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
 import '../Widgets/zoomDrawerWidget.dart';
+import 'checkoutScreen.dart';
 
 class ShopCartScreen extends StatefulWidget {
   const ShopCartScreen({Key? key}) : super(key: key);
@@ -17,9 +18,10 @@ class ShopCartScreen extends StatefulWidget {
 }
 
 final TextEditingController searchTextController = TextEditingController();
+final _drawerController = ZoomDrawerController();
 
 class _ShopCartScreenState extends State<ShopCartScreen> {
-  bool cardSelected = false;
+  bool cardSelected = true;
   bool cashSelected = false;
 
   void dispose() {
@@ -29,8 +31,6 @@ class _ShopCartScreenState extends State<ShopCartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _drawerController = ZoomDrawerController();
-
     return ZoomDrawerWidget(
       myController: _drawerController,
       screen: MaterialApp(
@@ -159,18 +159,29 @@ class _ShopCartScreenState extends State<ShopCartScreen> {
                         height: MediaQuery.of(context).size.height / 12,
                       ),
                       SlideAction(
-                        text: 'Slid To Pay',
-                        sliderButtonIcon: Icon(
-                          Icons.monetization_on,
-                          color: Colors.cyan,
-                        ),
+                        text: cardSelected ? 'Slid To Pay' : 'Slid To Checkout',
+                        sliderButtonIcon: cardSelected
+                            ? Icon(
+                                Icons.monetization_on,
+                                color: Colors.cyan,
+                              )
+                            : Icon(
+                                Icons.wallet_rounded,
+                                color: Colors.cyan,
+                              ),
                         innerColor: Colors.white70,
                         outerColor: Colors.cyan,
-                        onSubmit: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PaymentScreen(),
-                          ));
-                        },
+                        onSubmit: cardSelected
+                            ? () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => PaymentScreen(),
+                                ));
+                              }
+                            : () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => CheckoutScreen(),
+                                ));
+                              },
                       ),
                     ],
                   ),

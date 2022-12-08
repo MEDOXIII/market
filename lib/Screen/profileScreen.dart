@@ -242,7 +242,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         : isEmpty(profileImage)
                                             ? Image.asset(
                                                 'assets/images/avatar.png')
-                                            : Image.network(profileImage),
+                                            : Image.network(
+                                                profileImage,
+                                                width: 150.w,
+                                                height: 150.h,
+                                                fit: BoxFit.cover,
+                                              ),
                                   ),
                                   Positioned(
                                     bottom: 0,
@@ -280,6 +285,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   pickImage(ImageSource.camera);
                                                   Navigator.pop(context);
                                                 },
+                                              ),
+                                              NeumorphismButtonWidget(
+                                                child: Text(
+                                                  'Cancel',
+                                                  style: TextStyle(
+                                                      color: Colors.cyan),
+                                                ),
+                                                onClick: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                myColor: Colors.white70,
                                               ),
                                             ],
                                           ),
