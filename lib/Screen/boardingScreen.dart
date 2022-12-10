@@ -29,6 +29,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Container(
               child: Padding(

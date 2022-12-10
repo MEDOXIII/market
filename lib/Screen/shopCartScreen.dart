@@ -4,8 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'package:flutter_zoom_drawer/config.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import '../Widgets/neumorphismButtonWidget.dart';
+import '../Widgets/appBarWidget.dart';
 import '../Widgets/searchWidget.dart';
 import '../Widgets/zoomDrawerWidget.dart';
 import 'checkoutScreen.dart';
@@ -17,7 +16,7 @@ class ShopCartScreen extends StatefulWidget {
   State<ShopCartScreen> createState() => _ShopCartScreenState();
 }
 
-final TextEditingController searchTextController = TextEditingController();
+TextEditingController searchTextController = TextEditingController();
 final _drawerController = ZoomDrawerController();
 
 class _ShopCartScreenState extends State<ShopCartScreen> {
@@ -36,57 +35,16 @@ class _ShopCartScreenState extends State<ShopCartScreen> {
       screen: MaterialApp(
         home: SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
+            backgroundColor: Colors.white,
+            appBar: AppBarWidget(
               title: const Text(
                 'ShopCart',
                 style: TextStyle(
                   color: Colors.cyan,
                 ),
               ),
-              actions: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: SearchWidget(
-                    controller: searchTextController,
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: NeumorphismButtonWidget(
-                    child: Icon(
-                      Icons.shopping_cart,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    onClick: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ShopCartScreen(),
-                      ));
-                    },
-                    myColor: Colors.white70,
-                  ),
-                ),
-              ],
-              leading: Builder(
-                builder: (context) => Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: NeumorphismButtonWidget(
-                    child: Icon(
-                      Icons.menu,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    onClick: () {
-                      ZoomDrawer.of(context)!.toggle();
-                    },
-                    myColor: Colors.white70,
-                  ),
-                ),
+              child: SearchWidget(
+                controller: searchTextController,
               ),
             ),
             body: SingleChildScrollView(

@@ -6,13 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/deleteAccountScreen.dart';
-import 'package:market/Screen/shopCartScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market/Widgets/zoomDrawerWidget.dart';
+import '../Widgets/appBarWidget.dart';
 import '../Widgets/infoWidget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
@@ -155,57 +154,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       screen: MaterialApp(
         home: SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
+            backgroundColor: Colors.white,
+            appBar: AppBarWidget(
               title: const Text(
                 'Profile',
                 style: TextStyle(
                   color: Colors.cyan,
                 ),
               ),
-              actions: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: SearchWidget(
-                    controller: searchTextController,
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: NeumorphismButtonWidget(
-                    child: Icon(
-                      Icons.shopping_cart,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    onClick: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ShopCartScreen(),
-                      ));
-                    },
-                    myColor: Colors.white70,
-                  ),
-                ),
-              ],
-              leading: Builder(
-                builder: (context) => Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
-                  child: NeumorphismButtonWidget(
-                    child: Icon(
-                      Icons.menu,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    onClick: () {
-                      ZoomDrawer.of(context)!.toggle();
-                    },
-                    myColor: Colors.white70,
-                  ),
-                ),
+              child: SearchWidget(
+                controller: searchTextController,
               ),
             ),
             body: FutureBuilder(

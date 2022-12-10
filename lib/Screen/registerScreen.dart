@@ -83,6 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             return MaterialApp(
               home: SafeArea(
                 child: Scaffold(
+                  backgroundColor: Colors.white,
                   appBar: AppBar(
                     backgroundColor: Color(0xff0093d3),
                     title: const Text(

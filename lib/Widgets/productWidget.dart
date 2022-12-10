@@ -18,7 +18,7 @@ class ProductWidget extends StatelessWidget {
     return GestureDetector(
       child: Container(
         height: 500.h,
-        color: Colors.white38,
+        color: Colors.grey.shade100,
         padding: EdgeInsets.all(10),
         child: Column(
           children: [

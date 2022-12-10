@@ -45,64 +45,59 @@ class _SearchWidgetState extends State<SearchWidget> {
               duration: Duration(milliseconds: 375),
               width: 240.w,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    height: 50.h,
-                    width: 50.w,
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.clear,
-                          size: 30,
-                        ),
+                  GestureDetector(
+                      child: Icon(
+                        Icons.clear,
+                        size: 30,
                         color: Colors.lightBlue,
-                        onPressed: () {
-                          if (widget.controller.text.isEmpty) {
-                            setState(() {
-                              isOpen = !isOpen;
-                            });
-                          } else {
-                            setState(
-                              () {
-                                widget.controller.clear();
-                              },
-                            );
-                          }
-                        }),
-                  ),
+                      ),
+                      onTap: () {
+                        if (widget.controller.text.isEmpty) {
+                          setState(() {
+                            isOpen = !isOpen;
+                          });
+                        } else {
+                          setState(
+                            () {
+                              widget.controller.clear();
+                            },
+                          );
+                        }
+                      }),
                   SizedBox(
                     width: 140.w,
                     child: TextField(
                       // autofocus: true,
                       controller: widget.controller,
+                      style: TextStyle(color: Colors.cyan),
                       decoration: InputDecoration(
                         hintText: "Search",
+                        hintStyle: TextStyle(color: Colors.cyan),
                         isDense: true,
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50.h,
-                    width: 50.w,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        size: 30,
-                      ),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.search,
+                      size: 30,
                       color: Colors.lightBlue,
-                      onPressed: () {
-                        if (widget.controller.text.isEmpty) {
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: widget.controller.text,
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.cyan,
-                              textColor: Colors.white,
-                              fontSize: 16.sp);
-                        }
-                      },
                     ),
+                    onTap: () {
+                      if (widget.controller.text.isEmpty) {
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: widget.controller.text,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.cyan,
+                            textColor: Colors.white,
+                            fontSize: 16.sp);
+                      }
+                    },
                   ),
                 ],
               ),
