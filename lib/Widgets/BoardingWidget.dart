@@ -39,7 +39,7 @@ class BoardingWidget extends StatelessWidget {
             text,
             style: GoogleFonts.acme(
               textStyle: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 10.sp,
               ),
             ),
             textAlign: TextAlign.center,

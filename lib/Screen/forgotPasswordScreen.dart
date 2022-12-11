@@ -106,7 +106,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         onPressed: () {},
                       ),
                       controller: emailController,
-                      text: 'Enter Your Email',
+                      text: 'Email',
                       type: TextInputType.emailAddress,
                       isPass: false,
                       icon: Icon(Icons.email),

@@ -34,7 +34,8 @@ class textFormFieldWidget extends StatelessWidget {
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
-          hintText: text,
+          labelText: text,
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
           prefixIcon: icon,
           suffixIcon: lastIcon,
         ),

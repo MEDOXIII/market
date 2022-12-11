@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
-import 'package:market/Screen/shopCartScreen.dart';
 import 'package:market/Widgets/searchWidget.dart';
 import '../Widgets/appBarWidget.dart';
 import '../Widgets/categoryWidget.dart';
@@ -13,11 +12,12 @@ class CategoryScreen extends StatefulWidget {
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
+final _drawerController = ZoomDrawerController();
+TextEditingController searchTextController = TextEditingController();
+
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    final _drawerController = ZoomDrawerController();
-
     return ZoomDrawerWidget(
       myController: _drawerController,
       screen: MaterialApp(

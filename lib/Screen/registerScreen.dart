@@ -16,11 +16,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
   bool showConfirmPassword = true;
   bool showPassword = true;
@@ -112,13 +112,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 onPressed: () {},
                               ),
                               controller: nameController,
-                              text: 'Enter Your Name',
+                              text: 'Name',
                               type: TextInputType.name,
                               isPass: false,
                               icon: Icon(Icons.person),
                               validator: (name) =>
                                   name != null && name.length < 3
-                                      ? 'Enter Your Name'
+                                      ? 'Enter a valid Name'
                                       : null,
                             ),
                             textFormFieldWidget(
@@ -127,13 +127,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 onPressed: () {},
                               ),
                               controller: phoneController,
-                              text: 'Enter Your Phone Number',
+                              text: 'Phone Number',
                               type: TextInputType.phone,
                               isPass: false,
                               icon: Icon(Icons.phone),
                               validator: (phone) =>
                                   phone != null && phone.length < 11
-                                      ? 'Enter Your Phone Number'
+                                      ? 'Enter a valid Phone Number'
                                       : null,
                             ),
                             textFormFieldWidget(
@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 onPressed: () {},
                               ),
                               controller: emailController,
-                              text: 'Enter Your Email',
+                              text: 'Email',
                               type: TextInputType.emailAddress,
                               isPass: false,
                               icon: Icon(Icons.email),
@@ -160,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     () => showPassword = !showPassword),
                               ),
                               controller: passwordController,
-                              text: 'Enter Your Password',
+                              text: 'Password',
                               type: TextInputType.text,
                               isPass: showPassword,
                               icon: Icon(Icons.lock),
@@ -178,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     showConfirmPassword = !showConfirmPassword),
                               ),
                               controller: confirmPasswordController,
-                              text: 'Confirm Your Password',
+                              text: 'Confirm Password',
                               type: TextInputType.text,
                               isPass: showConfirmPassword,
                               icon: Icon(Icons.lock),

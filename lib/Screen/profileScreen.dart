@@ -25,11 +25,11 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-final TextEditingController searchTextController = TextEditingController();
-final TextEditingController nameController = TextEditingController();
-final TextEditingController phoneController = TextEditingController();
-final TextEditingController emailController = TextEditingController();
-final TextEditingController addressController = TextEditingController();
+TextEditingController searchTextController = TextEditingController();
+TextEditingController nameController = TextEditingController();
+TextEditingController phoneController = TextEditingController();
+TextEditingController emailController = TextEditingController();
+TextEditingController addressController = TextEditingController();
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;

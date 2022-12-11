@@ -9,6 +9,7 @@ import 'package:market/Screen/boardingScreen.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/textFieldWidget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({Key? key}) : super(key: key);
@@ -24,10 +25,24 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   bool showPassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    print("BACK BUTTON!");
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => BoardingScreen()));
+    return true;
   }
 
   Future delete() async {
@@ -125,7 +140,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                         onPressed: () {},
                       ),
                       controller: emailController,
-                      text: 'Enter Your Email',
+                      text: 'Email',
                       type: TextInputType.emailAddress,
                       isPass: false,
                       icon: Icon(Icons.email),
@@ -146,7 +161,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             setState(() => showPassword = !showPassword),
                       ),
                       controller: passwordController,
-                      text: 'Enter Your Password',
+                      text: 'Password',
                       type: TextInputType.text,
                       isPass: showPassword,
                       icon: Icon(Icons.lock),

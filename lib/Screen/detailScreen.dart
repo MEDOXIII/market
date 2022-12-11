@@ -18,7 +18,7 @@ class DetailScreen extends StatefulWidget {
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
-final TextEditingController searchTextController = TextEditingController();
+TextEditingController searchTextController = TextEditingController();
 
 class _DetailScreenState extends State<DetailScreen> {
   void dispose() {

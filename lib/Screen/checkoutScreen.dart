@@ -13,7 +13,7 @@ class CheckoutScreen extends StatefulWidget {
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-final TextEditingController searchTextController = TextEditingController();
+TextEditingController searchTextController = TextEditingController();
 final _drawerController = ZoomDrawerController();
 
 class _CheckoutScreenState extends State<CheckoutScreen> {

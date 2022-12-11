@@ -8,6 +8,7 @@ import 'package:market/Screen/productScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:market/Widgets/drawerListTile.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
 import '../Screen/boardingScreen.dart';
@@ -113,86 +114,41 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: Wrap(
           runSpacing: 16,
           children: [
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Color(0xff2a386c),
-              ),
-              title: Text(
-                "Category",
-                style: GoogleFonts.racingSansOne(
-                  textStyle: TextStyle(
-                    fontSize: 20.sp,
-                    color: Colors.cyan,
-                  ),
-                ),
-              ),
-              onTap: () {
+            DrawerListTile(
+              icon: Icons.home,
+              title: "Category",
+              onClick: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CategoryScreen(),
                 ));
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.price_change_outlined,
-                color: Color(0xff2a386c),
-              ),
-              title: Text(
-                "Product",
-                style: GoogleFonts.racingSansOne(
-                  textStyle: TextStyle(
-                    fontSize: 20.sp,
-                    color: Colors.cyan,
-                  ),
-                ),
-              ),
-              onTap: () {
+            DrawerListTile(
+              icon: Icons.price_change_outlined,
+              title: "Product",
+              onClick: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ProductScreen(),
                 ));
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.dataset_outlined,
-                color: Color(0xff2a386c),
-              ),
-              title: Text(
-                "Detail",
-                style: GoogleFonts.racingSansOne(
-                  textStyle: TextStyle(
-                    fontSize: 20.sp,
-                    color: Colors.cyan,
-                  ),
-                ),
-              ),
-              onTap: () {
+            DrawerListTile(
+              icon: Icons.dataset_outlined,
+              title: "Detail",
+              onClick: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailScreen(""),
                 ));
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.shopping_cart,
-                color: Color(0xff2a386c),
-              ),
-              title: Text(
-                "ShopCart",
-                style: GoogleFonts.racingSansOne(
-                  textStyle: TextStyle(
-                    fontSize: 20.sp,
-                    color: Colors.cyan,
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ShopCartScreen(),
-                ));
-              },
-            ),
+            DrawerListTile(
+                icon: Icons.shopping_cart,
+                title: "ShopCart",
+                onClick: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ShopCartScreen(),
+                  ));
+                }),
             Divider(
               color: Colors.black45,
             ),

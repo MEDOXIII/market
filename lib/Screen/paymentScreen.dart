@@ -21,7 +21,7 @@ String cardHolderName = "";
 String cvvCode = "";
 bool isCvvFocused = false;
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-final TextEditingController searchTextController = TextEditingController();
+TextEditingController searchTextController = TextEditingController();
 
 class _PaymentScreenState extends State<PaymentScreen> {
   void onCreditCardModelChange(CreditCardModel creditCardModel) {

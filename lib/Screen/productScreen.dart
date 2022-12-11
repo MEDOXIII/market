@@ -13,7 +13,7 @@ class ProductScreen extends StatefulWidget {
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
-final TextEditingController searchTextController = TextEditingController();
+TextEditingController searchTextController = TextEditingController();
 
 class _ProductScreenState extends State<ProductScreen> {
   void dispose() {
