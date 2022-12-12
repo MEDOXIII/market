@@ -28,7 +28,7 @@ class BoardingWidget extends StatelessWidget {
             textAddress,
             style: GoogleFonts.aclonica(
               textStyle: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 24.sp,
               ),
             ),
           ),
@@ -39,7 +39,7 @@ class BoardingWidget extends StatelessWidget {
             text,
             style: GoogleFonts.acme(
               textStyle: TextStyle(
-                fontSize: 10.sp,
+                fontSize: 16.sp,
               ),
             ),
             textAlign: TextAlign.center,

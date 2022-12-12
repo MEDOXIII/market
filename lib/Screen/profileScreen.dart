@@ -18,6 +18,8 @@ import '../Widgets/searchWidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 
+import 'addressScreen.dart';
+
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
@@ -544,14 +546,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                           ),
                                           onClick: () {
-                                            Fluttertoast.showToast(
-                                                msg: "Add Your Address",
-                                                toastLength: Toast.LENGTH_SHORT,
-                                                gravity: ToastGravity.CENTER,
-                                                timeInSecForIosWeb: 1,
-                                                backgroundColor: Colors.cyan,
-                                                textColor: Colors.white,
-                                                fontSize: 16.0);
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AddressScreen()));
                                           },
                                           myColor: Colors.white70,
                                         ),

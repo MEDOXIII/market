@@ -20,8 +20,8 @@ class DeleteAccountScreen extends StatefulWidget {
 
 class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   final formGlobalKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool showPassword = true;
 
   @override
@@ -134,7 +134,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 12,
                     ),
-                    textFormFieldWidget(
+                    TextFieldWidget(
                       lastIcon: IconButton(
                         icon: Icon(null),
                         onPressed: () {},
@@ -152,7 +152,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 24,
                     ),
-                    textFormFieldWidget(
+                    TextFieldWidget(
                       lastIcon: IconButton(
                         icon: Icon(showPassword
                             ? Icons.visibility_off

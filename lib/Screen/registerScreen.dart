@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market/Screen/loginScreen.dart';
+import 'package:market/Widgets/suggestionWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
@@ -99,14 +100,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 300.h,
-                              child: Image.asset('assets/images/market.png'),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 30,
-                            ),
-                            textFormFieldWidget(
+                            Image.asset('assets/images/market.png'),
+                            TextFieldWidget(
                               lastIcon: IconButton(
                                 icon: Icon(null),
                                 onPressed: () {},
@@ -121,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ? 'Enter a valid Name'
                                       : null,
                             ),
-                            textFormFieldWidget(
+                            TextFieldWidget(
                               lastIcon: IconButton(
                                 icon: Icon(null),
                                 onPressed: () {},
@@ -136,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ? 'Enter a valid Phone Number'
                                       : null,
                             ),
-                            textFormFieldWidget(
+                            TextFieldWidget(
                               lastIcon: IconButton(
                                 icon: Icon(null),
                                 onPressed: () {},
@@ -151,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ? 'Enter a valid Email'
                                   : null,
                             ),
-                            textFormFieldWidget(
+                            TextFieldWidget(
                               lastIcon: IconButton(
                                 icon: Icon(showPassword
                                     ? Icons.visibility_off
@@ -169,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ? 'Enter min of 6 characters'
                                       : null,
                             ),
-                            textFormFieldWidget(
+                            TextFieldWidget(
                               lastIcon: IconButton(
                                 icon: Icon(showConfirmPassword
                                     ? Icons.visibility_off
@@ -188,7 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       : null,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height / 30,
+                              height: MediaQuery.of(context).size.height / 48,
                             ),
                             NeumorphismButtonWidget(
                               child: Text(
@@ -205,35 +200,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               myColor: Colors.white70,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height / 30,
+                              height: MediaQuery.of(context).size.height / 48,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Already have an account ? ",
-                                  style: GoogleFonts.racingSansOne(
-                                    textStyle: TextStyle(
-                                      fontSize: 16.sp,
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) => LoginScreen(),
-                                    ));
-                                  },
-                                  child: Text(
-                                    "Log In",
-                                    style: GoogleFonts.damion(
-                                      textStyle: TextStyle(
-                                          fontSize: 16.sp, color: Colors.cyan),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            SuggestionWidget(
+                              text: "Already have an account ? ",
+                              clickText: "Log In",
+                              onClick: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ));
+                              },
                             ),
                           ],
                         ),

@@ -4,6 +4,7 @@ import 'package:market/Screen/categoryScreen.dart';
 import 'package:market/Screen/forgotPasswordScreen.dart';
 import 'package:market/Screen/registerScreen.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
+import 'package:market/Widgets/suggestionWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -83,10 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset('assets/images/market.png'),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 30,
-                          ),
-                          textFormFieldWidget(
+                          TextFieldWidget(
                             lastIcon: IconButton(
                               icon: Icon(null),
                               onPressed: () {},
@@ -101,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ? 'Enter a valid Email'
                                     : null,
                           ),
-                          textFormFieldWidget(
+                          TextFieldWidget(
                             lastIcon: IconButton(
                               icon: Icon(showPassword
                                   ? Icons.visibility_off
@@ -139,6 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 24,
+                          ),
                           NeumorphismButtonWidget(
                             child: Text(
                               'Login',
@@ -154,34 +155,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             myColor: Colors.white70,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height / 30,
+                            height: MediaQuery.of(context).size.height / 24,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don't have an account ? ",
-                                style: GoogleFonts.racingSansOne(
-                                  textStyle: TextStyle(
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => RegisterScreen(),
-                                  ));
-                                },
-                                child: Text(
-                                  "Register Here",
-                                  style: GoogleFonts.damion(
-                                    textStyle: TextStyle(
-                                        fontSize: 16.sp, color: Colors.cyan),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          SuggestionWidget(
+                            text: "Don't have an account ? ",
+                            clickText: "Register Here",
+                            onClick: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => RegisterScreen(),
+                              ));
+                            },
                           ),
                         ],
                       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class textFormFieldWidget extends StatelessWidget {
+class TextFieldWidget extends StatelessWidget {
   late final String text;
   final bool isPass;
   final Icon icon;
@@ -9,7 +9,7 @@ class textFormFieldWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType type;
 
-  textFormFieldWidget({
+  TextFieldWidget({
     required this.text,
     required this.isPass,
     required this.icon,

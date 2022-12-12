@@ -100,7 +100,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 12,
                     ),
-                    textFormFieldWidget(
+                    TextFieldWidget(
                       lastIcon: IconButton(
                         icon: Icon(null),
                         onPressed: () {},

@@ -8,7 +8,7 @@ import 'package:market/Screen/productScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:market/Widgets/drawerListTile.dart';
+import 'package:market/Widgets/drawerListTileWidget.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 
 import '../Screen/boardingScreen.dart';
@@ -114,7 +114,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: Wrap(
           runSpacing: 16,
           children: [
-            DrawerListTile(
+            DrawerListTileWidget(
               icon: Icons.home,
               title: "Category",
               onClick: () {
@@ -123,7 +123,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ));
               },
             ),
-            DrawerListTile(
+            DrawerListTileWidget(
               icon: Icons.price_change_outlined,
               title: "Product",
               onClick: () {
@@ -132,7 +132,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ));
               },
             ),
-            DrawerListTile(
+            DrawerListTileWidget(
               icon: Icons.dataset_outlined,
               title: "Detail",
               onClick: () {
@@ -141,7 +141,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ));
               },
             ),
-            DrawerListTile(
+            DrawerListTileWidget(
                 icon: Icons.shopping_cart,
                 title: "ShopCart",
                 onClick: () {
