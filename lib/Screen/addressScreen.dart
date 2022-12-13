@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market/Screen/profileScreen.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
 import '../Widgets/appBarWidget.dart';
@@ -18,6 +21,13 @@ class AddressScreen extends StatefulWidget {
 
 final _drawerController = ZoomDrawerController();
 final formGlobalKey = GlobalKey<FormState>();
+late String street;
+late String building;
+late String floor;
+late String apartment;
+
+final user = FirebaseAuth.instance.currentUser!;
+
 TextEditingController searchTextController = TextEditingController();
 TextEditingController streetController = TextEditingController();
 TextEditingController buildingController = TextEditingController();
@@ -39,14 +49,37 @@ class _AddressScreenState extends State<AddressScreen> {
     final isValid = formGlobalKey.currentState!.validate();
     if (!isValid) return;
 
-    Fluttertoast.showToast(
-        msg: " hello",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.cyan,
-        textColor: Colors.white,
-        fontSize: 16.0);
+    street = streetController.text.toString();
+    building = buildingController.text.toString();
+    floor = floorController.text.toString();
+    apartment = apartmentController.text.toString();
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .update({
+        'address': {
+          'Street': street,
+          'Building': building,
+          'Floor': floor,
+          'Apartment': apartment,
+        },
+      });
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(
+          msg: e.message.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.cyan,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      print(e);
+    }
+
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => ProfileScreen()));
   }
 
   @override
@@ -77,7 +110,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 200,
+                        height: 250,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -85,7 +118,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Location",
+                              "ِArea :",
                               style: GoogleFonts.xanhMono(
                                 textStyle: TextStyle(
                                     fontSize: 16.sp, color: Colors.black),
@@ -136,9 +169,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         icon: Icon(null),
                         controller: buildingController,
                         validator: (building) =>
-                            building != null && building.length < 2
-                                ? 'Enter a valid Building'
-                                : null,
+                            building == null ? 'Enter a valid Building' : null,
                         type: TextInputType.text,
                         lastIcon: IconButton(
                           icon: Icon(null),
@@ -150,9 +181,8 @@ class _AddressScreenState extends State<AddressScreen> {
                         isPass: false,
                         icon: Icon(null),
                         controller: floorController,
-                        validator: (floor) => floor != null && floor.length < 2
-                            ? 'Enter a valid Floor'
-                            : null,
+                        validator: (floor) =>
+                            floor == null ? 'Enter a valid Floor' : null,
                         type: TextInputType.text,
                         lastIcon: IconButton(
                           icon: Icon(null),
@@ -164,10 +194,9 @@ class _AddressScreenState extends State<AddressScreen> {
                         isPass: false,
                         icon: Icon(null),
                         controller: apartmentController,
-                        validator: (apartment) =>
-                            apartment != null && apartment.length < 2
-                                ? 'Enter a valid Apartment'
-                                : null,
+                        validator: (apartment) => apartment == null
+                            ? 'Enter a valid Apartment'
+                            : null,
                         type: TextInputType.text,
                         lastIcon: IconButton(
                           icon: Icon(null),

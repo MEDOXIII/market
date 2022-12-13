@@ -31,7 +31,10 @@ TextEditingController searchTextController = TextEditingController();
 TextEditingController nameController = TextEditingController();
 TextEditingController phoneController = TextEditingController();
 TextEditingController emailController = TextEditingController();
-TextEditingController addressController = TextEditingController();
+TextEditingController streetController = TextEditingController();
+TextEditingController buildingController = TextEditingController();
+TextEditingController floorController = TextEditingController();
+TextEditingController apartmentController = TextEditingController();
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;
@@ -40,6 +43,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late String phoneNumber;
   late String email;
   late String address;
+  late String street;
+  late String building;
+  late String floor;
+  late String apartment;
   late Future data;
   late String profileImage;
   File? imagePicker;
@@ -56,7 +63,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     nameController.dispose();
     phoneController.dispose();
     emailController.dispose();
-    addressController.dispose();
+    streetController.dispose();
+    buildingController.dispose();
+    floorController.dispose();
+    apartmentController.dispose();
     super.dispose();
   }
 
@@ -89,10 +99,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
       } else {
         email = value.data()!["email"];
       }
-      if (value.data()!["address"] == null) {
-        address = "";
+      if (value.data()!["address"]["Street"] == null) {
+        street = "";
       } else {
-        address = value.data()!["address"];
+        street = value.data()!["address"]["Street"];
+      }
+      if (value.data()!["address"]["Building"] == null) {
+        building = "";
+      } else {
+        building = value.data()!["address"]["Building"];
+      }
+      if (value.data()!["address"]["Floor"] == null) {
+        floor = "";
+      } else {
+        floor = value.data()!["address"]["Floor"];
+      }
+      if (value.data()!["address"]["Apartment"] == null) {
+        apartment = "";
+      } else {
+        apartment = value.data()!["address"]["Apartment"];
       }
       if (value.data()!["image"] == null) {
         profileImage = "";
@@ -100,6 +125,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         profileImage = value.data()!["image"];
       }
     });
+
+    address = apartment + floor + building + street;
   }
 
   Future pickImage(ImageSource source) async {
@@ -560,72 +587,149 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     labelText: "Address :",
                                     infoText: address,
                                     onClick: () {
-                                      addressController.text = address;
+                                      streetController.text = street;
+                                      buildingController.text = building;
+                                      floorController.text = floor;
+                                      apartmentController.text = apartment;
 
                                       showDialog(
                                         context: context,
-                                        builder: (context) => Form(
-                                          key: formGlobalKey,
-                                          child: AlertDialog(
-                                            title: Text('Edit Address'),
-                                            content: TextFormField(
-                                              keyboardType:
-                                                  TextInputType.streetAddress,
-                                              autofocus: true,
-                                              controller: addressController,
-                                              autovalidateMode: AutovalidateMode
-                                                  .onUserInteraction,
-                                              validator: (address) =>
-                                                  address != null &&
-                                                          address.length < 10
-                                                      ? 'Enter Your Address'
-                                                      : null,
+                                        builder: (context) => AlertDialog(
+                                          title: Text('Edit Address'),
+                                          content: Container(
+                                            height: 200.h,
+                                            child: Form(
+                                              key: formGlobalKey,
+                                              child: Column(
+                                                children: [
+                                                  TextFormField(
+                                                    keyboardType: TextInputType
+                                                        .streetAddress,
+                                                    autofocus: true,
+                                                    controller:
+                                                        streetController,
+                                                    autovalidateMode:
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
+                                                    validator: (street) => street !=
+                                                                null &&
+                                                            street.length < 6
+                                                        ? 'Enter a valid Street'
+                                                        : null,
+                                                  ),
+                                                  TextFormField(
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    autofocus: true,
+                                                    controller:
+                                                        buildingController,
+                                                    autovalidateMode:
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
+                                                    validator: (building) =>
+                                                        building == null
+                                                            ? 'Enter a valid Building'
+                                                            : null,
+                                                  ),
+                                                  TextFormField(
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    autofocus: true,
+                                                    controller: floorController,
+                                                    autovalidateMode:
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
+                                                    validator: (floor) => floor ==
+                                                            null
+                                                        ? 'Enter a valid Floor'
+                                                        : null,
+                                                  ),
+                                                  TextFormField(
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    autofocus: true,
+                                                    controller:
+                                                        apartmentController,
+                                                    autovalidateMode:
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
+                                                    validator: (apartment) =>
+                                                        apartment == null
+                                                            ? 'Enter a valid Apartment'
+                                                            : null,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            actions: [
-                                              NeumorphismButtonWidget(
-                                                child: Text(
-                                                  'Done',
-                                                  style: TextStyle(
-                                                      color: Colors.cyan),
-                                                ),
-                                                onClick: () {
-                                                  final isValid = formGlobalKey
-                                                      .currentState!
-                                                      .validate();
-                                                  if (isValid) {
-                                                    print(
-                                                        addressController.text);
-                                                    Navigator.pop(context);
-                                                  } else {
-                                                    Fluttertoast.showToast(
-                                                        msg:
-                                                            "Your Address Is Not Valid",
-                                                        toastLength:
-                                                            Toast.LENGTH_SHORT,
-                                                        gravity:
-                                                            ToastGravity.CENTER,
-                                                        timeInSecForIosWeb: 1,
-                                                        backgroundColor:
-                                                            Colors.cyan,
-                                                        textColor: Colors.white,
-                                                        fontSize: 16.0);
-                                                  }
-                                                },
-                                                myColor: Colors.white70,
-                                              ),
-                                              NeumorphismButtonWidget(
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
-                                                      color: Colors.cyan),
-                                                ),
-                                                myColor: Colors.white70,
-                                                onClick: () {
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            ],
                                           ),
+                                          actions: [
+                                            NeumorphismButtonWidget(
+                                              child: Text(
+                                                'Done',
+                                                style: TextStyle(
+                                                    color: Colors.cyan),
+                                              ),
+                                              onClick: () {
+                                                final isValid = formGlobalKey
+                                                    .currentState!
+                                                    .validate();
+                                                if (isValid) {
+                                                  print('isValid');
+                                                  print(street);
+                                                  print(building);
+                                                  print(floor);
+                                                  print(apartment);
+                                                  FirebaseFirestore.instance
+                                                      .collection('users')
+                                                      .doc(user.uid)
+                                                      .update({
+                                                    'address': {
+                                                      'Street': streetController
+                                                          .text
+                                                          .trim(),
+                                                      'Building':
+                                                          buildingController
+                                                              .text
+                                                              .trim(),
+                                                      'Floor': floorController
+                                                          .text
+                                                          .trim(),
+                                                      'Apartment':
+                                                          apartmentController
+                                                              .text
+                                                              .trim(),
+                                                    },
+                                                  });
+                                                  Navigator.pop(context);
+                                                } else {
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Your Address Is Not Valid",
+                                                      toastLength:
+                                                          Toast.LENGTH_SHORT,
+                                                      gravity:
+                                                          ToastGravity.CENTER,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          Colors.cyan,
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+                                                }
+                                              },
+                                              myColor: Colors.white70,
+                                            ),
+                                            NeumorphismButtonWidget(
+                                              child: Text(
+                                                'Cancel',
+                                                style: TextStyle(
+                                                    color: Colors.cyan),
+                                              ),
+                                              myColor: Colors.white70,
+                                              onClick: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       );
                                     },
