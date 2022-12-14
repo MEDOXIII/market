@@ -6,8 +6,8 @@ import 'package:flutter_zoom_drawer/config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/profileScreen.dart';
+import 'package:market/Widgets/dialogTextFieldWidget.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
-import 'package:market/Widgets/textFieldWidget.dart';
 import '../Widgets/appBarWidget.dart';
 import '../Widgets/searchWidget.dart';
 import '../Widgets/zoomDrawerWidget.dart';
@@ -148,60 +148,32 @@ class _AddressScreenState extends State<AddressScreen> {
                           ],
                         ),
                       ),
-                      TextFieldWidget(
+                      DialogTextFieldWidget(
                         text: 'Street',
-                        isPass: false,
-                        icon: Icon(null),
                         controller: streetController,
                         validator: (street) =>
                             street != null && street.length < 6
                                 ? 'Enter a valid Street'
                                 : null,
-                        type: TextInputType.streetAddress,
-                        lastIcon: IconButton(
-                          icon: Icon(null),
-                          onPressed: () {},
-                        ),
                       ),
-                      TextFieldWidget(
+                      DialogTextFieldWidget(
                         text: 'Building',
-                        isPass: false,
-                        icon: Icon(null),
                         controller: buildingController,
                         validator: (building) =>
                             building == null ? 'Enter a valid Building' : null,
-                        type: TextInputType.text,
-                        lastIcon: IconButton(
-                          icon: Icon(null),
-                          onPressed: () {},
-                        ),
                       ),
-                      TextFieldWidget(
+                      DialogTextFieldWidget(
                         text: 'Floor',
-                        isPass: false,
-                        icon: Icon(null),
                         controller: floorController,
                         validator: (floor) =>
                             floor == null ? 'Enter a valid Floor' : null,
-                        type: TextInputType.text,
-                        lastIcon: IconButton(
-                          icon: Icon(null),
-                          onPressed: () {},
-                        ),
                       ),
-                      TextFieldWidget(
+                      DialogTextFieldWidget(
                         text: 'Apartment',
-                        isPass: false,
-                        icon: Icon(null),
                         controller: apartmentController,
                         validator: (apartment) => apartment == null
                             ? 'Enter a valid Apartment'
                             : null,
-                        type: TextInputType.text,
-                        lastIcon: IconButton(
-                          icon: Icon(null),
-                          onPressed: () {},
-                        ),
                       ),
                       NeumorphismButtonWidget(
                         child: Text(

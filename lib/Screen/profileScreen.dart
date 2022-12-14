@@ -4,11 +4,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/deleteAccountScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:market/Widgets/dialogWidget.dart';
 import 'package:market/Widgets/zoomDrawerWidget.dart';
+import '../Widgets/addressButtonWidget.dart';
 import '../Widgets/appBarWidget.dart';
+import '../Widgets/dialogTextFieldWidget.dart';
 import '../Widgets/infoWidget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
@@ -17,8 +19,6 @@ import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/searchWidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
-
-import 'addressScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -244,9 +244,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         showDialog(
                                           context: context,
                                           builder: (context) => AlertDialog(
-                                            title: Text("Choose Your Photo"),
+                                            title: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "Choose Your Photo",
+                                                  style: TextStyle(
+                                                      color: Colors.cyan),
+                                                ),
+                                                NeumorphismButtonWidget(
+                                                  child: Icon(
+                                                    Icons.clear,
+                                                    color: Colors.cyan,
+                                                  ),
+                                                  onClick: () =>
+                                                      Navigator.pop(context),
+                                                  myColor: Colors.white70,
+                                                ),
+                                              ],
+                                            ),
                                             content: Text(
-                                                "Where Do You Want To Choose Your Photo"),
+                                              "Where Do You Want To Choose Your Photo?",
+                                              style:
+                                                  TextStyle(color: Colors.cyan),
+                                            ),
                                             actions: [
                                               NeumorphismButtonWidget(
                                                 child: Text(
@@ -272,17 +295,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   pickImage(ImageSource.camera);
                                                   Navigator.pop(context);
                                                 },
-                                              ),
-                                              NeumorphismButtonWidget(
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
-                                                      color: Colors.cyan),
-                                                ),
-                                                onClick: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                myColor: Colors.white70,
                                               ),
                                             ],
                                           ),
@@ -311,69 +323,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   context: context,
                                   builder: (context) => Form(
                                     key: formGlobalKey,
-                                    child: AlertDialog(
-                                      title: Text('Edit Name'),
-                                      content: TextFormField(
-                                        keyboardType: TextInputType.name,
-                                        autofocus: true,
+                                    child: DialogWidget(
+                                      title: 'Edit Name',
+                                      myWidget: DialogTextFieldWidget(
+                                        text: 'Name',
                                         controller: nameController,
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
                                         validator: (name) =>
                                             name != null && name.length < 3
                                                 ? 'Enter Your Name'
                                                 : null,
                                       ),
-                                      actions: [
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Done',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            final isValid = formGlobalKey
-                                                .currentState!
-                                                .validate();
+                                      doneButton: () {
+                                        final isValid = formGlobalKey
+                                            .currentState!
+                                            .validate();
 
-                                            if (isValid) {
-                                              print(nameController.text);
-                                              FirebaseFirestore.instance
-                                                  .collection('users')
-                                                  .doc(user.uid)
-                                                  .update({
-                                                'name':
-                                                    nameController.text.trim(),
-                                              });
-                                              Navigator.pop(context);
-                                            }
-                                            if (!isValid) {
-                                              print("Your Name Is Not Valid");
-                                              Fluttertoast.showToast(
-                                                  msg: "Your Name Is Not Valid",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.CENTER,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor: Colors.cyan,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0);
-                                            }
-                                          },
-                                        ),
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Cancel',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      ],
+                                        if (isValid) {
+                                          print(nameController.text);
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(user.uid)
+                                              .update({
+                                            'name': nameController.text.trim(),
+                                          });
+                                          Navigator.pop(context);
+                                        }
+                                        if (!isValid) {
+                                          print("Your Name Is Not Valid");
+                                          Fluttertoast.showToast(
+                                              msg: "Your Name Is Not Valid",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.cyan,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        }
+                                      },
                                     ),
                                   ),
                                 );
@@ -392,68 +378,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   context: context,
                                   builder: (context) => Form(
                                     key: formGlobalKey,
-                                    child: AlertDialog(
-                                      title: Text('Edit Phone'),
-                                      content: TextFormField(
-                                        keyboardType: TextInputType.phone,
-                                        autofocus: true,
+                                    child: DialogWidget(
+                                      title: 'Edit Phone',
+                                      myWidget: DialogTextFieldWidget(
+                                        text: 'Phone',
                                         controller: phoneController,
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
                                         validator: (phone) =>
                                             phone != null && phone.length < 11
                                                 ? 'Enter Your Phone Number'
                                                 : null,
                                       ),
-                                      actions: [
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Done',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            final isValid = formGlobalKey
-                                                .currentState!
-                                                .validate();
+                                      doneButton: () {
+                                        final isValid = formGlobalKey
+                                            .currentState!
+                                            .validate();
 
-                                            if (isValid) {
-                                              print(phoneController.text);
-                                              FirebaseFirestore.instance
-                                                  .collection('users')
-                                                  .doc(user.uid)
-                                                  .update({
-                                                'phone':
-                                                    phoneController.text.trim(),
-                                              });
-                                              Navigator.pop(context);
-                                            } else {
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Your Phone Number Is Not Valid",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.CENTER,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor: Colors.cyan,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0);
-                                            }
-                                          },
-                                        ),
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Cancel',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      ],
+                                        if (isValid) {
+                                          print(phoneController.text);
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(user.uid)
+                                              .update({
+                                            'phone':
+                                                phoneController.text.trim(),
+                                          });
+                                          Navigator.pop(context);
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg:
+                                                  "Your Phone Number Is Not Valid",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.cyan,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        }
+                                      },
                                     ),
                                   ),
                                 );
@@ -472,69 +433,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   context: context,
                                   builder: (context) => Form(
                                     key: formGlobalKey,
-                                    child: AlertDialog(
-                                      title: Text('Edit Email'),
-                                      content: TextFormField(
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        autofocus: true,
+                                    child: DialogWidget(
+                                      title: 'Edit Email',
+                                      myWidget: DialogTextFieldWidget(
+                                        text: 'Email',
                                         controller: emailController,
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
                                         validator: (email) => email != null &&
                                                 !EmailValidator.validate(email)
                                             ? 'Enter a valid Email'
                                             : null,
                                       ),
-                                      actions: [
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Done',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            final isValid = formGlobalKey
-                                                .currentState!
-                                                .validate();
+                                      doneButton: () {
+                                        final isValid = formGlobalKey
+                                            .currentState!
+                                            .validate();
 
-                                            if (isValid) {
-                                              print(emailController.text);
-                                              FirebaseFirestore.instance
-                                                  .collection('users')
-                                                  .doc(user.uid)
-                                                  .update({
-                                                'email':
-                                                    emailController.text.trim(),
-                                              });
-                                              Navigator.pop(context);
-                                            } else {
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Your Email Is Not Valid",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.CENTER,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor: Colors.cyan,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0);
-                                            }
-                                          },
-                                        ),
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Cancel',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      ],
+                                        if (isValid) {
+                                          print(emailController.text);
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(user.uid)
+                                              .update({
+                                            'email':
+                                                emailController.text.trim(),
+                                          });
+                                          Navigator.pop(context);
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: "Your Email Is Not Valid",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.cyan,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        }
+                                      },
                                     ),
                                   ),
                                 );
@@ -544,45 +478,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: MediaQuery.of(context).size.height / 24,
                             ),
                             isEmpty(address)
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Address :",
-                                          style: GoogleFonts.xanhMono(
-                                            textStyle: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: Colors.black),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              12,
-                                        ),
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            "Add Your Address",
-                                            style: TextStyle(
-                                              color: Colors.cyan,
-                                              fontSize: 16.sp,
-                                            ),
-                                          ),
-                                          onClick: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AddressScreen()));
-                                          },
-                                          myColor: Colors.white70,
-                                        ),
-                                      ],
-                                    ),
-                                  )
+                                ? AddressButtonWidget()
                                 : infoWidget(
                                     labelText: "Address :",
                                     infoText: address,
@@ -594,65 +490,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                       showDialog(
                                         context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: Text('Edit Address'),
-                                          content: Container(
-                                            height: 200.h,
+                                        builder: (context) => DialogWidget(
+                                          title: 'Edit Address',
+                                          myWidget: Container(
+                                            height: 250.h,
                                             child: Form(
                                               key: formGlobalKey,
                                               child: Column(
                                                 children: [
-                                                  TextFormField(
-                                                    keyboardType: TextInputType
-                                                        .streetAddress,
-                                                    autofocus: true,
+                                                  DialogTextFieldWidget(
+                                                    text: 'Street',
                                                     controller:
                                                         streetController,
-                                                    autovalidateMode:
-                                                        AutovalidateMode
-                                                            .onUserInteraction,
                                                     validator: (street) => street !=
                                                                 null &&
                                                             street.length < 6
                                                         ? 'Enter a valid Street'
                                                         : null,
                                                   ),
-                                                  TextFormField(
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    autofocus: true,
+                                                  DialogTextFieldWidget(
+                                                    text: 'Building',
                                                     controller:
                                                         buildingController,
-                                                    autovalidateMode:
-                                                        AutovalidateMode
-                                                            .onUserInteraction,
                                                     validator: (building) =>
                                                         building == null
                                                             ? 'Enter a valid Building'
                                                             : null,
                                                   ),
-                                                  TextFormField(
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    autofocus: true,
+                                                  DialogTextFieldWidget(
+                                                    text: 'Floor',
                                                     controller: floorController,
-                                                    autovalidateMode:
-                                                        AutovalidateMode
-                                                            .onUserInteraction,
                                                     validator: (floor) => floor ==
                                                             null
                                                         ? 'Enter a valid Floor'
                                                         : null,
                                                   ),
-                                                  TextFormField(
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    autofocus: true,
+                                                  DialogTextFieldWidget(
+                                                    text: 'Apartment',
                                                     controller:
                                                         apartmentController,
-                                                    autovalidateMode:
-                                                        AutovalidateMode
-                                                            .onUserInteraction,
                                                     validator: (apartment) =>
                                                         apartment == null
                                                             ? 'Enter a valid Apartment'
@@ -662,74 +538,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             ),
                                           ),
-                                          actions: [
-                                            NeumorphismButtonWidget(
-                                              child: Text(
-                                                'Done',
-                                                style: TextStyle(
-                                                    color: Colors.cyan),
-                                              ),
-                                              onClick: () {
-                                                final isValid = formGlobalKey
-                                                    .currentState!
-                                                    .validate();
-                                                if (isValid) {
-                                                  print('isValid');
-                                                  print(street);
-                                                  print(building);
-                                                  print(floor);
-                                                  print(apartment);
-                                                  FirebaseFirestore.instance
-                                                      .collection('users')
-                                                      .doc(user.uid)
-                                                      .update({
-                                                    'address': {
-                                                      'Street': streetController
-                                                          .text
+                                          doneButton: () {
+                                            final isValid = formGlobalKey
+                                                .currentState!
+                                                .validate();
+                                            if (isValid) {
+                                              print('isValid');
+                                              print(street);
+                                              print(building);
+                                              print(floor);
+                                              print(apartment);
+                                              FirebaseFirestore.instance
+                                                  .collection('users')
+                                                  .doc(user.uid)
+                                                  .update({
+                                                'address': {
+                                                  'Street': streetController
+                                                      .text
+                                                      .trim(),
+                                                  'Building': buildingController
+                                                      .text
+                                                      .trim(),
+                                                  'Floor': floorController.text
+                                                      .trim(),
+                                                  'Apartment':
+                                                      apartmentController.text
                                                           .trim(),
-                                                      'Building':
-                                                          buildingController
-                                                              .text
-                                                              .trim(),
-                                                      'Floor': floorController
-                                                          .text
-                                                          .trim(),
-                                                      'Apartment':
-                                                          apartmentController
-                                                              .text
-                                                              .trim(),
-                                                    },
-                                                  });
-                                                  Navigator.pop(context);
-                                                } else {
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                          "Your Address Is Not Valid",
-                                                      toastLength:
-                                                          Toast.LENGTH_SHORT,
-                                                      gravity:
-                                                          ToastGravity.CENTER,
-                                                      timeInSecForIosWeb: 1,
-                                                      backgroundColor:
-                                                          Colors.cyan,
-                                                      textColor: Colors.white,
-                                                      fontSize: 16.0);
-                                                }
-                                              },
-                                              myColor: Colors.white70,
-                                            ),
-                                            NeumorphismButtonWidget(
-                                              child: Text(
-                                                'Cancel',
-                                                style: TextStyle(
-                                                    color: Colors.cyan),
-                                              ),
-                                              myColor: Colors.white70,
-                                              onClick: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ],
+                                                },
+                                              });
+                                              Navigator.pop(context);
+                                            } else {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Your Address Is Not Valid",
+                                                  toastLength:
+                                                      Toast.LENGTH_SHORT,
+                                                  gravity: ToastGravity.CENTER,
+                                                  timeInSecForIosWeb: 1,
+                                                  backgroundColor: Colors.cyan,
+                                                  textColor: Colors.white,
+                                                  fontSize: 16.0);
+                                            }
+                                          },
                                         ),
                                       );
                                     },
@@ -751,39 +601,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onClick: () {
                                   showDialog(
                                     context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: Text("Delete Account!!!"),
-                                      content: Text(
-                                          "Do You Want To Delete Your Account??"),
-                                      actions: [
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Yes',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          onClick: () async {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        DeleteAccountScreen()));
-                                            await FirebaseAuth.instance
-                                                .signOut();
-                                          },
-                                          myColor: Colors.white70,
-                                        ),
-                                        NeumorphismButtonWidget(
-                                          child: Text(
-                                            'Cancel',
-                                            style:
-                                                TextStyle(color: Colors.cyan),
-                                          ),
-                                          myColor: Colors.white70,
-                                          onClick: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      ],
+                                    builder: (context) => DialogWidget(
+                                      title: ("Delete Account!!!"),
+                                      myWidget: Text(
+                                        "Do You Want To Delete Your Account??",
+                                        style: TextStyle(color: Colors.cyan),
+                                      ),
+                                      doneButton: () async {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DeleteAccountScreen()));
+                                        await FirebaseAuth.instance.signOut();
+                                      },
                                     ),
                                   );
                                 },
