@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/profileScreen.dart';
-import 'package:market/Widgets/dialogTextFieldWidget.dart';
+import 'package:market/Widgets/addressWidget.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
+import '../Widgets/toastWidget.dart';
 import '../Widgets/appBarWidget.dart';
 import '../Widgets/searchWidget.dart';
 import '../Widgets/zoomDrawerWidget.dart';
@@ -67,14 +67,7 @@ class _AddressScreenState extends State<AddressScreen> {
         },
       });
     } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(
-          msg: e.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.cyan,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastWidget(e.message.toString());
       print(e);
     }
 
@@ -148,33 +141,11 @@ class _AddressScreenState extends State<AddressScreen> {
                           ],
                         ),
                       ),
-                      DialogTextFieldWidget(
-                        text: 'Street',
-                        controller: streetController,
-                        validator: (street) =>
-                            street != null && street.length < 6
-                                ? 'Enter a valid Street'
-                                : null,
-                      ),
-                      DialogTextFieldWidget(
-                        text: 'Building',
-                        controller: buildingController,
-                        validator: (building) =>
-                            building == null ? 'Enter a valid Building' : null,
-                      ),
-                      DialogTextFieldWidget(
-                        text: 'Floor',
-                        controller: floorController,
-                        validator: (floor) =>
-                            floor == null ? 'Enter a valid Floor' : null,
-                      ),
-                      DialogTextFieldWidget(
-                        text: 'Apartment',
-                        controller: apartmentController,
-                        validator: (apartment) => apartment == null
-                            ? 'Enter a valid Apartment'
-                            : null,
-                      ),
+                      AddressWidget(
+                          streetController: streetController,
+                          buildingController: buildingController,
+                          floorController: floorController,
+                          apartmentController: apartmentController),
                       NeumorphismButtonWidget(
                         child: Text(
                           "Add Your Address",

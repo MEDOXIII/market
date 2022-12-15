@@ -20,6 +20,7 @@ class DialogTextFieldWidget extends StatelessWidget {
         textAlign: TextAlign.center,
         validator: validator,
         autovalidateMode: AutovalidateMode.onUserInteraction,
+        style: TextStyle(color: Colors.cyan),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           border: OutlineInputBorder(

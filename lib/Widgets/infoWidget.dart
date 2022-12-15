@@ -23,7 +23,11 @@ class infoWidget extends StatelessWidget {
           Text(
             labelText,
             style: GoogleFonts.xanhMono(
-              textStyle: TextStyle(fontSize: 16.sp, color: Colors.black),
+              textStyle: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ),
           SizedBox(
@@ -31,7 +35,7 @@ class infoWidget extends StatelessWidget {
           ),
           Text(
             infoText,
-            style: GoogleFonts.sail(
+            style: GoogleFonts.xanhMono(
               textStyle: TextStyle(fontSize: 16.sp, color: Colors.cyan),
             ),
           ),

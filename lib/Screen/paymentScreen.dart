@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
 import 'package:flutter_zoom_drawer/config.dart';
+import '../Widgets/toastWidget.dart';
 import '../Widgets/appBarWidget.dart';
 import '../Widgets/searchWidget.dart';
 import '../Widgets/zoomDrawerWidget.dart';
@@ -149,24 +150,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 },
                               );
                             } else {
+                              ToastWidget("Your card is invalid!");
                               print('invalid!');
-                              // showDialog(
-                              //   context: context,
-                              //   builder: (BuildContext context) {
-                              // 0    return AlertDialog(
-                              //       title: Text("invalid!!"),
-                              //       content: Text("Your card is invalid!"),
-                              //       actions: <Widget>[
-                              //         MaterialButton(
-                              //           child: Text("OK"),
-                              //           onPressed: () {
-                              //             Navigator.of(context).pop();
-                              //           },
-                              //         ),
-                              //       ],
-                              //     );
-                              //   },
-                              // );
                             }
                           },
                           myColor: Colors.white70,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
+import 'toastWidget.dart';
 import 'neumorphismButtonWidget.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -88,14 +87,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                     onTap: () {
                       if (widget.controller.text.isEmpty) {
                       } else {
-                        Fluttertoast.showToast(
-                            msg: widget.controller.text,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.cyan,
-                            textColor: Colors.white,
-                            fontSize: 16.sp);
+                        ToastWidget(
+                          widget.controller.text,
+                        );
                       }
                     },
                   ),

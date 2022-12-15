@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../Widgets/toastWidget.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/textFieldWidget.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:email_validator/email_validator.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -38,23 +38,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       await FirebaseAuth.instance.sendPasswordResetEmail(
         email: emailController.text.trim(),
       );
-      Fluttertoast.showToast(
-          msg: ' Password Reset Email Sent!',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.cyan,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastWidget('Password Reset Email Sent!');
     } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(
-          msg: e.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.cyan,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastWidget(e.message.toString());
+
       print(e);
     }
     Navigator.of(context).pop();

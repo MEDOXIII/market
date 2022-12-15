@@ -3,12 +3,13 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:market/Widgets/toastWidget.dart';
 import 'package:market/Screen/deleteAccountScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market/Widgets/dialogWidget.dart';
 import 'package:market/Widgets/zoomDrawerWidget.dart';
 import '../Widgets/addressButtonWidget.dart';
+import '../Widgets/addressWidget.dart';
 import '../Widgets/appBarWidget.dart';
 import '../Widgets/dialogTextFieldWidget.dart';
 import '../Widgets/infoWidget.dart';
@@ -72,6 +73,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool isEmpty(String value) {
     if (value.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool isValid() {
+    final Valid = formGlobalKey.currentState!.validate();
+
+    if (Valid) {
       return true;
     } else {
       return false;
@@ -163,12 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final uploadTask = firebaseStorageReference.putFile(file);
     final snapShot = await uploadTask.whenComplete(() {});
     final imageURL = await snapShot.ref.getDownloadURL();
-    showDialog(
-      context: context,
-      builder: (context) => Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+
     await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
       'image': imageURL,
     });
@@ -334,31 +340,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 : null,
                                       ),
                                       doneButton: () {
-                                        final isValid = formGlobalKey
-                                            .currentState!
-                                            .validate();
-
-                                        if (isValid) {
-                                          print(nameController.text);
-                                          FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(user.uid)
-                                              .update({
-                                            'name': nameController.text.trim(),
-                                          });
-                                          Navigator.pop(context);
-                                        }
-                                        if (!isValid) {
-                                          print("Your Name Is Not Valid");
-                                          Fluttertoast.showToast(
-                                              msg: "Your Name Is Not Valid",
-                                              toastLength: Toast.LENGTH_SHORT,
-                                              gravity: ToastGravity.CENTER,
-                                              timeInSecForIosWeb: 1,
-                                              backgroundColor: Colors.cyan,
-                                              textColor: Colors.white,
-                                              fontSize: 16.0);
-                                        }
+                                        isValid()
+                                            ? {
+                                                print(nameController.text),
+                                                FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .doc(user.uid)
+                                                    .update({
+                                                  'name': nameController.text
+                                                      .trim(),
+                                                }),
+                                                setState(() {
+                                                  name = nameController.text
+                                                      .trim();
+                                                }),
+                                                Navigator.pop(context),
+                                              }
+                                            : {
+                                                ToastWidget(
+                                                    "Your Name Is Not Valid"),
+                                              };
                                       },
                                     ),
                                   ),
@@ -379,43 +380,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   builder: (context) => Form(
                                     key: formGlobalKey,
                                     child: DialogWidget(
-                                      title: 'Edit Phone',
-                                      myWidget: DialogTextFieldWidget(
-                                        text: 'Phone',
-                                        controller: phoneController,
-                                        validator: (phone) =>
-                                            phone != null && phone.length < 11
-                                                ? 'Enter Your Phone Number'
-                                                : null,
-                                      ),
-                                      doneButton: () {
-                                        final isValid = formGlobalKey
-                                            .currentState!
-                                            .validate();
-
-                                        if (isValid) {
-                                          print(phoneController.text);
-                                          FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(user.uid)
-                                              .update({
-                                            'phone':
-                                                phoneController.text.trim(),
-                                          });
-                                          Navigator.pop(context);
-                                        } else {
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  "Your Phone Number Is Not Valid",
-                                              toastLength: Toast.LENGTH_SHORT,
-                                              gravity: ToastGravity.CENTER,
-                                              timeInSecForIosWeb: 1,
-                                              backgroundColor: Colors.cyan,
-                                              textColor: Colors.white,
-                                              fontSize: 16.0);
-                                        }
-                                      },
-                                    ),
+                                        title: 'Edit Phone',
+                                        myWidget: DialogTextFieldWidget(
+                                          text: 'Phone',
+                                          controller: phoneController,
+                                          validator: (phone) =>
+                                              phone != null && phone.length < 11
+                                                  ? 'Enter Your Phone Number'
+                                                  : null,
+                                        ),
+                                        doneButton: () {
+                                          isValid()
+                                              ? {
+                                                  print(phoneController.text),
+                                                  FirebaseFirestore.instance
+                                                      .collection('users')
+                                                      .doc(user.uid)
+                                                      .update({
+                                                    'phone': phoneController
+                                                        .text
+                                                        .trim(),
+                                                  }),
+                                                  setState(() {
+                                                    phoneNumber =
+                                                        phoneController.text
+                                                            .trim();
+                                                  }),
+                                                  Navigator.pop(context),
+                                                }
+                                              : {
+                                                  ToastWidget(
+                                                      "Your Phone Number Is Not Valid"),
+                                                };
+                                        }),
                                   ),
                                 );
                               },
@@ -444,30 +441,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             : null,
                                       ),
                                       doneButton: () {
-                                        final isValid = formGlobalKey
-                                            .currentState!
-                                            .validate();
-
-                                        if (isValid) {
-                                          print(emailController.text);
-                                          FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(user.uid)
-                                              .update({
-                                            'email':
-                                                emailController.text.trim(),
-                                          });
-                                          Navigator.pop(context);
-                                        } else {
-                                          Fluttertoast.showToast(
-                                              msg: "Your Email Is Not Valid",
-                                              toastLength: Toast.LENGTH_SHORT,
-                                              gravity: ToastGravity.CENTER,
-                                              timeInSecForIosWeb: 1,
-                                              backgroundColor: Colors.cyan,
-                                              textColor: Colors.white,
-                                              fontSize: 16.0);
-                                        }
+                                        isValid()
+                                            ? {
+                                                print(emailController.text),
+                                                FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .doc(user.uid)
+                                                    .update({
+                                                  'email': emailController.text
+                                                      .trim(),
+                                                }),
+                                                setState(() {
+                                                  email = emailController.text
+                                                      .trim();
+                                                }),
+                                                Navigator.pop(context),
+                                              }
+                                            : {
+                                                ToastWidget(
+                                                    "Your Email Is Not Valid"),
+                                              };
                                       },
                                     ),
                                   ),
@@ -481,7 +474,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ? AddressButtonWidget()
                                 : infoWidget(
                                     labelText: "Address :",
-                                    infoText: address,
+                                    infoText: apartment +
+                                        '/' +
+                                        floor +
+                                        '/' +
+                                        building +
+                                        '/' +
+                                        street,
                                     onClick: () {
                                       streetController.text = street;
                                       buildingController.text = building;
@@ -492,93 +491,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         context: context,
                                         builder: (context) => DialogWidget(
                                           title: 'Edit Address',
-                                          myWidget: Container(
-                                            height: 250.h,
-                                            child: Form(
-                                              key: formGlobalKey,
-                                              child: Column(
-                                                children: [
-                                                  DialogTextFieldWidget(
-                                                    text: 'Street',
-                                                    controller:
-                                                        streetController,
-                                                    validator: (street) => street !=
-                                                                null &&
-                                                            street.length < 6
-                                                        ? 'Enter a valid Street'
-                                                        : null,
-                                                  ),
-                                                  DialogTextFieldWidget(
-                                                    text: 'Building',
-                                                    controller:
-                                                        buildingController,
-                                                    validator: (building) =>
-                                                        building == null
-                                                            ? 'Enter a valid Building'
-                                                            : null,
-                                                  ),
-                                                  DialogTextFieldWidget(
-                                                    text: 'Floor',
-                                                    controller: floorController,
-                                                    validator: (floor) => floor ==
-                                                            null
-                                                        ? 'Enter a valid Floor'
-                                                        : null,
-                                                  ),
-                                                  DialogTextFieldWidget(
-                                                    text: 'Apartment',
-                                                    controller:
-                                                        apartmentController,
-                                                    validator: (apartment) =>
-                                                        apartment == null
-                                                            ? 'Enter a valid Apartment'
-                                                            : null,
-                                                  ),
-                                                ],
+                                          myWidget: Form(
+                                            key: formGlobalKey,
+                                            child: SingleChildScrollView(
+                                              child: AddressWidget(
+                                                streetController:
+                                                    streetController,
+                                                buildingController:
+                                                    buildingController,
+                                                floorController:
+                                                    floorController,
+                                                apartmentController:
+                                                    apartmentController,
                                               ),
                                             ),
                                           ),
                                           doneButton: () {
-                                            final isValid = formGlobalKey
-                                                .currentState!
-                                                .validate();
-                                            if (isValid) {
-                                              print('isValid');
-                                              print(street);
-                                              print(building);
-                                              print(floor);
-                                              print(apartment);
-                                              FirebaseFirestore.instance
-                                                  .collection('users')
-                                                  .doc(user.uid)
-                                                  .update({
-                                                'address': {
-                                                  'Street': streetController
-                                                      .text
-                                                      .trim(),
-                                                  'Building': buildingController
-                                                      .text
-                                                      .trim(),
-                                                  'Floor': floorController.text
-                                                      .trim(),
-                                                  'Apartment':
-                                                      apartmentController.text
-                                                          .trim(),
-                                                },
-                                              });
-                                              Navigator.pop(context);
-                                            } else {
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Your Address Is Not Valid",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.CENTER,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor: Colors.cyan,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0);
-                                            }
+                                            isValid()
+                                                ? {
+                                                    FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .doc(user.uid)
+                                                        .update({
+                                                      'address': {
+                                                        'Street':
+                                                            streetController
+                                                                .text
+                                                                .trim(),
+                                                        'Building':
+                                                            buildingController
+                                                                .text
+                                                                .trim(),
+                                                        'Floor': floorController
+                                                            .text
+                                                            .trim(),
+                                                        'Apartment':
+                                                            apartmentController
+                                                                .text
+                                                                .trim(),
+                                                      },
+                                                    }),
+                                                    setState(() {
+                                                      street = streetController
+                                                          .text
+                                                          .trim();
+                                                      building =
+                                                          buildingController
+                                                              .text
+                                                              .trim();
+                                                      floor = floorController
+                                                          .text
+                                                          .trim();
+                                                      apartment =
+                                                          apartmentController
+                                                              .text
+                                                              .trim();
+                                                    }),
+                                                    Navigator.pop(context),
+                                                  }
+                                                : {
+                                                    ToastWidget(
+                                                        "Your Address Is Not Valid"),
+                                                  };
                                           },
                                         ),
                                       );

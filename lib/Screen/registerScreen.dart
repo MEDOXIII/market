@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:market/Widgets/toastWidget.dart';
 import 'package:market/Screen/loginScreen.dart';
 import 'package:market/Widgets/suggestionWidget.dart';
 import 'package:market/Widgets/textFieldWidget.dart';
@@ -9,7 +10,6 @@ import 'categoryScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -64,14 +64,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'image': '',
       });
     } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(
-          msg: e.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.cyan,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastWidget(e.message.toString());
+
       print(e);
     }
 

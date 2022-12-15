@@ -85,11 +85,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                 )),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
+                          height: MediaQuery.of(context).size.height / 24,
                         ),
                         Text(
                           "My Profile",
-                          style: GoogleFonts.sacramento(
+                          style: GoogleFonts.racingSansOne(
                             textStyle: TextStyle(
                               fontSize: 20.sp,
                               color: Colors.white,

@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:market/Widgets/toastWidget.dart';
 import 'package:market/Screen/boardingScreen.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
 import '../Widgets/textFieldWidget.dart';
@@ -72,24 +72,9 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
       await image.delete();
 
       await FirebaseAuth.instance.currentUser?.delete();
-
-      Fluttertoast.showToast(
-          msg: "Your Account Is Deleted",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.cyan,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastWidget("Your Account Is Deleted");
     } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(
-          msg: e.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.cyan,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastWidget(e.message.toString());
       print(e);
     }
     Navigator.of(context).pop();
