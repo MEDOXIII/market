@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:email_validator/email_validator.dart';
 
+import '../Widgets/offlineCheckerWidget.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -52,124 +54,127 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return CategoryScreen();
-        } else {
-          return MaterialApp(
-            home: SafeArea(
-              child: Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
-                  backgroundColor: Color(0xff0093d3),
-                  title: const Text(
-                    'Login',
+    return OfflineCheckerWidget(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return CategoryScreen();
+          } else {
+            return MaterialApp(
+              home: SafeArea(
+                child: Scaffold(
+                  backgroundColor: Colors.white,
+                  appBar: AppBar(
+                    backgroundColor: Color(0xff0093d3),
+                    title: const Text(
+                      'Login',
+                    ),
+                    centerTitle: true,
                   ),
-                  centerTitle: true,
-                ),
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Form(
-                      key: formGlobalKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/images/market.png'),
-                          TextFieldWidget(
-                            lastIcon: IconButton(
-                              icon: Icon(null),
-                              onPressed: () {},
+                  body: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Form(
+                        key: formGlobalKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/market.png'),
+                            TextFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(null),
+                                onPressed: () {},
+                              ),
+                              controller: emailController,
+                              text: 'Email',
+                              type: TextInputType.emailAddress,
+                              isPass: false,
+                              icon: Icon(Icons.email),
+                              validator: (email) => email != null &&
+                                      !EmailValidator.validate(email)
+                                  ? 'Enter a valid Email'
+                                  : null,
                             ),
-                            controller: emailController,
-                            text: 'Email',
-                            type: TextInputType.emailAddress,
-                            isPass: false,
-                            icon: Icon(Icons.email),
-                            validator: (email) =>
-                                email != null && !EmailValidator.validate(email)
-                                    ? 'Enter a valid Email'
-                                    : null,
-                          ),
-                          TextFieldWidget(
-                            lastIcon: IconButton(
-                              icon: Icon(showPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility),
-                              onPressed: () =>
-                                  setState(() => showPassword = !showPassword),
+                            TextFieldWidget(
+                              lastIcon: IconButton(
+                                icon: Icon(showPassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                                onPressed: () => setState(
+                                    () => showPassword = !showPassword),
+                              ),
+                              controller: passwordController,
+                              text: 'Password',
+                              type: TextInputType.text,
+                              isPass: showPassword,
+                              icon: Icon(Icons.lock),
+                              validator: (password) =>
+                                  password != null && password.length < 6
+                                      ? 'Enter min of 6 characters'
+                                      : null,
                             ),
-                            controller: passwordController,
-                            text: 'Password',
-                            type: TextInputType.text,
-                            isPass: showPassword,
-                            icon: Icon(Icons.lock),
-                            validator: (password) =>
-                                password != null && password.length < 6
-                                    ? 'Enter min of 6 characters'
-                                    : null,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        ForgotPasswordScreen(),
-                                  ));
-                                },
-                                child: Text(
-                                  "Forgot Password ?",
-                                  style: GoogleFonts.damion(
-                                    textStyle: TextStyle(
-                                        fontSize: 16.sp, color: Colors.cyan),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ForgotPasswordScreen(),
+                                    ));
+                                  },
+                                  child: Text(
+                                    "Forgot Password ?",
+                                    style: GoogleFonts.damion(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.sp, color: Colors.cyan),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 24,
+                            ),
+                            NeumorphismButtonWidget(
+                              child: Text(
+                                'Login',
+                                style: GoogleFonts.sail(
+                                  textStyle: TextStyle(
+                                    fontSize: 20.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 24,
-                          ),
-                          NeumorphismButtonWidget(
-                            child: Text(
-                              'Login',
-                              style: GoogleFonts.sail(
-                                textStyle: TextStyle(
-                                  fontSize: 20.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              onClick: singIn,
+                              myColor: Colors.white70,
                             ),
-                            onClick: singIn,
-                            myColor: Colors.white70,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 24,
-                          ),
-                          SuggestionWidget(
-                            text: "Don't have an account ? ",
-                            clickText: "Register Here",
-                            onClick: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => RegisterScreen(),
-                              ));
-                            },
-                          ),
-                        ],
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 24,
+                            ),
+                            SuggestionWidget(
+                              text: "Don't have an account ? ",
+                              clickText: "Register Here",
+                              onClick: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => RegisterScreen(),
+                                ));
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        }
-      },
+            );
+          }
+        },
+      ),
     );
   }
 }

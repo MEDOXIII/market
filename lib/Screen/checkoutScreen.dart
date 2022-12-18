@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Widgets/appBarWidget.dart';
+import '../Widgets/offlineCheckerWidget.dart';
 import '../Widgets/searchWidget.dart';
 import '../Widgets/zoomDrawerWidget.dart';
 
@@ -24,41 +25,43 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ZoomDrawerWidget(
-      myController: _drawerController,
-      screen: MaterialApp(
-        home: SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBarWidget(
-              title: const Text(
-                'Checkout',
-                style: TextStyle(
-                  color: Colors.cyan,
+    return OfflineCheckerWidget(
+      body: ZoomDrawerWidget(
+        myController: _drawerController,
+        screen: MaterialApp(
+          home: SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBarWidget(
+                title: const Text(
+                  'Checkout',
+                  style: TextStyle(
+                    color: Colors.cyan,
+                  ),
+                ),
+                child: SearchWidget(
+                  controller: searchTextController,
                 ),
               ),
-              child: SearchWidget(
-                controller: searchTextController,
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 3,
-                      ),
-                      Text(
-                        'Your Order is On The Way ',
-                        style: GoogleFonts.damion(
-                          textStyle:
-                              TextStyle(fontSize: 20.sp, color: Colors.cyan),
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 3,
                         ),
-                      ),
-                    ],
+                        Text(
+                          'Your Order is On The Way ',
+                          style: GoogleFonts.damion(
+                            textStyle:
+                                TextStyle(fontSize: 20.sp, color: Colors.cyan),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

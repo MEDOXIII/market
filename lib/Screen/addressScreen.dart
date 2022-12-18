@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market/Screen/profileScreen.dart';
 import 'package:market/Widgets/addressWidget.dart';
 import 'package:market/Widgets/neumorphismButtonWidget.dart';
+import '../Widgets/offlineCheckerWidget.dart';
 import '../Widgets/toastWidget.dart';
 import '../Widgets/appBarWidget.dart';
 import '../Widgets/searchWidget.dart';
@@ -77,89 +78,91 @@ class _AddressScreenState extends State<AddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ZoomDrawerWidget(
-      myController: _drawerController,
-      screen: MaterialApp(
-        home: SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBarWidget(
-              title: const Text(
-                'Address',
-                style: TextStyle(
-                  color: Colors.cyan,
+    return OfflineCheckerWidget(
+      body: ZoomDrawerWidget(
+        myController: _drawerController,
+        screen: MaterialApp(
+          home: SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBarWidget(
+                title: const Text(
+                  'Address',
+                  style: TextStyle(
+                    color: Colors.cyan,
+                  ),
+                ),
+                child: SearchWidget(
+                  controller: searchTextController,
                 ),
               ),
-              child: SearchWidget(
-                controller: searchTextController,
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: formGlobalKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 250,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "ِArea :",
-                              style: GoogleFonts.xanhMono(
-                                textStyle: TextStyle(
-                                    fontSize: 16.sp, color: Colors.black),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                    key: formGlobalKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 250,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "ِArea :",
+                                style: GoogleFonts.xanhMono(
+                                  textStyle: TextStyle(
+                                      fontSize: 16.sp, color: Colors.black),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 12,
-                            ),
-                            Text(
-                              "",
-                              style: GoogleFonts.sail(
-                                textStyle: TextStyle(
-                                    fontSize: 16.sp, color: Colors.cyan),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 12,
                               ),
-                            ),
-                            NeumorphismButtonWidget(
-                              child: Text(
-                                "Add Location",
+                              Text(
+                                "",
                                 style: GoogleFonts.sail(
                                   textStyle: TextStyle(
                                       fontSize: 16.sp, color: Colors.cyan),
                                 ),
                               ),
-                              onClick: () {},
-                              myColor: Colors.white70,
-                            )
-                          ],
-                        ),
-                      ),
-                      AddressWidget(
-                          streetController: streetController,
-                          buildingController: buildingController,
-                          floorController: floorController,
-                          apartmentController: apartmentController),
-                      NeumorphismButtonWidget(
-                        child: Text(
-                          "Add Your Address",
-                          style: TextStyle(
-                            color: Colors.cyan,
-                            fontSize: 16.sp,
+                              NeumorphismButtonWidget(
+                                child: Text(
+                                  "Add Location",
+                                  style: GoogleFonts.sail(
+                                    textStyle: TextStyle(
+                                        fontSize: 16.sp, color: Colors.cyan),
+                                  ),
+                                ),
+                                onClick: () {},
+                                myColor: Colors.white70,
+                              )
+                            ],
                           ),
                         ),
-                        onClick: () {
-                          addAddress();
-                        },
-                        myColor: Colors.white70,
-                      )
-                    ],
+                        AddressWidget(
+                            streetController: streetController,
+                            buildingController: buildingController,
+                            floorController: floorController,
+                            apartmentController: apartmentController),
+                        NeumorphismButtonWidget(
+                          child: Text(
+                            "Add Your Address",
+                            style: TextStyle(
+                              color: Colors.cyan,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          onClick: () {
+                            addAddress();
+                          },
+                          myColor: Colors.white70,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

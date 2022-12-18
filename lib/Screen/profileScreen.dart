@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/neumorphismButtonWidget.dart';
+import '../Widgets/offlineCheckerWidget.dart';
 import '../Widgets/searchWidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -184,422 +185,430 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final _drawerController = ZoomDrawerController();
 
-    return ZoomDrawerWidget(
-      myController: _drawerController,
-      screen: MaterialApp(
-        home: SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBarWidget(
-              title: const Text(
-                'Profile',
-                style: TextStyle(
-                  color: Colors.cyan,
+    return OfflineCheckerWidget(
+      body: ZoomDrawerWidget(
+        myController: _drawerController,
+        screen: MaterialApp(
+          home: SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBarWidget(
+                title: const Text(
+                  'Profile',
+                  style: TextStyle(
+                    color: Colors.cyan,
+                  ),
+                ),
+                child: SearchWidget(
+                  controller: searchTextController,
                 ),
               ),
-              child: SearchWidget(
-                controller: searchTextController,
-              ),
-            ),
-            body: FutureBuilder(
-                future: getUser(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text(snapshot.error.toString()),
-                    );
-                  } else {
-                    return SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 150.h,
-                              width: 150.w,
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  ClipOval(
-                                    child: imagePicker != null
-                                        ? Image.file(
-                                            imagePicker!,
-                                            width: 150.w,
-                                            height: 150.h,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : isEmpty(profileImage)
-                                            ? Image.asset(
-                                                'assets/images/avatar.png')
-                                            : Image.network(
-                                                profileImage,
-                                                width: 150.w,
-                                                height: 150.h,
-                                                fit: BoxFit.cover,
+              body: FutureBuilder(
+                  future: getUser(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    } else {
+                      return SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 150.h,
+                                width: 150.w,
+                                child: Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    ClipOval(
+                                      child: imagePicker != null
+                                          ? Image.file(
+                                              imagePicker!,
+                                              width: 150.w,
+                                              height: 150.h,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : isEmpty(profileImage)
+                                              ? Image.asset(
+                                                  'assets/images/avatar.png')
+                                              : Image.network(
+                                                  profileImage,
+                                                  width: 150.w,
+                                                  height: 150.h,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "Choose Your Photo",
+                                                    style: TextStyle(
+                                                        color: Colors.cyan),
+                                                  ),
+                                                  NeumorphismButtonWidget(
+                                                    child: Icon(
+                                                      Icons.clear,
+                                                      color: Colors.cyan,
+                                                    ),
+                                                    onClick: () =>
+                                                        Navigator.pop(context),
+                                                    myColor: Colors.white70,
+                                                  ),
+                                                ],
                                               ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                            title: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  "Choose Your Photo",
-                                                  style: TextStyle(
-                                                      color: Colors.cyan),
+                                              content: Text(
+                                                "Where Do You Want To Choose Your Photo?",
+                                                style: TextStyle(
+                                                    color: Colors.cyan),
+                                              ),
+                                              actions: [
+                                                NeumorphismButtonWidget(
+                                                  child: Text(
+                                                    'Gallery',
+                                                    style: TextStyle(
+                                                        color: Colors.cyan),
+                                                  ),
+                                                  onClick: () {
+                                                    pickImage(
+                                                        ImageSource.gallery);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  myColor: Colors.white70,
                                                 ),
                                                 NeumorphismButtonWidget(
-                                                  child: Icon(
-                                                    Icons.clear,
-                                                    color: Colors.cyan,
+                                                  child: Text(
+                                                    'Camera',
+                                                    style: TextStyle(
+                                                        color: Colors.cyan),
                                                   ),
-                                                  onClick: () =>
-                                                      Navigator.pop(context),
                                                   myColor: Colors.white70,
+                                                  onClick: () {
+                                                    pickImage(
+                                                        ImageSource.camera);
+                                                    Navigator.pop(context);
+                                                  },
                                                 ),
                                               ],
                                             ),
-                                            content: Text(
-                                              "Where Do You Want To Choose Your Photo?",
-                                              style:
-                                                  TextStyle(color: Colors.cyan),
-                                            ),
-                                            actions: [
-                                              NeumorphismButtonWidget(
-                                                child: Text(
-                                                  'Gallery',
-                                                  style: TextStyle(
-                                                      color: Colors.cyan),
-                                                ),
-                                                onClick: () {
-                                                  pickImage(
-                                                      ImageSource.gallery);
-                                                  Navigator.pop(context);
-                                                },
-                                                myColor: Colors.white70,
-                                              ),
-                                              NeumorphismButtonWidget(
-                                                child: Text(
-                                                  'Camera',
-                                                  style: TextStyle(
-                                                      color: Colors.cyan),
-                                                ),
-                                                myColor: Colors.white70,
-                                                onClick: () {
-                                                  pickImage(ImageSource.camera);
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                      icon: Icon(
-                                        Icons.camera_alt_outlined,
-                                        color: Colors.cyan,
-                                        size: 30,
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.camera_alt_outlined,
+                                          color: Colors.cyan,
+                                          size: 30,
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 24,
-                            ),
-                            infoWidget(
-                              labelText: "Name :",
-                              infoText: name,
-                              onClick: () {
-                                nameController.text = name;
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 24,
+                              ),
+                              infoWidget(
+                                labelText: "Name :",
+                                infoText: name,
+                                onClick: () {
+                                  nameController.text = name;
 
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => Form(
-                                    key: formGlobalKey,
-                                    child: DialogWidget(
-                                      title: 'Edit Name',
-                                      myWidget: DialogTextFieldWidget(
-                                        text: 'Name',
-                                        controller: nameController,
-                                        validator: (name) =>
-                                            name != null && name.length < 3
-                                                ? 'Enter Your Name'
-                                                : null,
-                                      ),
-                                      doneButton: () {
-                                        isValid()
-                                            ? {
-                                                print(nameController.text),
-                                                FirebaseFirestore.instance
-                                                    .collection('users')
-                                                    .doc(user.uid)
-                                                    .update({
-                                                  'name': nameController.text
-                                                      .trim(),
-                                                }),
-                                                setState(() {
-                                                  name = nameController.text
-                                                      .trim();
-                                                }),
-                                                Navigator.pop(context),
-                                              }
-                                            : {
-                                                ToastWidget(
-                                                    "Your Name Is Not Valid"),
-                                              };
-                                      },
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 24,
-                            ),
-                            infoWidget(
-                              labelText: "Phone Number :",
-                              infoText: phoneNumber,
-                              onClick: () {
-                                phoneController.text = phoneNumber;
-
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => Form(
-                                    key: formGlobalKey,
-                                    child: DialogWidget(
-                                        title: 'Edit Phone',
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => Form(
+                                      key: formGlobalKey,
+                                      child: DialogWidget(
+                                        title: 'Edit Name',
                                         myWidget: DialogTextFieldWidget(
-                                          text: 'Phone',
-                                          controller: phoneController,
-                                          validator: (phone) =>
-                                              phone != null && phone.length < 11
-                                                  ? 'Enter Your Phone Number'
+                                          text: 'Name',
+                                          controller: nameController,
+                                          validator: (name) =>
+                                              name != null && name.length < 3
+                                                  ? 'Enter Your Name'
                                                   : null,
                                         ),
                                         doneButton: () {
                                           isValid()
                                               ? {
-                                                  print(phoneController.text),
+                                                  print(nameController.text),
                                                   FirebaseFirestore.instance
                                                       .collection('users')
                                                       .doc(user.uid)
                                                       .update({
-                                                    'phone': phoneController
-                                                        .text
+                                                    'name': nameController.text
                                                         .trim(),
                                                   }),
                                                   setState(() {
-                                                    phoneNumber =
-                                                        phoneController.text
-                                                            .trim();
+                                                    name = nameController.text
+                                                        .trim();
                                                   }),
                                                   Navigator.pop(context),
                                                 }
                                               : {
                                                   ToastWidget(
-                                                      "Your Phone Number Is Not Valid"),
+                                                      "Your Name Is Not Valid"),
                                                 };
-                                        }),
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 24,
-                            ),
-                            infoWidget(
-                              labelText: "Email :",
-                              infoText: email,
-                              onClick: () {
-                                emailController.text = email;
-
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => Form(
-                                    key: formGlobalKey,
-                                    child: DialogWidget(
-                                      title: 'Edit Email',
-                                      myWidget: DialogTextFieldWidget(
-                                        text: 'Email',
-                                        controller: emailController,
-                                        validator: (email) => email != null &&
-                                                !EmailValidator.validate(email)
-                                            ? 'Enter a valid Email'
-                                            : null,
+                                        },
                                       ),
-                                      doneButton: () {
-                                        isValid()
-                                            ? {
-                                                print(emailController.text),
-                                                FirebaseFirestore.instance
-                                                    .collection('users')
-                                                    .doc(user.uid)
-                                                    .update({
-                                                  'email': emailController.text
-                                                      .trim(),
-                                                }),
-                                                setState(() {
-                                                  email = emailController.text
-                                                      .trim();
-                                                }),
-                                                Navigator.pop(context),
-                                              }
-                                            : {
-                                                ToastWidget(
-                                                    "Your Email Is Not Valid"),
-                                              };
-                                      },
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 24,
-                            ),
-                            isEmpty(address)
-                                ? AddressButtonWidget()
-                                : infoWidget(
-                                    labelText: "Address :",
-                                    infoText: apartment +
-                                        '/' +
-                                        floor +
-                                        '/' +
-                                        building +
-                                        '/' +
-                                        street,
-                                    onClick: () {
-                                      streetController.text = street;
-                                      buildingController.text = building;
-                                      floorController.text = floor;
-                                      apartmentController.text = apartment;
+                                  );
+                                },
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 24,
+                              ),
+                              infoWidget(
+                                labelText: "Phone Number :",
+                                infoText: phoneNumber,
+                                onClick: () {
+                                  phoneController.text = phoneNumber;
 
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => DialogWidget(
-                                          title: 'Edit Address',
-                                          myWidget: Form(
-                                            key: formGlobalKey,
-                                            child: SingleChildScrollView(
-                                              child: AddressWidget(
-                                                streetController:
-                                                    streetController,
-                                                buildingController:
-                                                    buildingController,
-                                                floorController:
-                                                    floorController,
-                                                apartmentController:
-                                                    apartmentController,
-                                              ),
-                                            ),
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => Form(
+                                      key: formGlobalKey,
+                                      child: DialogWidget(
+                                          title: 'Edit Phone',
+                                          myWidget: DialogTextFieldWidget(
+                                            text: 'Phone',
+                                            controller: phoneController,
+                                            validator: (phone) =>
+                                                phone != null &&
+                                                        phone.length < 11
+                                                    ? 'Enter Your Phone Number'
+                                                    : null,
                                           ),
                                           doneButton: () {
                                             isValid()
                                                 ? {
+                                                    print(phoneController.text),
                                                     FirebaseFirestore.instance
                                                         .collection('users')
                                                         .doc(user.uid)
                                                         .update({
-                                                      'address': {
-                                                        'Street':
-                                                            streetController
-                                                                .text
-                                                                .trim(),
-                                                        'Building':
-                                                            buildingController
-                                                                .text
-                                                                .trim(),
-                                                        'Floor': floorController
-                                                            .text
-                                                            .trim(),
-                                                        'Apartment':
-                                                            apartmentController
-                                                                .text
-                                                                .trim(),
-                                                      },
+                                                      'phone': phoneController
+                                                          .text
+                                                          .trim(),
                                                     }),
                                                     setState(() {
-                                                      street = streetController
-                                                          .text
-                                                          .trim();
-                                                      building =
-                                                          buildingController
-                                                              .text
-                                                              .trim();
-                                                      floor = floorController
-                                                          .text
-                                                          .trim();
-                                                      apartment =
-                                                          apartmentController
-                                                              .text
+                                                      phoneNumber =
+                                                          phoneController.text
                                                               .trim();
                                                     }),
                                                     Navigator.pop(context),
                                                   }
                                                 : {
                                                     ToastWidget(
-                                                        "Your Address Is Not Valid"),
+                                                        "Your Phone Number Is Not Valid"),
                                                   };
-                                          },
-                                        ),
-                                      );
-                                    },
-                                  ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 24,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: NeumorphismButtonWidget(
-                                child: Text(
-                                  "Delete Your Account",
-                                  style: TextStyle(
-                                    color: Colors.cyan,
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                onClick: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => DialogWidget(
-                                      title: ("Delete Account!!!"),
-                                      myWidget: Text(
-                                        "Do You Want To Delete Your Account??",
-                                        style: TextStyle(color: Colors.cyan),
-                                      ),
-                                      doneButton: () async {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DeleteAccountScreen()));
-                                        await FirebaseAuth.instance.signOut();
-                                      },
+                                          }),
                                     ),
                                   );
                                 },
-                                myColor: Colors.white70,
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 24,
+                              ),
+                              infoWidget(
+                                labelText: "Email :",
+                                infoText: email,
+                                onClick: () {
+                                  emailController.text = email;
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => Form(
+                                      key: formGlobalKey,
+                                      child: DialogWidget(
+                                        title: 'Edit Email',
+                                        myWidget: DialogTextFieldWidget(
+                                          text: 'Email',
+                                          controller: emailController,
+                                          validator: (email) => email != null &&
+                                                  !EmailValidator.validate(
+                                                      email)
+                                              ? 'Enter a valid Email'
+                                              : null,
+                                        ),
+                                        doneButton: () {
+                                          isValid()
+                                              ? {
+                                                  print(emailController.text),
+                                                  FirebaseFirestore.instance
+                                                      .collection('users')
+                                                      .doc(user.uid)
+                                                      .update({
+                                                    'email': emailController
+                                                        .text
+                                                        .trim(),
+                                                  }),
+                                                  setState(() {
+                                                    email = emailController.text
+                                                        .trim();
+                                                  }),
+                                                  Navigator.pop(context),
+                                                }
+                                              : {
+                                                  ToastWidget(
+                                                      "Your Email Is Not Valid"),
+                                                };
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 24,
+                              ),
+                              isEmpty(address)
+                                  ? AddressButtonWidget()
+                                  : infoWidget(
+                                      labelText: "Address :",
+                                      infoText: apartment +
+                                          '/' +
+                                          floor +
+                                          '/' +
+                                          building +
+                                          '/' +
+                                          street,
+                                      onClick: () {
+                                        streetController.text = street;
+                                        buildingController.text = building;
+                                        floorController.text = floor;
+                                        apartmentController.text = apartment;
+
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => DialogWidget(
+                                            title: 'Edit Address',
+                                            myWidget: Form(
+                                              key: formGlobalKey,
+                                              child: SingleChildScrollView(
+                                                child: AddressWidget(
+                                                  streetController:
+                                                      streetController,
+                                                  buildingController:
+                                                      buildingController,
+                                                  floorController:
+                                                      floorController,
+                                                  apartmentController:
+                                                      apartmentController,
+                                                ),
+                                              ),
+                                            ),
+                                            doneButton: () {
+                                              isValid()
+                                                  ? {
+                                                      FirebaseFirestore.instance
+                                                          .collection('users')
+                                                          .doc(user.uid)
+                                                          .update({
+                                                        'address': {
+                                                          'Street':
+                                                              streetController
+                                                                  .text
+                                                                  .trim(),
+                                                          'Building':
+                                                              buildingController
+                                                                  .text
+                                                                  .trim(),
+                                                          'Floor':
+                                                              floorController
+                                                                  .text
+                                                                  .trim(),
+                                                          'Apartment':
+                                                              apartmentController
+                                                                  .text
+                                                                  .trim(),
+                                                        },
+                                                      }),
+                                                      setState(() {
+                                                        street =
+                                                            streetController
+                                                                .text
+                                                                .trim();
+                                                        building =
+                                                            buildingController
+                                                                .text
+                                                                .trim();
+                                                        floor = floorController
+                                                            .text
+                                                            .trim();
+                                                        apartment =
+                                                            apartmentController
+                                                                .text
+                                                                .trim();
+                                                      }),
+                                                      Navigator.pop(context),
+                                                    }
+                                                  : {
+                                                      ToastWidget(
+                                                          "Your Address Is Not Valid"),
+                                                    };
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 24,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: NeumorphismButtonWidget(
+                                  child: Text(
+                                    "Delete Your Account",
+                                    style: TextStyle(
+                                      color: Colors.cyan,
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onClick: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => DialogWidget(
+                                        title: ("Delete Account!!!"),
+                                        myWidget: Text(
+                                          "Do You Want To Delete Your Account??",
+                                          style: TextStyle(color: Colors.cyan),
+                                        ),
+                                        doneButton: () async {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DeleteAccountScreen()));
+                                          await FirebaseAuth.instance.signOut();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  myColor: Colors.white70,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                }),
+                      );
+                    }
+                  }),
+            ),
           ),
         ),
       ),
